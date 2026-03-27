@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shania Swan | Product & Experience Designer</title>
-  <meta name="description" content="Portfolio of Shania Swan — UX/UI, XR, and creative technology designer building human-centered immersive experiences." />
+  <meta
+    name="description"
+    content="Portfolio of Shania Swan — UX/UI, XR, and creative technology designer building human-centered immersive experiences."
+  />
   <style>
     :root {
       --bg: #090909;
@@ -26,6 +29,7 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -38,8 +42,15 @@
       overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
     .bg-orb,
     .bg-grid,
@@ -68,7 +79,11 @@
     }
 
     .cursor-glow {
-      background: radial-gradient(250px circle at var(--mx, 50%) var(--my, 50%), rgba(224,195,109,0.12), transparent 42%);
+      background: radial-gradient(
+        250px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(224,195,109,0.12),
+        transparent 42%
+      );
       z-index: 0;
     }
 
@@ -105,7 +120,9 @@
       transition: transform 0.22s ease;
     }
 
-    .brand:hover { transform: translateY(-1px); }
+    .brand:hover {
+      transform: translateY(-1px);
+    }
 
     .brand-mark {
       width: 42px;
@@ -343,35 +360,6 @@
       border: 1px solid var(--line);
     }
 
-    .portrait-placeholder {
-      width: 100%;
-      height: 100%;
-      min-height: 360px;
-      border-radius: 20px;
-      border: 1px dashed rgba(255,255,255,0.16);
-      display: grid;
-      place-items: center;
-      color: rgba(255,255,255,0.45);
-      letter-spacing: 0.18em;
-      font-size: 0.8rem;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    .floating-note {
-      position: absolute;
-      right: 1rem;
-      bottom: 1rem;
-      max-width: 230px;
-      padding: 0.9rem 1rem;
-      border-radius: 18px;
-      background: rgba(9,9,9,0.72);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(224,195,109,0.18);
-      color: var(--text);
-      font-size: 0.92rem;
-    }
-
     .mini-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
@@ -428,7 +416,6 @@
     }
 
     .about-panel,
-    .resume-panel,
     .contact-panel {
       padding: 1.6rem;
     }
@@ -607,14 +594,12 @@
       transform: translateX(4px);
     }
 
-    .resume-grid,
     .contact-grid {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: 1rem;
     }
 
-    .resume-card,
     .contact-card {
       padding: 1.25rem;
       border-radius: 22px;
@@ -623,19 +608,16 @@
       transition: transform 0.22s ease, border-color 0.22s ease;
     }
 
-    .resume-card:hover,
     .contact-card:hover {
       transform: translateY(-3px);
       border-color: rgba(255,255,255,0.17);
     }
 
-    .resume-card h3,
     .contact-card h3 {
       margin: 0;
       font-size: 1.05rem;
     }
 
-    .resume-card p,
     .contact-card p,
     .contact-card a {
       color: var(--muted);
@@ -659,8 +641,7 @@
       padding: 1.1rem;
       border-radius: 20px;
       border: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
       overflow: hidden;
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
@@ -732,6 +713,89 @@
       font-size: 0.92rem;
     }
 
+    .resume-hover-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .resume-trigger {
+      position: relative;
+      z-index: 3;
+    }
+
+    .resume-popover {
+      position: absolute;
+      top: calc(100% + 16px);
+      left: 0;
+      width: min(540px, 90vw);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+      z-index: 20;
+    }
+
+    .resume-hover-wrap:hover .resume-popover,
+    .resume-hover-wrap:focus-within .resume-popover {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .resume-popover-inner {
+      padding: 1rem;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: rgba(16,17,20,0.95);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+    }
+
+    .resume-popover-inner h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.05rem;
+    }
+
+    .resume-popover-inner p {
+      margin: 0 0 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .resume-preview-box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .resume-preview-box iframe {
+      width: 100%;
+      height: 320px;
+      border: 0;
+      display: block;
+    }
+
+    .resume-preview-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.9rem;
+    }
+
+    .fade-in,
+    .fade-in-item {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .fade-in.visible,
+    .fade-in-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     footer {
       padding: 2.4rem 0 3rem;
       text-align: center;
@@ -742,11 +806,9 @@
       .projects-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
       .timeline { grid-template-columns: repeat(2, minmax(0,1fr)); }
     }
-    }
 
     @media (max-width: 980px) {
       .hero-grid,
-      .resume-grid,
       .contact-grid,
       .about-grid,
       .section-head {
@@ -764,15 +826,24 @@
         align-items: flex-start;
       }
 
-      .hero-copy { padding: 1.5rem; }
+      .hero-copy {
+        padding: 1.5rem;
+      }
     }
 
     @media (max-width: 760px) {
       .projects-grid { grid-template-columns: 1fr; }
       .timeline { grid-template-columns: 1fr; }
       .hero h1 { max-width: 100%; }
-    }
-      .hero h1 { max-width: 100%; }
+
+      .resume-popover {
+        width: min(92vw, 420px);
+        left: 0;
+      }
+
+      .resume-preview-box iframe {
+        height: 240px;
+      }
     }
   </style>
 </head>
@@ -807,8 +878,28 @@
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#projects">Explore My Work</a>
-            <a class="btn btn-secondary" href="#resume">View Resume</a>
+
+            <div class="resume-hover-wrap">
+              <a class="btn btn-secondary resume-trigger" href="resume.pdf" target="_blank">
+                Open Resume
+              </a>
+
+              <div class="resume-popover">
+                <div class="resume-popover-inner">
+                  <h3>Resume Preview</h3>
+                  <p>Open or save my full resume.</p>
+                  <div class="resume-preview-box">
+                    <iframe src="resume.pdf" title="Shania Swan Resume Preview"></iframe>
+                  </div>
+                  <div class="resume-preview-actions">
+                    <a class="btn btn-primary" href="resume.pdf" target="_blank">Open PDF</a>
+                    <a class="btn btn-secondary" href="resume.pdf" download>Save PDF</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div class="hero-stats">
             <div class="stat">
               <small>Degree</small>
@@ -828,7 +919,6 @@
         <div class="panel hero-side">
           <div class="portrait-card">
             <img src="shania-headshot.jpg" alt="Headshot of Shania Swan">
-            <div class="floating-note"></div>
           </div>
           <div class="mini-grid">
             <div class="mini-card">
@@ -955,77 +1045,22 @@
             <p class="section-intro"></p>
           </div>
         </div>
-        <div class="panel resume-panel">
-          <div class="resume-grid">
-            <div class="resume-card">
-              <h3>Quick Snapshot</h3>
-              <p>University of Miami student pursuing a B.S. in Innovation, Technology, and Design with experience in immersive training, student-facing service, and creative communication.</p>
-              <div class="hero-actions" style="margin-top: 1rem;">
-                <a class="btn btn-primary" href="resume.pdf" target="_blank">Open Resume PDF</a>
+
+        <div class="resume-hover-wrap">
+          <a class="btn btn-primary resume-trigger" href="resume.pdf" target="_blank">
+            Open Resume
+          </a>
+
+          <div class="resume-popover">
+            <div class="resume-popover-inner">
+              <h3>Resume Preview</h3>
+              <p>Open or save my full resume.</p>
+              <div class="resume-preview-box">
+                <iframe src="resume.pdf" title="Shania Swan Resume Preview"></iframe>
               </div>
-            </div>
-            <div class="resume-card">
-              <h3>Experience Highlights</h3>
-              <div class="timeline fade-in-group">
-                <div class="timeline-item fade-in-item">
-                  <span class="timeline-kicker">Internship</span>
-                  <h3>Interactive Compliance Training Developer Intern</h3>
-                  <p>UHealth</p>
-                  <ul>
-                    <li>Built a gamified compliance training module in Unity</li>
-                    <li>Used human-centered design for VR/AR learning</li>
-                  </ul>
-                </div>
-
-                <div class="timeline-item fade-in-item">
-                  <span class="timeline-kicker">Student Services</span>
-                  <h3>Student Assistant</h3>
-                  <p>UM Orientation and Commuter Student Involvement</p>
-                  <ul>
-                    <li>Supported parent and student inquiries</li>
-                    <li>Helped run major campus welcome events</li>
-                  </ul>
-                </div>
-
-                <div class="timeline-item fade-in-item">
-                  <span class="timeline-kicker">Lab + VR</span>
-                  <h3>Student Assistant</h3>
-                  <p>UM A&S Modern Languages & Literatures</p>
-                  <ul>
-                    <li>Set up and troubleshot VR equipment</li>
-                    <li>Supported lab operations and front-desk services</li>
-                  </ul>
-                </div>
-
-                <div class="timeline-item fade-in-item">
-                  <span class="timeline-kicker">Leadership</span>
-                  <h3>Secretary</h3>
-                  <p>Sigma Gamma Rho Sorority, Inc.</p>
-                  <ul>
-                    <li>Manage communications, records, and scheduling</li>
-                    <li>Support service initiatives and chapter operations</li>
-                  </ul>
-                </div>
-
-                <div class="timeline-item fade-in-item">
-                  <span class="timeline-kicker">Marketing</span>
-                  <h3>PR + Marketing Chair</h3>
-                  <p>Black Leaders for the Queer Community</p>
-                  <ul>
-                    <li>Lead campaigns, social media, and storytelling</li>
-                    <li>Design digital and print promotional materials</li>
-                  </ul>
-                </div>
-
-                <div class="timeline-item fade-in-item">
-                  <span class="timeline-kicker">Creative Direction</span>
-                  <h3>Creative Director</h3>
-                  <p>UImpactProject</p>
-                  <ul>
-                    <li>Lead visual direction and brand identity</li>
-                    <li>Create content, lookbooks, and promo materials</li>
-                  </ul>
-                </div>
+              <div class="resume-preview-actions">
+                <a class="btn btn-primary" href="resume.pdf" target="_blank">Open PDF</a>
+                <a class="btn btn-secondary" href="resume.pdf" download>Save PDF</a>
               </div>
             </div>
           </div>
@@ -1067,7 +1102,7 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 Shania Swan </p>
+      <p>© 2026 Shania Swan</p>
     </div>
   </footer>
 
@@ -1089,23 +1124,6 @@
 
     document.querySelectorAll('.fade-in').forEach(function (el) {
       sectionObserver.observe(el);
-    });
-
-    const timelineObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          const items = entry.target.querySelectorAll('.fade-in-item');
-          items.forEach(function (item, index) {
-            setTimeout(function () {
-              item.classList.add('visible');
-            }, index * 120);
-          });
-        }
-      });
-    }, { threshold: 0.18 });
-
-    document.querySelectorAll('.fade-in-group').forEach(function (group) {
-      timelineObserver.observe(group);
     });
   </script>
 </body>
