@@ -650,42 +650,86 @@
     .timeline {
       margin-top: 1rem;
       display: grid;
-      gap: 0.8rem;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 0.9rem;
     }
 
     .timeline-item {
-      padding: 0.95rem 1rem;
-      border-radius: 18px;
+      position: relative;
+      padding: 1.1rem;
+      border-radius: 20px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.025);
-      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--gold), var(--coral), var(--violet));
+      opacity: 0.9;
+    }
+
+    .timeline-item::after {
+      content: "";
+      position: absolute;
+      right: -35px;
+      top: -35px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(224,195,109,0.14), transparent 70%);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      opacity: 0.7;
     }
 
     .timeline-item:hover {
-      transform: translateX(4px);
-      border-color: rgba(224,195,109,0.24);
-      background: rgba(255,255,255,0.04);
+      transform: translateY(-6px);
+      border-color: rgba(224,195,109,0.28);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.24);
     }
 
-    .timeline-item strong {
-      display: block;
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-item span {
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
-    }
-
-    .fade-in.visible {
+    .timeline-item:hover::after {
+      transform: scale(1.12);
       opacity: 1;
-      transform: translateY(0);
+    }
+
+    .timeline-kicker {
+      display: inline-flex;
+      margin-bottom: 0.55rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ffd999;
+    }
+
+    .timeline-item h3 {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+
+    .timeline-item p {
+      margin: 0.25rem 0 0.7rem;
+      color: #f1d898;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .timeline-item ul {
+      margin: 0;
+      padding-left: 1rem;
+      color: var(--muted);
+    }
+
+    .timeline-item li {
+      margin: 0.32rem 0;
+      line-height: 1.5;
+      font-size: 0.92rem;
     }
 
     footer {
@@ -696,6 +740,8 @@
 
     @media (max-width: 1200px) {
       .projects-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      .timeline { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
     }
 
     @media (max-width: 980px) {
@@ -723,6 +769,9 @@
 
     @media (max-width: 760px) {
       .projects-grid { grid-template-columns: 1fr; }
+      .timeline { grid-template-columns: 1fr; }
+      .hero h1 { max-width: 100%; }
+    }
       .hero h1 { max-width: 100%; }
     }
   </style>
@@ -779,7 +828,7 @@
         <div class="panel hero-side">
           <div class="portrait-card">
             <img src="shania-headshot.jpg" alt="Headshot of Shania Swan">
-            <div class="floating-note">Hover around the page — the site has subtle motion and color play to keep it engaging without losing professionalism.</div>
+            <div class="floating-note"></div>
           </div>
           <div class="mini-grid">
             <div class="mini-card">
@@ -800,7 +849,7 @@
         <div class="section-head">
           <div>
             <h2 class="section-title">About</h2>
-            <p class="section-intro">Built from your resume, this section highlights the direction that feels strongest for internships and design roles.</p>
+            <p class="section-intro"></p>
           </div>
         </div>
         <div class="panel about-panel">
@@ -841,7 +890,7 @@
         <div class="section-head">
           <div>
             <h2 class="section-title">Featured Projects</h2>
-            <p class="section-intro">These five projects now match the PDFs you uploaded and show a stronger mix of XR, UX, social strategy, and editorial design.</p>
+            <p class="section-intro"></p>
           </div>
         </div>
         <div class="projects-grid">
@@ -903,7 +952,7 @@
         <div class="section-head">
           <div>
             <h2 class="section-title">Resume</h2>
-            <p class="section-intro">Upload your PDF to the same GitHub repo and rename it to <strong>resume.pdf</strong>, then this button will work perfectly.</p>
+            <p class="section-intro"></p>
           </div>
         </div>
         <div class="panel resume-panel">
@@ -916,31 +965,66 @@
               </div>
             </div>
             <div class="resume-card">
-              <h3>Highlights</h3>
-              <div class="timeline">
-                <div class="timeline-item">
-                  <strong>Interactive Compliance Training Developer Intern</strong>
-                  <span>Built an interactive, gamified compliance training module in Unity for UHealth using human-centered design and immersive learning methods.</span>
+              <h3>Experience Highlights</h3>
+              <div class="timeline fade-in-group">
+                <div class="timeline-item fade-in-item">
+                  <span class="timeline-kicker">Internship</span>
+                  <h3>Interactive Compliance Training Developer Intern</h3>
+                  <p>UHealth</p>
+                  <ul>
+                    <li>Built a gamified compliance training module in Unity</li>
+                    <li>Used human-centered design for VR/AR learning</li>
+                  </ul>
                 </div>
-                <div class="timeline-item">
-                  <strong>Student Assistant</strong>
-                  <span>Supported orientation events, student services, front-desk operations, and immersive lab experiences across campus-facing roles.</span>
+
+                <div class="timeline-item fade-in-item">
+                  <span class="timeline-kicker">Student Services</span>
+                  <h3>Student Assistant</h3>
+                  <p>UM Orientation and Commuter Student Involvement</p>
+                  <ul>
+                    <li>Supported parent and student inquiries</li>
+                    <li>Helped run major campus welcome events</li>
+                  </ul>
                 </div>
-                <div class="timeline-item">
-                  <strong>Secretary · Sigma Gamma Rho</strong>
-                  <span>Coordinate communications, records, scheduling, and service-focused chapter operations.</span>
+
+                <div class="timeline-item fade-in-item">
+                  <span class="timeline-kicker">Lab + VR</span>
+                  <h3>Student Assistant</h3>
+                  <p>UM A&S Modern Languages & Literatures</p>
+                  <ul>
+                    <li>Set up and troubleshot VR equipment</li>
+                    <li>Supported lab operations and front-desk services</li>
+                  </ul>
                 </div>
-                <div class="timeline-item">
-                  <strong>PR + Marketing Chair · BLQ</strong>
-                  <span>Lead campaigns, social storytelling, and digital and print design to strengthen visibility and engagement.</span>
+
+                <div class="timeline-item fade-in-item">
+                  <span class="timeline-kicker">Leadership</span>
+                  <h3>Secretary</h3>
+                  <p>Sigma Gamma Rho Sorority, Inc.</p>
+                  <ul>
+                    <li>Manage communications, records, and scheduling</li>
+                    <li>Support service initiatives and chapter operations</li>
+                  </ul>
                 </div>
-                <div class="timeline-item">
-                  <strong>Creative Director · UImpactProject</strong>
-                  <span>Shape visual direction, promotional content, and cohesive branding for a student-led fashion and culture initiative.</span>
+
+                <div class="timeline-item fade-in-item">
+                  <span class="timeline-kicker">Marketing</span>
+                  <h3>PR + Marketing Chair</h3>
+                  <p>Black Leaders for the Queer Community</p>
+                  <ul>
+                    <li>Lead campaigns, social media, and storytelling</li>
+                    <li>Design digital and print promotional materials</li>
+                  </ul>
                 </div>
-                <div class="timeline-item">
-                  <strong>Student Member · ITD Advisory Board</strong>
-                  <span>Represent student perspective and collaborate on programming, curriculum feedback, and professional-development initiatives.</span>
+
+                <div class="timeline-item fade-in-item">
+                  <span class="timeline-kicker">Creative Direction</span>
+                  <h3>Creative Director</h3>
+                  <p>UImpactProject</p>
+                  <ul>
+                    <li>Lead visual direction and brand identity</li>
+                    <li>Create content, lookbooks, and promo materials</li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -954,7 +1038,7 @@
         <div class="section-head">
           <div>
             <h2 class="section-title">Contact</h2>
-            <p class="section-intro">Built using the contact details from your uploaded resume and the LinkedIn you provided.</p>
+            <p class="section-intro"></p>
           </div>
         </div>
         <div class="panel contact-panel">
@@ -983,26 +1067,46 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 Shania Swan — designed to feel polished, vibrant, and interactive.</p>
+      <p>© 2026 Shania Swan </p>
     </div>
   </footer>
 
   <script>
     const root = document.documentElement;
-    window.addEventListener('mousemove', (e) => {
-      root.style.setProperty('--mx', `${e.clientX}px`);
-      root.style.setProperty('--my', `${e.clientY}px`);
+
+    window.addEventListener('mousemove', function (e) {
+      root.style.setProperty('--mx', e.clientX + 'px');
+      root.style.setProperty('--my', e.clientY + 'px');
     });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const sectionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+    document.querySelectorAll('.fade-in').forEach(function (el) {
+      sectionObserver.observe(el);
+    });
+
+    const timelineObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          const items = entry.target.querySelectorAll('.fade-in-item');
+          items.forEach(function (item, index) {
+            setTimeout(function () {
+              item.classList.add('visible');
+            }, index * 120);
+          });
+        }
+      });
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll('.fade-in-group').forEach(function (group) {
+      timelineObserver.observe(group);
+    });
   </script>
 </body>
 </html>
