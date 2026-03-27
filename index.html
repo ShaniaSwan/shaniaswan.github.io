@@ -2,1043 +2,250 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shania Swan | Product & Experience Designer</title>
-  <meta
-    name="description"
-    content="Portfolio of Shania Swan — UX/UI, XR, and creative technology designer building human-centered immersive experiences."
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shania Swan | Portfolio</title>
+
   <style>
     :root {
-      --bg: #090909;
-      --bg-2: #101114;
-      --card: rgba(255,255,255,0.06);
-      --card-2: rgba(255,255,255,0.04);
-      --text: #f8f5ef;
-      --muted: #c6c0b4;
-      --line: rgba(255,255,255,0.10);
-      --gold: #e0c36d;
-      --coral: #ff7a59;
-      --violet: #7d7cff;
-      --teal: #49d8c3;
-      --shadow: 0 25px 70px rgba(0,0,0,0.38);
-      --radius-xl: 30px;
-      --radius-lg: 22px;
-      --max: 1220px;
+      --bg: #0e0f11;
+      --card: #15171a;
+      --line: rgba(255,255,255,0.08);
+      --text: #ffffff;
+      --muted: #a0a4ab;
+      --accent: #feba02;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
     body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
       color: var(--text);
-      background:
-        radial-gradient(circle at 15% 10%, rgba(224,195,109,0.14), transparent 26%),
-        radial-gradient(circle at 82% 12%, rgba(125,124,255,0.14), transparent 22%),
-        radial-gradient(circle at 70% 45%, rgba(73,216,195,0.08), transparent 24%),
-        linear-gradient(180deg, #070707 0%, #101114 100%);
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .bg-orb,
-    .bg-grid,
-    .cursor-glow {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .bg-grid {
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.25), transparent 85%);
-      z-index: 0;
-    }
-
-    .bg-orb {
-      background:
-        radial-gradient(420px circle at 18% 12%, rgba(224,195,109,0.10), transparent 70%),
-        radial-gradient(360px circle at 85% 18%, rgba(125,124,255,0.12), transparent 70%),
-        radial-gradient(300px circle at 70% 72%, rgba(73,216,195,0.10), transparent 70%);
-      filter: blur(8px);
-      z-index: 0;
-    }
-
-    .cursor-glow {
-      background: radial-gradient(
-        250px circle at var(--mx, 50%) var(--my, 50%),
-        rgba(224,195,109,0.12),
-        transparent 42%
-      );
-      z-index: 0;
+      line-height: 1.6;
     }
 
     .container {
-      position: relative;
-      z-index: 1;
-      width: min(var(--max), calc(100% - 2rem));
-      margin: 0 auto;
+      width: min(1100px, 90%);
+      margin: auto;
     }
 
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(16px);
-      background: rgba(9,9,9,0.72);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      transition: transform 0.22s ease;
-    }
-
-    .brand:hover {
-      transform: translateY(-1px);
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: linear-gradient(145deg, rgba(224,195,109,0.18), rgba(255,255,255,0.04));
-      border: 1px solid rgba(224,195,109,0.26);
-      color: var(--gold);
-      box-shadow: 0 0 30px rgba(224,195,109,0.12);
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.1rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .nav-links a {
-      position: relative;
-      transition: color 0.22s ease;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -0.25rem;
-      width: 100%;
-      height: 2px;
-      transform: scaleX(0);
-      transform-origin: left;
-      background: linear-gradient(90deg, var(--gold), var(--coral));
-      transition: transform 0.22s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      color: var(--text);
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a:focus-visible::after {
-      transform: scaleX(1);
-    }
-
+    /* HERO */
     .hero {
-      min-height: calc(100vh - 78px);
-      display: grid;
-      align-items: center;
-      padding: 3.5rem 0 3rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 1.2rem;
-      align-items: stretch;
-    }
-
-    .panel {
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-    }
-
-    .hero-copy {
-      padding: 3rem;
-      position: relative;
-    }
-
-    .hero-copy::before {
-      content: "";
-      position: absolute;
-      inset: auto -10% -30% auto;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(125,124,255,0.25), transparent 60%);
-      filter: blur(30px);
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      border-radius: 999px;
-      padding: 0.45rem 0.85rem;
-      background: rgba(224,195,109,0.12);
-      border: 1px solid rgba(224,195,109,0.18);
-      color: #f1d898;
-      font-size: 0.86rem;
-      margin-bottom: 1rem;
+      padding: 100px 0 60px;
     }
 
     .hero h1 {
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(3.1rem, 7vw, 6.5rem);
-      line-height: 0.92;
-      letter-spacing: -0.05em;
-      max-width: 9ch;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      transition: color 0.3s ease;
     }
 
-    .name-flip {
-      display: inline-block;
-      background: linear-gradient(90deg, var(--gold), #fff2c6);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      transition: filter 0.25s ease, transform 0.25s ease, text-shadow 0.25s ease;
-    }
-
-    .name-flip:hover {
-      background: linear-gradient(90deg, var(--coral), var(--violet), var(--teal));
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      filter: saturate(1.1);
-      transform: translateY(-2px);
-      text-shadow: 0 0 28px rgba(255,122,89,0.18);
+    .hero h1:hover {
+      color: var(--accent);
     }
 
     .hero p {
-      margin: 1.2rem 0 0;
-      max-width: 62ch;
       color: var(--muted);
-      font-size: 1.02rem;
+      margin-bottom: 20px;
     }
 
     .hero-actions {
       display: flex;
+      gap: 10px;
       flex-wrap: wrap;
-      gap: 0.9rem;
-      margin-top: 1.7rem;
     }
 
+    /* BUTTONS */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.55rem;
-      padding: 0.95rem 1.2rem;
+      padding: 10px 18px;
       border-radius: 999px;
-      font-weight: 700;
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-    }
-
-    .btn:hover,
-    .btn:focus-visible {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.2);
+      text-decoration: none;
+      font-size: 0.9rem;
+      border: 1px solid var(--line);
+      transition: all 0.25s ease;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--gold), #b58b32);
-      color: #121212;
+      background: var(--accent);
+      color: black;
+      border: none;
     }
 
     .btn-secondary {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
+      color: white;
     }
 
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 0.8rem;
-      margin-top: 1.8rem;
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
     }
 
-    .stat {
-      padding: 1rem;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.035);
-      transition: transform 0.22s ease, border-color 0.22s ease;
-    }
-
-    .stat:hover {
-      transform: translateY(-3px);
-      border-color: rgba(224,195,109,0.24);
-    }
-
-    .stat small {
-      display: block;
-      color: var(--muted);
-      margin-bottom: 0.3rem;
-    }
-
-    .stat strong {
-      font-size: 1rem;
-      line-height: 1.35;
-    }
-
-    .hero-side {
-      display: grid;
-      grid-template-rows: 1fr auto;
-      gap: 1rem;
-      padding: 1rem;
-    }
-
-    .portrait-card {
-      position: relative;
-      min-height: 430px;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
-        radial-gradient(circle at top right, rgba(255,122,89,0.18), transparent 24%),
-        radial-gradient(circle at bottom left, rgba(73,216,195,0.18), transparent 28%),
-        #141418;
-      display: grid;
-      place-items: center;
-      padding: 1.3rem;
-      transition: transform 0.28s ease, border-color 0.28s ease;
-    }
-
-    .portrait-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255,255,255,0.18);
-    }
-
-    .portrait-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 20px;
-      border: 1px solid var(--line);
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 0.8rem;
-    }
-
-    .mini-card {
-      padding: 1rem;
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.035);
-      transition: transform 0.22s ease, border-color 0.22s ease;
-    }
-
-    .mini-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255,255,255,0.2);
-    }
-
-    .mini-card h3 {
-      margin: 0 0 0.45rem;
-      font-size: 0.98rem;
-    }
-
-    .mini-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
+    /* SECTION */
     .section {
-      padding: 1.2rem 0 0;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      padding: 60px 0;
     }
 
     .section-title {
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: -0.04em;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
     }
 
-    .section-intro {
-      margin: 0;
-      color: var(--muted);
-      max-width: 62ch;
-    }
-
-    .about-panel,
-    .contact-panel {
-      padding: 1.6rem;
-    }
-
-    .about-grid {
+    /* PROJECTS */
+    .projects-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap: 0.9rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
     }
 
-    .about-card {
-      padding: 1.15rem;
+    .card {
+      padding: 20px;
       border-radius: 20px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.035);
-      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      background: var(--card);
+      transition: transform 0.25s ease, border-color 0.25s ease;
     }
 
-    .about-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(224,195,109,0.22);
-      box-shadow: 0 14px 36px rgba(0,0,0,0.22);
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
     }
 
-    .about-card h3 {
-      margin: 0 0 0.45rem;
-      font-size: 1rem;
+    .card h3 {
+      margin-bottom: 8px;
     }
 
-    .about-card p {
-      margin: 0;
+    .card p {
       color: var(--muted);
       font-size: 0.95rem;
     }
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 1rem;
-    }
-
-    .tag {
-      padding: 0.55rem 0.8rem;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
-      font-size: 0.92rem;
-      transition: transform 0.22s ease, border-color 0.22s ease;
-    }
-
-    .tag:hover {
-      transform: translateY(-2px);
-      border-color: rgba(224,195,109,0.22);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0,1fr));
-      gap: 1rem;
-    }
-
-    .project-card {
-      position: relative;
-      min-height: 360px;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
-      box-shadow: var(--shadow);
-      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
-      isolation: isolate;
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px) rotate(-0.45deg);
-      border-color: rgba(224,195,109,0.25);
-      box-shadow: 0 25px 60px rgba(0,0,0,0.45);
-    }
-
-    .project-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.90) 100%);
-      z-index: 1;
-    }
-
-    .project-card::after {
-      content: "";
-      position: absolute;
-      inset: auto -30% -40% auto;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(224,195,109,0.22), transparent 65%);
-      transform: translateY(25px);
-      opacity: 0;
-      transition: opacity 0.28s ease, transform 0.28s ease;
-      z-index: 1;
-    }
-
-    .project-card:hover::after {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .project-visual {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(circle at top right, rgba(255,122,89,0.25), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(73,216,195,0.22), transparent 30%),
-        linear-gradient(135deg, rgba(125,124,255,0.22), rgba(224,195,109,0.18)),
-        #18181d;
-      color: rgba(255,255,255,0.55);
-      font-size: 0.8rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      transition: transform 0.32s ease, filter 0.32s ease;
-    }
-
-    .project-card:hover .project-visual {
-      transform: scale(1.06);
-      filter: saturate(1.15);
-    }
-
-    .project-content {
-      position: absolute;
-      inset: auto 0 0 0;
-      padding: 1.2rem;
-      z-index: 2;
-    }
-
-    .project-kicker {
-      display: inline-block;
-      font-size: 0.78rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #ffd999;
-      margin-bottom: 0.45rem;
-    }
-
-    .project-content h3 {
-      margin: 0;
-      font-size: 1.08rem;
-      line-height: 1.2;
-    }
-
-    .project-content p {
-      margin: 0.55rem 0 0;
-      color: rgba(248,245,239,0.82);
-      font-size: 0.92rem;
-      line-height: 1.45;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.28s ease, margin-top 0.28s ease;
-    }
-
-    .project-card:hover .project-content p {
-      max-height: 160px;
-      margin-top: 0.6rem;
-    }
-
-    .project-arrow {
-      display: inline-flex;
-      margin-top: 0.8rem;
-      font-weight: 700;
-      color: var(--gold);
-      transition: transform 0.22s ease;
-    }
-
-    .project-card:hover .project-arrow {
-      transform: translateX(4px);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 1rem;
-    }
-
-    .contact-card {
-      padding: 1.25rem;
-      border-radius: 22px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.035);
-      transition: transform 0.22s ease, border-color 0.22s ease;
-    }
-
-    .contact-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255,255,255,0.17);
-    }
-
-    .contact-card h3 {
-      margin: 0;
-      font-size: 1.05rem;
-    }
-
-    .contact-card p,
-    .contact-card a {
-      color: var(--muted);
-      margin: 0.45rem 0 0;
-      line-height: 1.6;
-    }
-
-    .contact-card a:hover {
-      color: var(--text);
-    }
-
+    /* RESUME */
     .resume-card {
       padding: 1.5rem;
       border-radius: 22px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.035);
-      transition: transform 0.22s ease, border-color 0.22s ease;
+      background: var(--card);
+      transition: 0.25s ease;
     }
 
     .resume-card:hover {
       transform: translateY(-3px);
-      border-color: rgba(255,255,255,0.17);
+      border-color: var(--accent);
     }
 
     .resume-card h3 {
-      margin: 0;
-      font-size: 1.2rem;
+      margin-bottom: 10px;
     }
 
     .resume-card p {
       color: var(--muted);
-      margin: 0.6rem 0 0;
-      line-height: 1.6;
+      margin-bottom: 15px;
     }
 
-    .timeline {
-      margin-top: 1rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 0.9rem;
+    /* CONTACT */
+    .contact a {
+      color: var(--accent);
+      text-decoration: none;
     }
 
-    .timeline-item {
-      position: relative;
-      padding: 1.1rem;
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
-      overflow: hidden;
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 4px;
-      background: linear-gradient(180deg, var(--gold), var(--coral), var(--violet));
-      opacity: 0.9;
-    }
-
-    .timeline-item::after {
-      content: "";
-      position: absolute;
-      right: -35px;
-      top: -35px;
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(224,195,109,0.14), transparent 70%);
-      transition: transform 0.25s ease, opacity 0.25s ease;
-      opacity: 0.7;
-    }
-
-    .timeline-item:hover {
-      transform: translateY(-6px);
-      border-color: rgba(224,195,109,0.28);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.24);
-    }
-
-    .timeline-item:hover::after {
-      transform: scale(1.12);
-      opacity: 1;
-    }
-
-    .timeline-kicker {
-      display: inline-flex;
-      margin-bottom: 0.55rem;
-      font-size: 0.74rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #ffd999;
-    }
-
-    .timeline-item h3 {
-      margin: 0;
-      font-size: 1rem;
-      line-height: 1.25;
-    }
-
-    .timeline-item p {
-      margin: 0.25rem 0 0.7rem;
-      color: #f1d898;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .timeline-item ul {
-      margin: 0;
-      padding-left: 1rem;
-      color: var(--muted);
-    }
-
-    .timeline-item li {
-      margin: 0.32rem 0;
-      line-height: 1.5;
-      font-size: 0.92rem;
-    }
-
-    .fade-in,
-    .fade-in-item {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
-    }
-
-    .fade-in.visible,
-    .fade-in-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    footer {
-      padding: 2.4rem 0 3rem;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    @media (max-width: 1200px) {
-      .projects-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
-      .timeline { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    }
-
-    @media (max-width: 980px) {
-      .hero-grid,
-      .contact-grid,
-      .about-grid,
-      .section-head {
-        grid-template-columns: 1fr;
-        display: grid;
-      }
-
-      .hero-stats,
-      .mini-grid {
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .projects-grid {
         grid-template-columns: 1fr;
       }
 
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
+      .hero h1 {
+        font-size: 2.2rem;
       }
-
-      .hero-copy {
-        padding: 1.5rem;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .projects-grid { grid-template-columns: 1fr; }
-      .timeline { grid-template-columns: 1fr; }
-      .hero h1 { max-width: 100%; }
     }
   </style>
 </head>
+
 <body>
-  <div class="bg-grid"></div>
-  <div class="bg-orb"></div>
-  <div class="cursor-glow"></div>
 
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="#top" class="brand">
-        <div class="brand-mark">S</div>
-        <div>Shania Swan</div>
-      </a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#resume">Resume</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
-  </nav>
-
-  <main id="top">
-    <section class="hero fade-in">
-      <div class="container hero-grid">
-        <div class="panel hero-copy">
-          <div class="eyebrow">UX/UI • XR • Creative Technology • Human-Centered Design</div>
-          <h1>Hi, I’m <span class="name-flip">Shania</span>.</h1>
-          <p>
-            I’m a University of Miami Innovation, Technology, and Design student creating polished digital experiences across UX/UI, immersive media, and creative technology. My work sits at the intersection of clarity, storytelling, and interaction design.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">Explore My Work</a>
-            <a class="btn btn-secondary" href="resume.pdf" target="_blank">Open Resume</a>
-          </div>
-
-          <div class="hero-stats">
-            <div class="stat">
-              <small>Degree</small>
-              <strong>B.S. Innovation, Technology, Design</strong>
-            </div>
-            <div class="stat">
-              <small>Strengths</small>
-              <strong>UX/UI, immersive learning, visual communication</strong>
-            </div>
-            <div class="stat">
-              <small>Tools</small>
-              <strong>Figma, Unity, Canva, Adobe, UX research</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel hero-side">
-          <div class="portrait-card">
-            <img src="shania-headshot.jpg" alt="Headshot of Shania Swan">
-          </div>
-          <div class="mini-grid">
-            <div class="mini-card">
-              <h3>Current Focus</h3>
-              <p>Designing experiences that blend interface design, emerging tech, and real-world impact.</p>
-            </div>
-            <div class="mini-card">
-              <h3>Interests</h3>
-              <p>XR/VR, AI, fashion, design systems, wellness-centered experiences, and storytelling.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section fade-in" id="about">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">About</h2>
-            <p class="section-intro"></p>
-          </div>
-        </div>
-        <div class="panel about-panel">
-          <div class="about-grid">
-            <div class="about-card">
-              <h3>Design Perspective</h3>
-              <p>I approach design through usability, visual clarity, and emotion, aiming to create experiences that feel thoughtful and memorable.</p>
-            </div>
-            <div class="about-card">
-              <h3>Technical Range</h3>
-              <p>My toolkit spans interface design, prototyping, immersive technology, creative direction, and collaborative problem-solving.</p>
-            </div>
-            <div class="about-card">
-              <h3>Experience</h3>
-              <p>I’ve worked across student services, immersive learning environments, brand storytelling, and interactive healthcare training.</p>
-            </div>
-            <div class="about-card">
-              <h3>Goal</h3>
-              <p>I want to build human-centered digital products and experiences that merge innovation with a strong visual voice.</p>
-            </div>
-          </div>
-          <div class="tags">
-            <span class="tag">UX/UI Design</span>
-            <span class="tag">XR / VR</span>
-            <span class="tag">Creative Technology</span>
-            <span class="tag">Unity Prototyping</span>
-            <span class="tag">Figma</span>
-            <span class="tag">Visual Storytelling</span>
-            <span class="tag">Design Thinking</span>
-            <span class="tag">Brand Direction</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section fade-in" id="projects">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-intro"></p>
-          </div>
-        </div>
-        <div class="projects-grid">
-          <a class="project-card" href="#" aria-label="Frost Science Museum sensory AR VR experience">
-            <div class="project-visual">FROST SCIENCE MUSEUM</div>
-            <div class="project-content">
-              <span class="project-kicker">AR / VR Experience</span>
-              <h3>Frost Science Sensory AR/VR Experience</h3>
-              <p>Designed a calming underwater learning environment for neurodivergent children with guided interaction, soft visual effects, timed animations, and an AI marine biologist guide.</p>
-              <span class="project-arrow">Open case study →</span>
-            </div>
-          </a>
-
-          <a class="project-card" href="#" aria-label="Miami MoCAAD virtual museum XR exhibition">
-            <div class="project-visual">MOCAAD XR MUSEUM</div>
-            <div class="project-content">
-              <span class="project-kicker">XR / Cultural Experience</span>
-              <h3>Miami MoCAAD Virtual Museum</h3>
-              <p>Helped create an immersive virtual gallery that expanded access to African Diaspora art through artwork scanning, spatial planning, XR navigation, and stakeholder-centered design.</p>
-              <span class="project-arrow">Open case study →</span>
-            </div>
-          </a>
-
-          <a class="project-card" href="#" aria-label="Spotify DJ social shared queue experience">
-            <div class="project-visual">SPOTIFY DJ SOCIAL+</div>
-            <div class="project-content">
-              <span class="project-kicker">UX / Interaction Design</span>
-              <h3>Spotify DJ Shared Queue</h3>
-              <p>Designed a collaborative listening interface where users can join live sessions, contribute songs to a shared queue, and interact in real time through a clearer social music experience.</p>
-              <span class="project-arrow">Open case study →</span>
-            </div>
-          </a>
-
-          <a class="project-card" href="#" aria-label="UM Campus Cats social media design sprint">
-            <div class="project-visual">CAMPUS CATS SPRINT</div>
-            <div class="project-content">
-              <span class="project-kicker">Social / Brand Sprint</span>
-              <h3>UM Campus Cats Social Media</h3>
-              <p>Built a one-week Instagram brand concept around campus cats using AI-generated visuals, short-form video ideas, content structure, and Figma prototyping for community engagement.</p>
-              <span class="project-arrow">Open case study →</span>
-            </div>
-          </a>
-
-          <a class="project-card" href="#" aria-label="Pharrell Williams TIME magazine editorial design">
-            <div class="project-visual">EDITORIAL DESIGN</div>
-            <div class="project-content">
-              <span class="project-kicker">InDesign / Editorial</span>
-              <h3>Pharrell Williams TIME Magazine</h3>
-              <p>Created a five-page editorial layout inspired by TIME, combining typography, hierarchy, image treatment, and visual balance across a cover and two interior spreads.</p>
-              <span class="project-arrow">Open case study →</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section fade-in" id="resume">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">Resume</h2>
-            <p class="section-intro"></p>
-          </div>
-        </div>
-
-        <div class="resume-card">
-          <h3>My Resume</h3>
-          <p>A deeper look into my work, leadership, and creative direction.</p>
-          <div class="hero-actions" style="margin-top: 1rem;">
-            <a class="btn btn-primary" href="resume.pdf" target="_blank">Open Resume</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section fade-in" id="contact">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">Contact</h2>
-            <p class="section-intro"></p>
-          </div>
-        </div>
-        <div class="panel contact-panel">
-          <div class="contact-grid">
-            <div class="contact-card">
-              <h3>Email</h3>
-              <a href="mailto:swanshania210@gmail.com">swanshania210@gmail.com</a>
-            </div>
-            <div class="contact-card">
-              <h3>Phone</h3>
-              <a href="tel:6146072900">614-607-2900</a>
-            </div>
-            <div class="contact-card">
-              <h3>LinkedIn</h3>
-              <a href="https://www.linkedin.com/in/shania-swan-265802335" target="_blank">linkedin.com/in/shania-swan-265802335</a>
-            </div>
-            <div class="contact-card">
-              <h3>Education</h3>
-              <p>University of Miami • B.S. Innovation, Technology, Design • May 2027</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
+  <!-- HERO -->
+  <section class="hero">
     <div class="container">
-      <p>© 2026 Shania Swan</p>
+      <h1>Shania Swan</h1>
+      <p>UX/UI Designer | XR/VR | Creative Technologist</p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">Explore My Work</a>
+        <a class="btn btn-secondary" href="resume.pdf" target="_blank">Open Resume</a>
+      </div>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    const root = document.documentElement;
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <h2 class="section-title">Selected Work</h2>
 
-    window.addEventListener('mousemove', function (e) {
-      root.style.setProperty('--mx', e.clientX + 'px');
-      root.style.setProperty('--my', e.clientY + 'px');
-    });
+      <div class="projects-grid">
 
-    const sectionObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.12 });
+        <div class="card">
+          <h3>Interactive Compliance Training</h3>
+          <p>VR-based immersive training experience built in Unity for UHealth.</p>
+        </div>
 
-    document.querySelectorAll('.fade-in').forEach(function (el) {
-      sectionObserver.observe(el);
-    });
-  </script>
+        <div class="card">
+          <h3>MoCAAD XR Museum</h3>
+          <p>Immersive virtual museum experience with spatial storytelling.</p>
+        </div>
+
+        <div class="card">
+          <h3>Frost Science AR/VR</h3>
+          <p>Sensory-based AR/VR experience designed for museum engagement.</p>
+        </div>
+
+        <div class="card">
+          <h3>Spotify Social Queue</h3>
+          <p>Collaborative music experience redesign with social interaction focus.</p>
+        </div>
+
+        <div class="card">
+          <h3>Campus Cats Campaign</h3>
+          <p>Social media design sprint focused on engagement and storytelling.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section class="section" id="resume">
+    <div class="container">
+      <h2 class="section-title">Resume</h2>
+
+      <div class="resume-card">
+        <h3>My Resume</h3>
+        <p>A deeper look into my experience, leadership, and design work.</p>
+
+        <a class="btn btn-primary" href="resume.pdf" target="_blank">
+          Open Resume
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+
+      <p>Email: ginriche@gmail.com</p>
+      <p>
+        LinkedIn:
+        <a href="https://www.linkedin.com/in/shania-swan-265802335" target="_blank">
+          View Profile
+        </a>
+      </p>
+    </div>
+  </section>
+
 </body>
 </html>
