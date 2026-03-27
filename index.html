@@ -629,6 +629,30 @@
       color: var(--text);
     }
 
+    .resume-card {
+      padding: 1.5rem;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.035);
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .resume-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.17);
+    }
+
+    .resume-card h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .resume-card p {
+      color: var(--muted);
+      margin: 0.6rem 0 0;
+      line-height: 1.6;
+    }
+
     .timeline {
       margin-top: 1rem;
       display: grid;
@@ -713,76 +737,6 @@
       font-size: 0.92rem;
     }
 
-    .resume-hover-wrap {
-      position: relative;
-      display: inline-block;
-    }
-
-    .resume-trigger {
-      position: relative;
-      z-index: 3;
-    }
-
-    .resume-popover {
-      position: absolute;
-      top: calc(100% + 16px);
-      left: 0;
-      width: min(540px, 90vw);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(12px);
-      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
-      z-index: 20;
-    }
-
-    .resume-hover-wrap:hover .resume-popover,
-    .resume-hover-wrap:focus-within .resume-popover {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .resume-popover-inner {
-      padding: 1rem;
-      border-radius: 24px;
-      border: 1px solid var(--line);
-      background: rgba(16,17,20,0.95);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 25px 70px rgba(0,0,0,0.4);
-    }
-
-    .resume-popover-inner h3 {
-      margin: 0 0 0.35rem;
-      font-size: 1.05rem;
-    }
-
-    .resume-popover-inner p {
-      margin: 0 0 0.9rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .resume-preview-box {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.03);
-    }
-
-    .resume-preview-box iframe {
-      width: 100%;
-      height: 320px;
-      border: 0;
-      display: block;
-    }
-
-    .resume-preview-actions {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-top: 0.9rem;
-    }
-
     .fade-in,
     .fade-in-item {
       opacity: 0;
@@ -835,15 +789,6 @@
       .projects-grid { grid-template-columns: 1fr; }
       .timeline { grid-template-columns: 1fr; }
       .hero h1 { max-width: 100%; }
-
-      .resume-popover {
-        width: min(92vw, 420px);
-        left: 0;
-      }
-
-      .resume-preview-box iframe {
-        height: 240px;
-      }
     }
   </style>
 </head>
@@ -878,26 +823,7 @@
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#projects">Explore My Work</a>
-
-            <div class="resume-hover-wrap">
-              <a class="btn btn-secondary resume-trigger" href="resume.pdf" target="_blank">
-                Open Resume
-              </a>
-
-              <div class="resume-popover">
-                <div class="resume-popover-inner">
-                  <h3>Resume Preview</h3>
-                  <p>Open or save my full resume.</p>
-                  <div class="resume-preview-box">
-                    <iframe src="resume.pdf" title="Shania Swan Resume Preview"></iframe>
-                  </div>
-                  <div class="resume-preview-actions">
-                    <a class="btn btn-primary" href="resume.pdf" target="_blank">Open PDF</a>
-                    <a class="btn btn-secondary" href="resume.pdf" download>Save PDF</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <a class="btn btn-secondary" href="resume.pdf" target="_blank">Open Resume</a>
           </div>
 
           <div class="hero-stats">
@@ -1046,23 +972,11 @@
           </div>
         </div>
 
-        <div class="resume-hover-wrap">
-          <a class="btn btn-primary resume-trigger" href="resume.pdf" target="_blank">
-            Open Resume
-          </a>
-
-          <div class="resume-popover">
-            <div class="resume-popover-inner">
-              <h3>Resume Preview</h3>
-              <p>Open or save my full resume.</p>
-              <div class="resume-preview-box">
-                <iframe src="resume.pdf" title="Shania Swan Resume Preview"></iframe>
-              </div>
-              <div class="resume-preview-actions">
-                <a class="btn btn-primary" href="resume.pdf" target="_blank">Open PDF</a>
-                <a class="btn btn-secondary" href="resume.pdf" download>Save PDF</a>
-              </div>
-            </div>
+        <div class="resume-card">
+          <h3>My Resume</h3>
+          <p>A deeper look into my work, leadership, and creative direction.</p>
+          <div class="hero-actions" style="margin-top: 1rem;">
+            <a class="btn btn-primary" href="resume.pdf" target="_blank">Open Resume</a>
           </div>
         </div>
       </div>
