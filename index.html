@@ -18,7 +18,6 @@
       --violet: #7b61ff;
       --teal: #35d0ba;
       --shadow: 0 20px 50px rgba(0,0,0,0.35);
-      --radius: 24px;
       --max: 1180px;
     }
 
@@ -152,11 +151,13 @@
       transition: transform 0.25s ease;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--text);
     }
 
-    .nav-links a:hover::after {
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
       transform: scaleX(1);
     }
 
@@ -185,6 +186,20 @@
     .hero-copy {
       position: relative;
       padding: 3rem;
+      transition: transform 0.15s ease;
+      transform-style: preserve-3d;
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      right: -50px;
+      bottom: -60px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,97,255,0.25), transparent 65%);
+      filter: blur(22px);
     }
 
     .eyebrow {
@@ -250,6 +265,7 @@
       border: 1px solid var(--line);
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
       will-change: transform;
+      cursor: pointer;
     }
 
     .btn:hover {
@@ -317,11 +333,11 @@
         radial-gradient(circle at bottom left, rgba(53,208,186,0.16), transparent 28%),
         #141418;
       padding: 1rem;
-      transition: transform 0.28s ease, border-color 0.28s ease;
+      transition: transform 0.15s ease, border-color 0.28s ease;
+      transform-style: preserve-3d;
     }
 
     .portrait-card:hover {
-      transform: translateY(-5px);
       border-color: rgba(255,255,255,0.18);
     }
 
@@ -457,16 +473,12 @@
 
     .work-carousel .project-card {
       flex: 0 0 320px;
-      min-height: 380px;
+      min-height: 390px;
     }
 
     @keyframes workScroll {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(calc(-50% - 0.5rem));
-      }
+      from { transform: translateX(0); }
+      to { transform: translateX(calc(-50% - 0.5rem)); }
     }
 
     .project-card {
@@ -478,6 +490,7 @@
       box-shadow: var(--shadow);
       transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
       isolation: isolate;
+      cursor: pointer;
     }
 
     .project-card:hover {
@@ -494,33 +507,81 @@
       z-index: 1;
     }
 
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background: radial-gradient(
+        220px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+        rgba(255,255,255,0.10),
+        transparent 45%
+      );
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .project-card:hover::after {
+      opacity: 1;
+    }
+
     .project-visual {
       position: absolute;
       inset: 0;
-      display: grid;
-      place-items: center;
+      overflow: hidden;
       background:
         radial-gradient(circle at top right, rgba(123,97,255,0.25), transparent 28%),
         radial-gradient(circle at bottom left, rgba(53,208,186,0.22), transparent 30%),
         linear-gradient(135deg, rgba(240,194,79,0.18), rgba(255,255,255,0.02)),
         #18181d;
-      color: rgba(255,255,255,0.55);
-      font-size: 0.8rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
       transition: transform 0.32s ease, filter 0.32s ease;
     }
 
     .project-card:hover .project-visual {
-      transform: scale(1.06);
+      transform: scale(1.05);
       filter: saturate(1.15);
+    }
+
+    .project-label {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      z-index: 1;
+      transition: opacity 0.25s ease;
+    }
+
+    .project-card:hover .project-label {
+      opacity: 0.18;
+    }
+
+    .project-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.04);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      filter: saturate(1.05);
+    }
+
+    .project-card:hover .project-image {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .project-content {
       position: absolute;
       inset: auto 0 0 0;
       padding: 1.2rem;
-      z-index: 2;
+      z-index: 4;
     }
 
     .project-kicker {
@@ -621,15 +682,113 @@
       color: var(--text);
     }
 
-    .fade-in {
+    .fade-in,
+    .fade-left,
+    .fade-right {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    .fade-in.visible {
+    .fade-in { transform: translateY(26px); }
+    .fade-left { transform: translateX(-32px); }
+    .fade-right { transform: translateX(32px); }
+
+    .visible.fade-in,
+    .visible.fade-left,
+    .visible.fade-right {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate(0, 0);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(8,9,12,0.72);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      padding: 1rem;
+    }
+
+    .modal.open {
+      display: grid;
+    }
+
+    .modal-card {
+      width: min(760px, 100%);
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(20,22,28,0.96), rgba(12,13,18,0.98));
+      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+      overflow: hidden;
+    }
+
+    .modal-media {
+      position: relative;
+      height: 280px;
+      background:
+        radial-gradient(circle at top right, rgba(123,97,255,0.22), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(53,208,186,0.18), transparent 30%),
+        linear-gradient(135deg, rgba(240,194,79,0.18), rgba(255,255,255,0.03)),
+        #1a1c22;
+    }
+
+    .modal-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+    }
+
+    .modal-body {
+      padding: 1.4rem;
+    }
+
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: start;
+      margin-bottom: 0.8rem;
+    }
+
+    .modal-kicker {
+      display: inline-block;
+      color: #ffd999;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.76rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .modal-body h3 {
+      font-size: 1.45rem;
+      line-height: 1.15;
+    }
+
+    .modal-body p {
+      color: var(--muted);
+      line-height: 1.65;
+      margin-top: 0.9rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .modal-close {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+      font-size: 1rem;
     }
 
     footer {
@@ -673,6 +832,10 @@
       .work-track {
         animation-duration: 22s;
       }
+
+      .modal-media {
+        height: 220px;
+      }
     }
   </style>
 </head>
@@ -699,7 +862,7 @@
   <main id="top">
     <section class="hero fade-in">
       <div class="container hero-grid">
-        <div class="panel hero-copy">
+        <div class="panel hero-copy" id="heroCopy">
           <div class="eyebrow">UX/UI • XR • Creative Technology • Human-Centered Design</div>
           <h1>Hi, I’m <span class="name-flip">Shania</span>.</h1>
           <p>
@@ -727,8 +890,8 @@
           </div>
         </div>
 
-        <div class="panel hero-side">
-          <div class="portrait-card">
+        <div class="panel hero-side fade-right">
+          <div class="portrait-card" id="heroPortrait">
             <img src="shania-headshot.jpg" alt="Headshot of Shania Swan">
           </div>
 
@@ -746,7 +909,7 @@
       </div>
     </section>
 
-    <section class="section fade-in" id="about">
+    <section class="section fade-left" id="about">
       <div class="container">
         <div class="section-head">
           <h2 class="section-title">About</h2>
@@ -794,8 +957,16 @@
 
         <div class="work-carousel" id="workCarousel">
           <div class="work-track">
-            <a class="project-card" href="#" aria-label="Frost Science Museum sensory AR VR experience">
-              <div class="project-visual">FROST SCIENCE MUSEUM</div>
+            <a class="project-card open-modal" href="javascript:void(0)"
+               data-title="Frost Science Sensory AR/VR Experience"
+               data-kicker="AR / VR Experience"
+               data-desc="Designed a calming underwater learning environment for neurodivergent children with guided interaction, soft visual effects, timed animations, and an AI marine biologist guide."
+               data-image="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=1200&q=80"
+               data-link="#">
+              <div class="project-visual">
+                <div class="project-label">FROST SCIENCE MUSEUM</div>
+                <img class="project-image" src="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=1200&q=80" alt="Frost Science preview">
+              </div>
               <div class="project-content">
                 <span class="project-kicker">AR / VR Experience</span>
                 <h3>Frost Science Sensory AR/VR Experience</h3>
@@ -804,8 +975,16 @@
               </div>
             </a>
 
-            <a class="project-card" href="#" aria-label="Miami MoCAAD virtual museum XR exhibition">
-              <div class="project-visual">MOCAAD XR MUSEUM</div>
+            <a class="project-card open-modal" href="javascript:void(0)"
+               data-title="Miami MoCAAD Virtual Museum"
+               data-kicker="XR / Cultural Experience"
+               data-desc="Helped create an immersive virtual gallery that expanded access to African Diaspora art through artwork scanning, spatial planning, XR navigation, and stakeholder-centered design."
+               data-image="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+               data-link="#">
+              <div class="project-visual">
+                <div class="project-label">MOCAAD XR MUSEUM</div>
+                <img class="project-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="MoCAAD preview">
+              </div>
               <div class="project-content">
                 <span class="project-kicker">XR / Cultural Experience</span>
                 <h3>Miami MoCAAD Virtual Museum</h3>
@@ -814,8 +993,16 @@
               </div>
             </a>
 
-            <a class="project-card" href="#" aria-label="Spotify DJ social shared queue experience">
-              <div class="project-visual">SPOTIFY DJ SOCIAL+</div>
+            <a class="project-card open-modal" href="javascript:void(0)"
+               data-title="Spotify DJ Shared Queue"
+               data-kicker="UX / Interaction Design"
+               data-desc="Designed a collaborative listening interface where users can join live sessions, contribute songs to a shared queue, and interact in real time through a clearer social music experience."
+               data-image="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80"
+               data-link="#">
+              <div class="project-visual">
+                <div class="project-label">SPOTIFY DJ SOCIAL+</div>
+                <img class="project-image" src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80" alt="Spotify preview">
+              </div>
               <div class="project-content">
                 <span class="project-kicker">UX / Interaction Design</span>
                 <h3>Spotify DJ Shared Queue</h3>
@@ -824,8 +1011,16 @@
               </div>
             </a>
 
-            <a class="project-card" href="#" aria-label="UM Campus Cats social media design sprint">
-              <div class="project-visual">CAMPUS CATS SPRINT</div>
+            <a class="project-card open-modal" href="javascript:void(0)"
+               data-title="UM Campus Cats Social Media"
+               data-kicker="Social / Brand Sprint"
+               data-desc="Built a one-week Instagram brand concept around campus cats using AI-generated visuals, short-form video ideas, content structure, and Figma prototyping for community engagement."
+               data-image="https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=1200&q=80"
+               data-link="#">
+              <div class="project-visual">
+                <div class="project-label">CAMPUS CATS SPRINT</div>
+                <img class="project-image" src="https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=1200&q=80" alt="Campus Cats preview">
+              </div>
               <div class="project-content">
                 <span class="project-kicker">Social / Brand Sprint</span>
                 <h3>UM Campus Cats Social Media</h3>
@@ -834,8 +1029,16 @@
               </div>
             </a>
 
-            <a class="project-card" href="#" aria-label="Pharrell Williams TIME magazine editorial design">
-              <div class="project-visual">EDITORIAL DESIGN</div>
+            <a class="project-card open-modal" href="javascript:void(0)"
+               data-title="Pharrell Williams TIME Magazine"
+               data-kicker="InDesign / Editorial"
+               data-desc="Created a five-page editorial layout inspired by TIME, combining typography, hierarchy, image treatment, and visual balance across a cover and two interior spreads."
+               data-image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+               data-link="#">
+              <div class="project-visual">
+                <div class="project-label">EDITORIAL DESIGN</div>
+                <img class="project-image" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Editorial preview">
+              </div>
               <div class="project-content">
                 <span class="project-kicker">InDesign / Editorial</span>
                 <h3>Pharrell Williams TIME Magazine</h3>
@@ -844,8 +1047,16 @@
               </div>
             </a>
 
-            <a class="project-card" href="#" aria-label="Frost Science Museum sensory AR VR experience duplicate">
-              <div class="project-visual">FROST SCIENCE MUSEUM</div>
+            <a class="project-card open-modal" href="javascript:void(0)"
+               data-title="Frost Science Sensory AR/VR Experience"
+               data-kicker="AR / VR Experience"
+               data-desc="Designed a calming underwater learning environment for neurodivergent children with guided interaction, soft visual effects, timed animations, and an AI marine biologist guide."
+               data-image="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=1200&q=80"
+               data-link="#">
+              <div class="project-visual">
+                <div class="project-label">FROST SCIENCE MUSEUM</div>
+                <img class="project-image" src="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=1200&q=80" alt="Frost Science preview duplicate">
+              </div>
               <div class="project-content">
                 <span class="project-kicker">AR / VR Experience</span>
                 <h3>Frost Science Sensory AR/VR Experience</h3>
@@ -854,8 +1065,16 @@
               </div>
             </a>
 
-            <a class="project-card" href="#" aria-label="Miami MoCAAD virtual museum XR exhibition duplicate">
-              <div class="project-visual">MOCAAD XR MUSEUM</div>
+            <a class="project-card open-modal" href="javascript:void(0)"
+               data-title="Miami MoCAAD Virtual Museum"
+               data-kicker="XR / Cultural Experience"
+               data-desc="Helped create an immersive virtual gallery that expanded access to African Diaspora art through artwork scanning, spatial planning, XR navigation, and stakeholder-centered design."
+               data-image="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+               data-link="#">
+              <div class="project-visual">
+                <div class="project-label">MOCAAD XR MUSEUM</div>
+                <img class="project-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="MoCAAD preview duplicate">
+              </div>
               <div class="project-content">
                 <span class="project-kicker">XR / Cultural Experience</span>
                 <h3>Miami MoCAAD Virtual Museum</h3>
@@ -864,8 +1083,16 @@
               </div>
             </a>
 
-            <a class="project-card" href="#" aria-label="Spotify DJ social shared queue experience duplicate">
-              <div class="project-visual">SPOTIFY DJ SOCIAL+</div>
+            <a class="project-card open-modal" href="javascript:void(0)"
+               data-title="Spotify DJ Shared Queue"
+               data-kicker="UX / Interaction Design"
+               data-desc="Designed a collaborative listening interface where users can join live sessions, contribute songs to a shared queue, and interact in real time through a clearer social music experience."
+               data-image="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80"
+               data-link="#">
+              <div class="project-visual">
+                <div class="project-label">SPOTIFY DJ SOCIAL+</div>
+                <img class="project-image" src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80" alt="Spotify preview duplicate">
+              </div>
               <div class="project-content">
                 <span class="project-kicker">UX / Interaction Design</span>
                 <h3>Spotify DJ Shared Queue</h3>
@@ -874,8 +1101,16 @@
               </div>
             </a>
 
-            <a class="project-card" href="#" aria-label="UM Campus Cats social media design sprint duplicate">
-              <div class="project-visual">CAMPUS CATS SPRINT</div>
+            <a class="project-card open-modal" href="javascript:void(0)"
+               data-title="UM Campus Cats Social Media"
+               data-kicker="Social / Brand Sprint"
+               data-desc="Built a one-week Instagram brand concept around campus cats using AI-generated visuals, short-form video ideas, content structure, and Figma prototyping for community engagement."
+               data-image="https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=1200&q=80"
+               data-link="#">
+              <div class="project-visual">
+                <div class="project-label">CAMPUS CATS SPRINT</div>
+                <img class="project-image" src="https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=1200&q=80" alt="Campus Cats preview duplicate">
+              </div>
               <div class="project-content">
                 <span class="project-kicker">Social / Brand Sprint</span>
                 <h3>UM Campus Cats Social Media</h3>
@@ -884,8 +1119,16 @@
               </div>
             </a>
 
-            <a class="project-card" href="#" aria-label="Pharrell Williams TIME magazine editorial design duplicate">
-              <div class="project-visual">EDITORIAL DESIGN</div>
+            <a class="project-card open-modal" href="javascript:void(0)"
+               data-title="Pharrell Williams TIME Magazine"
+               data-kicker="InDesign / Editorial"
+               data-desc="Created a five-page editorial layout inspired by TIME, combining typography, hierarchy, image treatment, and visual balance across a cover and two interior spreads."
+               data-image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+               data-link="#">
+              <div class="project-visual">
+                <div class="project-label">EDITORIAL DESIGN</div>
+                <img class="project-image" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Editorial preview duplicate">
+              </div>
               <div class="project-content">
                 <span class="project-kicker">InDesign / Editorial</span>
                 <h3>Pharrell Williams TIME Magazine</h3>
@@ -898,7 +1141,7 @@
       </div>
     </section>
 
-    <section class="section fade-in" id="resume">
+    <section class="section fade-right" id="resume">
       <div class="container">
         <div class="section-head">
           <h2 class="section-title">Resume</h2>
@@ -950,6 +1193,27 @@
     </div>
   </footer>
 
+  <div class="modal" id="projectModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-media">
+        <img id="modalImage" src="" alt="Project preview">
+      </div>
+      <div class="modal-body">
+        <div class="modal-top">
+          <div>
+            <span class="modal-kicker" id="modalKicker"></span>
+            <h3 id="modalTitle"></h3>
+          </div>
+          <button class="modal-close" id="modalClose" aria-label="Close modal">✕</button>
+        </div>
+        <p id="modalDesc"></p>
+        <div class="modal-actions">
+          <a class="btn btn-primary" id="modalLink" href="#" target="_blank">Open Project</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const root = document.documentElement;
 
@@ -966,7 +1230,7 @@
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.fade-in').forEach(function(el) {
+    document.querySelectorAll('.fade-in, .fade-left, .fade-right').forEach(function(el) {
       observer.observe(el);
     });
 
@@ -975,7 +1239,7 @@
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
+        btn.style.transform = 'translate(' + (x * 0.08) + 'px, ' + (y * 0.08) + 'px)';
       });
 
       btn.addEventListener('mouseleave', function() {
@@ -983,11 +1247,44 @@
       });
     });
 
+    const heroCopy = document.getElementById('heroCopy');
+    const heroPortrait = document.getElementById('heroPortrait');
+
+    function parallaxCard(el, e, amount) {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      el.style.transform = 'rotateY(' + (x / amount) + 'deg) rotateX(' + (-y / amount) + 'deg)';
+    }
+
+    if (heroCopy) {
+      heroCopy.addEventListener('mousemove', function(e) {
+        parallaxCard(heroCopy, e, 28);
+      });
+      heroCopy.addEventListener('mouseleave', function() {
+        heroCopy.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      });
+    }
+
+    if (heroPortrait) {
+      heroPortrait.addEventListener('mousemove', function(e) {
+        parallaxCard(heroPortrait, e, 32);
+      });
+      heroPortrait.addEventListener('mouseleave', function() {
+        heroPortrait.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      });
+    }
+
     const workCarousel = document.getElementById('workCarousel');
 
     if (workCarousel) {
-      const pauseCarousel = () => workCarousel.classList.add('paused');
-      const resumeCarousel = () => workCarousel.classList.remove('paused');
+      function pauseCarousel() {
+        workCarousel.classList.add('paused');
+      }
+
+      function resumeCarousel() {
+        workCarousel.classList.remove('paused');
+      }
 
       workCarousel.addEventListener('mouseenter', pauseCarousel);
       workCarousel.addEventListener('mouseleave', resumeCarousel);
@@ -995,6 +1292,85 @@
       workCarousel.addEventListener('focusout', resumeCarousel);
       workCarousel.addEventListener('pointerdown', pauseCarousel);
     }
+
+    document.querySelectorAll('.project-card').forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--spot-x', x + 'px');
+        card.style.setProperty('--spot-y', y + 'px');
+      });
+    });
+
+    const modal = document.getElementById('projectModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalKicker = document.getElementById('modalKicker');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalImage = document.getElementById('modalImage');
+    const modalLink = document.getElementById('modalLink');
+    const modalClose = document.getElementById('modalClose');
+
+    document.querySelectorAll('.open-modal').forEach(function(card) {
+      card.addEventListener('click', function() {
+        if (workCarousel) {
+          workCarousel.classList.add('paused');
+        }
+
+        modalTitle.textContent = this.dataset.title || '';
+        modalKicker.textContent = this.dataset.kicker || '';
+        modalDesc.textContent = this.dataset.desc || '';
+        modalImage.src = this.dataset.image || '';
+        modalLink.href = this.dataset.link || '#';
+
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      if (workCarousel) {
+        workCarousel.classList.remove('paused');
+      }
+    }
+
+    if (modalClose) {
+      modalClose.addEventListener('click', closeModal);
+    }
+
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        closeModal();
+      }
+    });
+
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const navObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          navLinks.forEach(function(link) {
+            const isActive = link.getAttribute('href') === '#' + entry.target.id;
+            link.classList.toggle('active', isActive);
+          });
+        }
+      });
+    }, { threshold: 0.45 });
+
+    sections.forEach(function(section) {
+      navObserver.observe(section);
+    });
   </script>
 </body>
 </html>
