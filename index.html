@@ -759,6 +759,37 @@
       font-size: 1rem;
       line-height: 1.7;
     }
+    .case-hero {
+  margin-top: 1.2rem;
+  padding: 1.35rem;
+  border-radius: 24px;
+  border: 1px solid rgba(240, 194, 79, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(123, 97, 255, 0.12), transparent 26%),
+    radial-gradient(circle at bottom left, rgba(53, 208, 186, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+.case-hero-statement {
+  font-size: clamp(1.08rem, 2vw, 1.35rem);
+  line-height: 1.6;
+  color: var(--text);
+  max-width: 68ch;
+  font-weight: 600;
+}
+
+.case-hero-statement strong {
+  color: #fff3cb;
+}
+
+.case-hero-sub {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  max-width: 70ch;
+}
 
     .case-close {
       width: 44px;
@@ -1288,47 +1319,49 @@
             <button class="case-close" id="closeCaseStudy">✕</button>
           </div>
 
-          <p class="case-intro" id="caseIntro"></p>
+          <div class="case-hero">
+  <p class="case-hero-statement" id="caseHeroStatement"></p>
+  <p class="case-hero-sub" id="caseIntro"></p>
 
-          <div class="case-meta-grid">
-            <div class="case-meta-item">
-              <strong>Role</strong>
-              <span id="caseRole"></span>
-            </div>
-            <div class="case-meta-item">
-              <strong>Tools</strong>
-              <span id="caseTools"></span>
-            </div>
-            <div class="case-meta-item">
-              <strong>Focus</strong>
-              <span id="caseFocus"></span>
-            </div>
-            <div class="case-meta-item">
-              <strong>Outcome</strong>
-              <span id="caseOutcome"></span>
-            </div>
-          </div>
+  <div class="case-meta-grid">
+    <div class="case-meta-item">
+      <strong>Role</strong>
+      <span id="caseRole"></span>
+    </div>
+    <div class="case-meta-item">
+      <strong>Tools</strong>
+      <span id="caseTools"></span>
+    </div>
+    <div class="case-meta-item">
+      <strong>Focus</strong>
+      <span id="caseFocus"></span>
+    </div>
+    <div class="case-meta-item">
+      <strong>Outcome</strong>
+      <span id="caseOutcome"></span>
+    </div>
+  </div>
+</div>
 
-          <div class="case-body-grid">
-            <div class="case-panel">
-              <h3>Overview</h3>
-              <p id="caseOverview"></p>
-            </div>
+<div class="case-panel">
+  <h3>The Opportunity</h3>
+  <p id="caseOverview"></p>
+</div>
 
-            <div class="case-panel">
-              <h3>Problem</h3>
-              <p id="caseProblem"></p>
-            </div>
+<div class="case-panel">
+  <h3>The Problem</h3>
+  <p id="caseProblem"></p>
+</div>
 
-            <div class="case-panel">
-              <h3>Approach</h3>
-              <p id="caseApproach"></p>
-            </div>
+<div class="case-panel">
+  <h3>My Approach</h3>
+  <p id="caseApproach"></p>
+</div>
 
-            <div class="case-panel">
-              <h3>Impact</h3>
-              <p id="caseImpact"></p>
-            </div>
+<div class="case-panel">
+  <h3>Why It Matters</h3>
+  <p id="caseImpact"></p>
+</div>
           </div>
 
           <div class="case-panel">
@@ -1474,74 +1507,79 @@
 
     const caseData = {
       mocaad: {
-        label: "XR / Cultural Experience",
-        title: "Miami MoCAAD Virtual Museum",
-        intro: "An immersive XR museum experience designed to expand access to contemporary African Diaspora art beyond the physical gallery.",
-        role: "Research, spatial design planning, 3D scanning, immersive prototyping",
-        tools: "Figma, PolyCam, XR design, prototyping",
-        focus: "Accessibility, cultural preservation, spatial storytelling",
-        outcome: "Launched during Miami Art Week as an immersive cultural design collaboration",
-        overview: "Developed in collaboration with Miami MoCAAD, this project explored how XR can extend access to contemporary African Diaspora art while preserving artistic intent and cultural context.",
-        problem: "Traditional museum spaces can limit access through physical, geographic, and institutional barriers. The museum needed a way to reach audiences beyond its walls without losing community connection.",
-        approach: "I contributed to a virtual gallery experience where users could engage with artworks digitally and experience a larger cultural moment through immersive storytelling and visual space design.",
-        impact: "The project demonstrated how XR can support cultural preservation, broaden access, and create new ways for audiences to engage with art outside the physical museum."
-      },
+  label: "XR / Cultural Experience",
+  title: "Miami MoCAAD Virtual Museum",
+  heroStatement: "Designed an immersive XR museum experience that expands access to African Diaspora art beyond the physical gallery while preserving cultural context and storytelling.",
+  intro: "An immersive XR museum experience designed to expand access to contemporary African Diaspora art beyond the physical gallery.",
+  role: "Research, spatial design planning, 3D scanning, immersive prototyping",
+  tools: "Figma, PolyCam, XR design, prototyping",
+  focus: "Accessibility, cultural preservation, spatial storytelling",
+  outcome: "Launched during Miami Art Week as an immersive cultural design collaboration",
+  overview: "Developed in collaboration with Miami MoCAAD, this project explored how XR can extend access to contemporary African Diaspora art while preserving artistic intent and cultural context.",
+  problem: "Traditional museum spaces can limit access through physical, geographic, and institutional barriers. The museum needed a way to reach audiences beyond its walls without losing community connection.",
+  approach: "I contributed to a virtual gallery experience where users could engage with artworks digitally and experience a larger cultural moment through immersive storytelling and visual space design.",
+  impact: "The project demonstrated how XR can support cultural preservation, broaden access, and create new ways for audiences to engage with art outside the physical museum."
+},
 
       frost: {
-        label: "AR / VR Experience",
-        title: "Frost Science Sensory AR/VR Experience",
-        intro: "A sensory-friendly immersive learning concept designed to make science education calmer, more accessible, and more engaging for neurodivergent children.",
-        role: "UX planning, AR/VR concept development, spatial design, presentation design",
-        tools: "ENGAGE VR, Canva, immersive design, research",
-        focus: "Accessibility, sensory design, educational immersion",
-        outcome: "A sensory-friendly VR concept rooted in real museum elements",
-        overview: "This project reimagined a Frost Science experience for children ages 5–11 who may become overstimulated or need more supportive, low-stim environments.",
-        problem: "Museum environments can be overwhelming for some children, making it difficult to engage with exhibits comfortably while still learning.",
-        approach: "Our team focused on a calm underwater observation-box concept inspired by real aquarium elements, sensory-support tools, and guided educational interaction.",
-        impact: "The final concept showed how immersive design can create more inclusive educational spaces by combining low-stim visuals, calming interaction, and structured learning."
-      },
+  label: "AR / VR Experience",
+  title: "Frost Science Sensory AR/VR Experience",
+  heroStatement: "Created a sensory-friendly immersive learning concept for neurodivergent children, using calmer interaction and supportive environmental design to make science education more accessible.",
+  intro: "A sensory-friendly immersive learning concept designed to make science education calmer, more accessible, and more engaging for neurodivergent children.",
+  role: "UX planning, AR/VR concept development, spatial design, presentation design",
+  tools: "ENGAGE VR, Canva, immersive design, research",
+  focus: "Accessibility, sensory design, educational immersion",
+  outcome: "A sensory-friendly VR concept rooted in real museum elements",
+  overview: "This project reimagined a Frost Science experience for children ages 5–11 who may become overstimulated or need more supportive, low-stim environments.",
+  problem: "Museum environments can be overwhelming for some children, making it difficult to engage with exhibits comfortably while still learning.",
+  approach: "Our team focused on a calm underwater observation-box concept inspired by real aquarium elements, sensory-support tools, and guided educational interaction.",
+  impact: "The final concept showed how immersive design can create more inclusive educational spaces by combining low-stim visuals, calming interaction, and structured learning."
+},
 
       spotify: {
-        label: "Product / UX Design",
-        title: "Spotify AI DJ Personalization",
-        intro: "A music-first AI DJ concept designed to improve discovery and restore personalization across songs, artists, playlists, and podcasts.",
-        role: "UX research, product thinking, interaction design, prototyping",
-        tools: "Figma, wireframing, prototyping, UX research",
-        focus: "Personalization, discovery, AI interaction",
-        outcome: "Concept for a more intentional music discovery experience",
-        overview: "This concept responds to a shift in Spotify’s experience where music discovery can feel less personal and users may struggle to find the right songs for the moment.",
-        problem: "Users may want more active control over recommendations, moods, and playlist generation instead of relying only on passive suggestions.",
-        approach: "I designed an AI DJ experience where users can choose categories, tap recommendation chips, or type exactly what kind of music they want, making discovery feel more direct and tailored.",
-        impact: "The project reframes personalization as an interactive experience that helps users find better music faster while still feeling intuitive and lightweight."
-      },
+  label: "Product / UX Design",
+  title: "Spotify AI DJ Personalization",
+  heroStatement: "Designed a more interactive AI DJ experience for Spotify that gives users greater control over personalization, discovery, and mood-based listening.",
+  intro: "A music-first AI DJ concept designed to improve discovery and restore personalization across songs, artists, playlists, and podcasts.",
+  role: "UX research, product thinking, interaction design, prototyping",
+  tools: "Figma, wireframing, prototyping, UX research",
+  focus: "Personalization, discovery, AI interaction",
+  outcome: "Concept for a more intentional music discovery experience",
+  overview: "This concept responds to a shift in Spotify’s experience where music discovery can feel less personal and users may struggle to find the right songs for the moment.",
+  problem: "Users may want more active control over recommendations, moods, and playlist generation instead of relying only on passive suggestions.",
+  approach: "I designed an AI DJ experience where users can choose categories, tap recommendation chips, or type exactly what kind of music they want, making discovery feel more direct and tailored.",
+  impact: "The project reframes personalization as an interactive experience that helps users find better music faster while still feeling intuitive and lightweight."
+},
 
       campuscats: {
-        label: "Social Media / UX Strategy",
-        title: "UM Campus Cats Social Media",
-        intro: "A social content concept centered on campus culture, storytelling, and interactive engagement around the University of Miami’s campus cats.",
-        role: "Content strategy, concept development, AI image generation, prototype design",
-        tools: "Figma, content strategy, AI visuals, social UX thinking",
-        focus: "Branding, storytelling, engagement",
-        outcome: "Interactive prototype and branded social concept",
-        overview: "I created a concept for a campus-specific social presence focused on the University of Miami’s campus cats, using playful visuals and interactive flows to drive awareness and engagement.",
-        problem: "The challenge was to turn a niche campus subject into a recognizable and engaging digital concept with a clear visual identity and interactive structure.",
-        approach: "I developed a cat-centered visual direction, social content ideas, and a Figma prototype to show how the experience could feel both community-driven and highly engaging.",
-        impact: "The project shows my ability to blend storytelling, brand direction, and interface thinking into a concept that feels playful, memorable, and culturally specific."
-      },
+  label: "Social Media / UX Strategy",
+  title: "UM Campus Cats Social Media",
+  heroStatement: "Built a playful campus-centered content and interaction concept that turns a niche subject into a recognizable, engaging digital brand experience.",
+  intro: "A social content concept centered on campus culture, storytelling, and interactive engagement around the University of Miami’s campus cats.",
+  role: "Content strategy, concept development, AI image generation, prototype design",
+  tools: "Figma, content strategy, AI visuals, social UX thinking",
+  focus: "Branding, storytelling, engagement",
+  outcome: "Interactive prototype and branded social concept",
+  overview: "I created a concept for a campus-specific social presence focused on the University of Miami’s campus cats, using playful visuals and interactive flows to drive awareness and engagement.",
+  problem: "The challenge was to turn a niche campus subject into a recognizable and engaging digital concept with a clear visual identity and interactive structure.",
+  approach: "I developed a cat-centered visual direction, social content ideas, and a Figma prototype to show how the experience could feel both community-driven and highly engaging.",
+  impact: "The project shows my ability to blend storytelling, brand direction, and interface thinking into a concept that feels playful, memorable, and culturally specific."
+},
 
       time: {
-        label: "Editorial / InDesign",
-        title: "Pharrell Williams TIME Magazine",
-        intro: "A multi-page editorial layout inspired by TIME magazine, designed to communicate Pharrell Williams’ influence across music, fashion, and creativity through strong hierarchy, typography, and image-led storytelling.",
-        role: "Editorial layout, typography, image editing, visual storytelling",
-        tools: "Adobe InDesign, Adobe Photoshop",
-        focus: "Hierarchy, storytelling, publication design",
-        outcome: "A polished editorial system spanning a cover and two interior spreads",
-        overview: "I designed a magazine project inspired by TIME that explores Pharrell Williams’ creative influence across music, fashion, and culture through a branded editorial system.",
-        problem: "The challenge was to create a professional editorial layout that felt cohesive, visually credible, and engaging across multiple pages while balancing headlines, imagery, and long-form text.",
-        approach: "I designed a TIME-style cover treatment and interior spreads focused on strong hierarchy, restrained typography, and a narrative that moves through music, LEGO, and Louis Vuitton.",
-        impact: "This project strengthened my editorial design skills and shows my ability to shape narrative through layout, typography, composition, and publication-style structure."
-      }
+  label: "Editorial / InDesign",
+  title: "Pharrell Williams TIME Magazine",
+  heroStatement: "Designed a polished editorial system inspired by TIME magazine to communicate Pharrell Williams’ cultural impact through typography, hierarchy, and image-led storytelling.",
+  intro: "A multi-page editorial layout inspired by TIME magazine, designed to communicate Pharrell Williams’ influence across music, fashion, and creativity through strong hierarchy, typography, and image-led storytelling.",
+  role: "Editorial layout, typography, image editing, visual storytelling",
+  tools: "Adobe InDesign, Adobe Photoshop",
+  focus: "Hierarchy, storytelling, publication design",
+  outcome: "A polished editorial system spanning a cover and two interior spreads",
+  overview: "I designed a magazine project inspired by TIME that explores Pharrell Williams’ creative influence across music, fashion, and culture through a branded editorial system.",
+  problem: "The challenge was to create a professional editorial layout that felt cohesive, visually credible, and engaging across multiple pages while balancing headlines, imagery, and long-form text.",
+  approach: "I designed a TIME-style cover treatment and interior spreads focused on strong hierarchy, restrained typography, and a narrative that moves through music, LEGO, and Louis Vuitton.",
+  impact: "This project strengthened my editorial design skills and shows my ability to shape narrative through layout, typography, composition, and publication-style structure."
+}
     };
 
     function getMediaMarkup(key) {
@@ -1665,16 +1703,17 @@
         if (!data) return;
 
         document.getElementById("caseLabel").textContent = data.label;
-        document.getElementById("caseTitle").textContent = data.title;
-        document.getElementById("caseIntro").textContent = data.intro;
-        document.getElementById("caseRole").textContent = data.role;
-        document.getElementById("caseTools").textContent = data.tools;
-        document.getElementById("caseFocus").textContent = data.focus;
-        document.getElementById("caseOutcome").textContent = data.outcome;
-        document.getElementById("caseOverview").textContent = data.overview;
-        document.getElementById("caseProblem").textContent = data.problem;
-        document.getElementById("caseApproach").textContent = data.approach;
-        document.getElementById("caseImpact").textContent = data.impact;
+document.getElementById("caseTitle").textContent = data.title;
+document.getElementById("caseHeroStatement").innerHTML = "<strong>Project Snapshot:</strong> " + (data.heroStatement || data.intro);
+document.getElementById("caseIntro").textContent = data.intro;
+document.getElementById("caseRole").textContent = data.role;
+document.getElementById("caseTools").textContent = data.tools;
+document.getElementById("caseFocus").textContent = data.focus;
+document.getElementById("caseOutcome").textContent = data.outcome;
+document.getElementById("caseOverview").textContent = data.overview;
+document.getElementById("caseProblem").textContent = data.problem;
+document.getElementById("caseApproach").textContent = data.approach;
+document.getElementById("caseImpact").textContent = data.impact;
 
         const mediaConfig = getMediaMarkup(key);
         caseMedia.innerHTML = mediaConfig.media;
