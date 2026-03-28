@@ -2,226 +2,1038 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shania Swan | Portfolio</title>
-  <meta name="description" content="Shania Swan — UX/UI Designer, XR/VR creative technologist, and product experience designer." />
+  <meta
+    name="description"
+    content="Shania Swan — UX/UI Designer, XR/VR creative technologist, and product experience designer."
+  />
   <style>
     :root {
       --bg: #0b0c10;
       --bg-2: #111319;
-      --card: rgba(255,255,255,0.05);
-      --line: rgba(255,255,255,0.10);
+      --line: rgba(255, 255, 255, 0.1);
       --text: #f7f4ef;
       --muted: #b9bcc6;
       --gold: #f0c24f;
       --gold-2: #d8a629;
       --violet: #7b61ff;
       --teal: #35d0ba;
-      --shadow: 0 20px 50px rgba(0,0,0,0.35);
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
       --max: 1180px;
+      --radius-xl: 30px;
+      --radius-lg: 24px;
+      --radius-md: 20px;
+      --radius-sm: 18px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 15% 10%, rgba(240,194,79,0.12), transparent 24%),
-        radial-gradient(circle at 85% 20%, rgba(123,97,255,0.14), transparent 20%),
-        radial-gradient(circle at 65% 70%, rgba(53,208,186,0.10), transparent 22%),
+        radial-gradient(circle at 15% 10%, rgba(240, 194, 79, 0.12), transparent 24%),
+        radial-gradient(circle at 85% 20%, rgba(123, 97, 255, 0.14), transparent 20%),
+        radial-gradient(circle at 65% 70%, rgba(53, 208, 186, 0.1), transparent 22%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
       color: var(--text);
       overflow-x: hidden;
     }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-    .bg-grid, .cursor-glow { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    .bg-grid,
+    .cursor-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
     .bg-grid {
       background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
       background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.35), transparent 88%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent 88%);
     }
+
     .cursor-glow {
-      background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(240,194,79,0.10), transparent 45%);
+      background: radial-gradient(
+        240px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(240, 194, 79, 0.1),
+        transparent 45%
+      );
     }
-    .container { position: relative; z-index: 1; width: min(var(--max), calc(100% - 2rem)); margin: 0 auto; }
-    .nav { position: sticky; top: 0; z-index: 30; backdrop-filter: blur(16px); background: rgba(10,11,15,0.65); border-bottom: 1px solid var(--line); }
-    .nav-inner { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; }
-    .brand { display: flex; align-items: center; gap: 0.8rem; font-weight: 700; letter-spacing: 0.02em; transition: transform 0.25s ease; }
-    .brand:hover { transform: translateY(-1px); }
-    .brand-mark { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; border: 1px solid rgba(240,194,79,0.25); background: linear-gradient(145deg, rgba(240,194,79,0.18), rgba(255,255,255,0.03)); color: var(--gold); box-shadow: 0 0 24px rgba(240,194,79,0.14); }
-    .nav-links { display: flex; flex-wrap: wrap; gap: 1.1rem; color: var(--muted); font-size: 0.95rem; }
-    .nav-links a { position: relative; transition: color 0.2s ease; }
-    .nav-links a::after { content: ""; position: absolute; left: 0; bottom: -0.25rem; width: 100%; height: 2px; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, var(--gold), var(--violet)); transition: transform 0.25s ease; }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); }
-    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
-    .hero { min-height: calc(100vh - 74px); display: grid; align-items: center; padding: 4.5rem 0 3rem; }
-    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.2rem; align-items: stretch; }
-    .panel { background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025)); border: 1px solid var(--line); border-radius: 30px; box-shadow: var(--shadow); overflow: hidden; }
-    .hero-copy { position: relative; padding: 3rem; transition: transform 0.15s ease; transform-style: preserve-3d; }
-    .hero-copy::before { content: ""; position: absolute; right: -50px; bottom: -60px; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(circle, rgba(123,97,255,0.25), transparent 65%); filter: blur(22px); }
-    .eyebrow { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.8rem; border-radius: 999px; border: 1px solid rgba(240,194,79,0.2); background: rgba(240,194,79,0.10); color: #f4d98e; font-size: 0.86rem; margin-bottom: 1rem; }
-    .hero h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(3.2rem, 7vw, 6.4rem); line-height: 0.92; letter-spacing: -0.05em; max-width: 9ch; }
-    .name-flip { background: linear-gradient(90deg, var(--gold), #fff0bc); -webkit-background-clip: text; background-clip: text; color: transparent; transition: filter 0.25s ease, transform 0.25s ease; display: inline-block; }
-    .name-flip:hover { background: linear-gradient(90deg, var(--gold), var(--violet), var(--teal)); -webkit-background-clip: text; background-clip: text; color: transparent; transform: translateY(-2px); filter: saturate(1.15); }
-    .hero p { color: var(--muted); max-width: 62ch; margin-top: 1.25rem; font-size: 1.03rem; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.7rem; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.95rem 1.2rem; border-radius: 999px; font-weight: 700; border: 1px solid var(--line); transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease; will-change: transform; cursor: pointer; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(0,0,0,0.22); }
-    .btn-primary { background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #121212; border: none; }
-    .btn-secondary { background: rgba(255,255,255,0.03); color: var(--text); }
-    .hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0.8rem; margin-top: 1.9rem; }
-    .stat { padding: 1rem; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,0.035); transition: transform 0.22s ease, border-color 0.22s ease; }
-    .stat:hover { transform: translateY(-4px); border-color: rgba(240,194,79,0.22); }
-    .stat small { display: block; color: var(--muted); margin-bottom: 0.25rem; }
-    .stat strong { font-size: 0.98rem; line-height: 1.35; }
-    .hero-side { display: grid; grid-template-rows: 1fr auto; gap: 1rem; padding: 1rem; }
-    .portrait-card { min-height: 430px; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)), radial-gradient(circle at top right, rgba(123,97,255,0.18), transparent 24%), radial-gradient(circle at bottom left, rgba(53,208,186,0.16), transparent 28%), #141418; padding: 1rem; transition: transform 0.15s ease, border-color 0.28s ease; transform-style: preserve-3d; }
-    .portrait-card:hover { border-color: rgba(255,255,255,0.18); }
-    .portrait-card img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; border: 1px solid var(--line); }
-    .mini-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0.8rem; }
-    .mini-card { padding: 1rem; border-radius: 20px; border: 1px solid var(--line); background: rgba(255,255,255,0.035); transition: transform 0.22s ease, border-color 0.22s ease; }
-    .mini-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.18); }
-    .mini-card h3 { font-size: 0.98rem; margin-bottom: 0.4rem; }
-    .mini-card p { color: var(--muted); font-size: 0.92rem; }
-    .section { padding: 1.4rem 0 0; }
-    .section-head { margin-bottom: 1rem; }
-    .section-title { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.04em; }
-    .about-panel, .contact-panel { padding: 1.6rem; }
-    .about-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0.9rem; }
-    .about-card { padding: 1.15rem; border-radius: 20px; border: 1px solid var(--line); background: rgba(255,255,255,0.035); transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease; }
-    .about-card:hover { transform: translateY(-4px); border-color: rgba(240,194,79,0.22); box-shadow: 0 14px 32px rgba(0,0,0,0.22); }
-    .about-card h3 { margin-bottom: 0.45rem; font-size: 1rem; }
-    .about-card p { color: var(--muted); font-size: 0.95rem; }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1rem; }
-    .tag { padding: 0.55rem 0.8rem; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); font-size: 0.92rem; transition: transform 0.22s ease, border-color 0.22s ease; }
-    .tag:hover { transform: translateY(-2px); border-color: rgba(240,194,79,0.22); }
-    .work-carousel { position: relative; overflow: hidden; width: 100%; padding: 0.5rem 0; mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
-    .work-track { display: flex; gap: 1rem; width: max-content; animation: workScroll 28s linear infinite; will-change: transform; }
-    .work-carousel.paused .work-track, .work-carousel:hover .work-track, .work-carousel:focus-within .work-track { animation-play-state: paused; }
-    .work-carousel .project-card { flex: 0 0 320px; min-height: 380px; }
-    @keyframes workScroll { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 0.5rem)); } }
-    .project-card { position: relative; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03)); box-shadow: var(--shadow); transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease; isolation: isolate; cursor: pointer; }
-    .project-card:hover { transform: translateY(-10px) rotate(-0.4deg); border-color: rgba(240,194,79,0.25); box-shadow: 0 25px 60px rgba(0,0,0,0.45); }
-    .project-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.90) 100%); z-index: 1; }
-    .project-visual { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(circle at top right, rgba(123,97,255,0.25), transparent 28%), radial-gradient(circle at bottom left, rgba(53,208,186,0.22), transparent 30%), linear-gradient(135deg, rgba(240,194,79,0.18), rgba(255,255,255,0.02)), #18181d; transition: transform 0.32s ease, filter 0.32s ease; }
-    .project-card:hover .project-visual { transform: scale(1.05); filter: saturate(1.15); }
-    .project-label { position: absolute; inset: 0; display: grid; place-items: center; color: rgba(255,255,255,0.55); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; z-index: 1; transition: opacity 0.25s ease; text-align: center; padding: 1rem; }
-    .project-card:hover .project-label { opacity: 0.18; }
-    .project-content { position: absolute; inset: auto 0 0 0; padding: 1.2rem; z-index: 4; }
-    .project-kicker { display: inline-block; font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: #ffd999; margin-bottom: 0.45rem; }
-    .project-content h3 { font-size: 1.08rem; line-height: 1.2; }
-    .project-content p { margin-top: 0.55rem; color: rgba(248,245,239,0.82); font-size: 0.92rem; line-height: 1.45; }
-    .project-arrow { display: inline-flex; margin-top: 0.8rem; font-weight: 700; color: var(--gold); transition: transform 0.22s ease; }
-    .project-card:hover .project-arrow { transform: translateX(4px); }
-    .hidden-case-study { display: none; scroll-margin-top: 100px; }
-    .hidden-case-study.open { display: block; }
-    .case-viewer { padding: 1.75rem; border-radius: 28px; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025)); box-shadow: var(--shadow); }
-    .case-viewer-top { display: flex; justify-content: space-between; gap: 1rem; align-items: start; }
-    .case-label { display: inline-block; margin-bottom: 0.7rem; color: #ffd999; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.16em; }
-    .case-viewer h2 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; }
-    .case-intro { margin-top: 0.8rem; color: var(--muted); max-width: 70ch; font-size: 1rem; line-height: 1.7; }
-    .case-close { width: 44px; height: 44px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); color: var(--text); cursor: pointer; font-size: 1rem; }
-    .case-meta-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.9rem; margin-top: 1.4rem; }
-    .case-meta-item { padding: 1rem; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); }
-    .case-meta-item strong { display: block; margin-bottom: 0.35rem; font-size: 0.88rem; color: var(--text); }
-    .case-meta-item span { color: var(--muted); font-size: 0.92rem; line-height: 1.5; display: block; }
-    .case-body-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.2rem; }
-    .case-panel { padding: 1.4rem; border-radius: 24px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); }
-    .case-panel h3 { margin-bottom: 0.55rem; font-size: 1.08rem; }
-    .case-panel p { color: var(--muted); line-height: 1.75; }
-    .case-media { margin-top: 0.8rem; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); background: rgba(255,255,255,0.02); }
-    .case-media-placeholder { min-height: 240px; display: grid; place-items: center; text-align: center; padding: 1rem; color: rgba(255,255,255,0.45); border: 1px dashed rgba(255,255,255,0.18); border-radius: 22px; background: rgba(255,255,255,0.02); }
-    /* PDF Viewer Styles */
-    .pdf-viewer-wrap { width: 100%; }
-    .pdf-viewer-header { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.2rem; background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--line); }
-    .pdf-viewer-header span { font-size: 0.88rem; color: var(--muted); }
-    .pdf-viewer-actions { display: flex; gap: 0.6rem; }
-    .pdf-viewer-iframe { width: 100%; height: 680px; border: none; display: block; background: #fff; }
-    .pdf-download-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600; background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #121212; border: none; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; text-decoration: none; }
-    .pdf-download-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(240,194,79,0.3); }
-    .case-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
-    .resume-card { padding: 1.5rem; border-radius: 22px; border: 1px solid var(--line); background: rgba(255,255,255,0.035); transition: transform 0.22s ease, border-color 0.22s ease; }
-    .resume-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.17); }
-    .resume-card h3 { font-size: 1.2rem; }
-    .resume-card p { color: var(--muted); margin-top: 0.6rem; line-height: 1.6; }
-    .contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1rem; }
-    .contact-card { padding: 1.25rem; border-radius: 22px; border: 1px solid var(--line); background: rgba(255,255,255,0.035); transition: transform 0.22s ease, border-color 0.22s ease; }
-    .contact-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.17); }
-    .contact-card h3 { font-size: 1.05rem; }
-    .contact-card p, .contact-card a { color: var(--muted); margin-top: 0.45rem; line-height: 1.6; }
-    .contact-card a:hover { color: var(--text); }
-    .fade-in, .fade-left, .fade-right { opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease; }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: rgba(10, 11, 15, 0.68);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: transform 0.25s ease;
+    }
+
+    .brand:hover {
+      transform: translateY(-1px);
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(240, 194, 79, 0.25);
+      background: linear-gradient(145deg, rgba(240, 194, 79, 0.18), rgba(255, 255, 255, 0.03));
+      color: var(--gold);
+      box-shadow: 0 0 24px rgba(240, 194, 79, 0.14);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.25rem;
+      width: 100%;
+      height: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      background: linear-gradient(90deg, var(--gold), var(--violet));
+      transition: transform 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      min-height: calc(100vh - 74px);
+      display: grid;
+      align-items: center;
+      padding: 4.5rem 0 3rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.2rem;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      position: relative;
+      padding: 3rem;
+      transition: transform 0.15s ease;
+      transform-style: preserve-3d;
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      right: -50px;
+      bottom: -60px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123, 97, 255, 0.25), transparent 65%);
+      filter: blur(22px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(240, 194, 79, 0.2);
+      background: rgba(240, 194, 79, 0.1);
+      color: #f4d98e;
+      font-size: 0.86rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.2rem, 7vw, 6.4rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      max-width: 9ch;
+    }
+
+    .name-flip {
+      background: linear-gradient(90deg, var(--gold), #fff0bc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .name-flip:hover {
+      background: linear-gradient(90deg, var(--gold), var(--violet), var(--teal));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      transform: translateY(-2px);
+      filter: saturate(1.15);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 62ch;
+      margin-top: 1.25rem;
+      font-size: 1.03rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.7rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.95rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      color: #121212;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 1.9rem;
+    }
+
+    .stat {
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-4px);
+      border-color: rgba(240, 194, 79, 0.22);
+    }
+
+    .stat small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat strong {
+      font-size: 0.98rem;
+      line-height: 1.4;
+    }
+
+    .hero-side {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .portrait-card {
+      min-height: 430px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+        radial-gradient(circle at top right, rgba(123, 97, 255, 0.18), transparent 24%),
+        radial-gradient(circle at bottom left, rgba(53, 208, 186, 0.16), transparent 28%),
+        #141418;
+      padding: 1rem;
+      transition: transform 0.15s ease, border-color 0.28s ease;
+      transform-style: preserve-3d;
+    }
+
+    .portrait-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .mini-card {
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .mini-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .mini-card h3 {
+      font-size: 0.98rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .mini-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .section {
+      padding: 1.4rem 0 0;
+    }
+
+    .section-head {
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .about-panel,
+    .contact-panel {
+      padding: 1.6rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .about-card {
+      padding: 1.15rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .about-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(240, 194, 79, 0.22);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+    }
+
+    .about-card h3 {
+      margin-bottom: 0.45rem;
+      font-size: 1rem;
+    }
+
+    .about-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.92rem;
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .tag:hover {
+      transform: translateY(-2px);
+      border-color: rgba(240, 194, 79, 0.22);
+    }
+
+    .work-carousel {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding: 0.5rem 0;
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
+    .work-track {
+      display: flex;
+      gap: 1rem;
+      width: max-content;
+      animation: workScroll 28s linear infinite;
+      will-change: transform;
+    }
+
+    .work-carousel.paused .work-track,
+    .work-carousel:hover .work-track,
+    .work-carousel:focus-within .work-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes workScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(calc(-50% - 0.5rem)); }
+    }
+
+    .project-card {
+      position: relative;
+      flex: 0 0 320px;
+      min-height: 390px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
+      box-shadow: var(--shadow);
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+      isolation: isolate;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) rotate(-0.4deg);
+      border-color: rgba(240, 194, 79, 0.25);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.9) 100%);
+      z-index: 1;
+    }
+
+    .project-visual {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(123, 97, 255, 0.25), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(53, 208, 186, 0.22), transparent 30%),
+        linear-gradient(135deg, rgba(240, 194, 79, 0.18), rgba(255, 255, 255, 0.02)),
+        #18181d;
+      transition: transform 0.32s ease, filter 0.32s ease;
+    }
+
+    .project-card:hover .project-visual {
+      transform: scale(1.05);
+      filter: saturate(1.1);
+    }
+
+    .project-label {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      z-index: 1;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .project-content {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 1.2rem;
+      z-index: 4;
+    }
+
+    .project-kicker {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ffd999;
+      margin-bottom: 0.45rem;
+    }
+
+    .project-content h3 {
+      font-size: 1.08rem;
+      line-height: 1.2;
+    }
+
+    .project-content p {
+      margin-top: 0.55rem;
+      color: rgba(248, 245, 239, 0.82);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .project-arrow {
+      display: inline-flex;
+      margin-top: 0.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      transition: transform 0.22s ease;
+    }
+
+    .project-card:hover .project-arrow {
+      transform: translateX(4px);
+    }
+
+    .cover-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1);
+      transition: transform 0.35s ease;
+    }
+
+    .project-card:hover .cover-image {
+      transform: scale(1.05);
+    }
+
+    .cover-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 25%, rgba(0,0,0,0.62) 100%);
+    }
+
+    .mocaad-cover-card::before,
+    .frost-cover-card::before,
+    .spotify-cover-card::before,
+    .umcats-cover-card::before {
+      background: linear-gradient(180deg, transparent 35%, rgba(0,0,0,0.65) 100%);
+    }
+
+    .mocaad-cover-visual,
+    .frost-cover-visual,
+    .spotify-cover-visual,
+    .umcats-cover-visual {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .time-cover-visual {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(#a9c7d8, #bcd6e6);
+      overflow: hidden;
+    }
+
+    .time-cover-card::before {
+      background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.35) 100%);
+    }
+
+    .time-cover-card .project-content {
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.45));
+    }
+
+    .time-frame {
+      position: absolute;
+      inset: 16px;
+      border: 14px solid #e41d1d;
+      z-index: 2;
+    }
+
+    .time-date {
+      position: absolute;
+      top: 26px;
+      left: 30px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: black;
+      z-index: 3;
+    }
+
+    .time-title {
+      position: absolute;
+      top: 70px;
+      width: 100%;
+      text-align: center;
+      z-index: 3;
+    }
+
+    .time-person {
+      display: block;
+      font-family: Georgia, serif;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .time-logo {
+      display: block;
+      font-family: Georgia, serif;
+      font-size: 5.5rem;
+      color: #e41d1d;
+      letter-spacing: -0.05em;
+      line-height: 0.9;
+    }
+
+    .time-subject {
+      position: absolute;
+      bottom: 120px;
+      left: 40px;
+      font-family: Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #111;
+      z-index: 3;
+      max-width: 150px;
+    }
+
+    .time-subject span {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin-top: 6px;
+    }
+
+    .time-side {
+      position: absolute;
+      bottom: 120px;
+      right: 40px;
+      text-align: right;
+      max-width: 180px;
+      z-index: 3;
+      color: #111;
+    }
+
+    .time-side span {
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .time-side p {
+      font-size: 0.8rem;
+      margin-top: 6px;
+      line-height: 1.35;
+    }
+
+    .hidden-case-study {
+      display: none;
+      scroll-margin-top: 100px;
+    }
+
+    .hidden-case-study.open {
+      display: block;
+    }
+
+    .case-viewer {
+      padding: 1.75rem;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      box-shadow: var(--shadow);
+    }
+
+    .case-viewer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .case-label {
+      display: inline-block;
+      margin-bottom: 0.7rem;
+      color: #ffd999;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .case-viewer h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+    }
+
+    .case-intro {
+      margin-top: 0.8rem;
+      color: var(--muted);
+      max-width: 70ch;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .case-close {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .case-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1.4rem;
+    }
+
+    .case-meta-item {
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .case-meta-item strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .case-meta-item span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      display: block;
+    }
+
+    .case-body-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .case-panel {
+      padding: 1.4rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .case-panel h3 {
+      margin-bottom: 0.55rem;
+      font-size: 1.08rem;
+    }
+
+    .case-panel p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .case-media {
+      margin-top: 0.8rem;
+      min-height: 240px;
+      border-radius: 22px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1rem;
+      color: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.02);
+      overflow: hidden;
+    }
+
+    .case-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .media-wrap {
+      width: 100%;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+    }
+
+    .media-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.95rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .media-topbar span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .embedded-frame,
+    .embedded-pdf,
+    .embedded-figma {
+      width: 100%;
+      height: 80vh;
+      border: none;
+      display: block;
+      background: #000;
+    }
+
+    .resume-card {
+      padding: 1.5rem;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.035);
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .resume-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.17);
+    }
+
+    .resume-card h3 {
+      font-size: 1.2rem;
+    }
+
+    .resume-card p {
+      color: var(--muted);
+      margin-top: 0.6rem;
+      line-height: 1.6;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+    }
+
+    .contact-card {
+      padding: 1.25rem;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.035);
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.17);
+    }
+
+    .contact-card h3 {
+      font-size: 1.05rem;
+    }
+
+    .contact-card p,
+    .contact-card a {
+      color: var(--muted);
+      margin-top: 0.45rem;
+      line-height: 1.6;
+    }
+
+    .contact-card a:hover {
+      color: var(--text);
+    }
+
+    .fade-in,
+    .fade-left,
+    .fade-right {
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
     .fade-in { transform: translateY(26px); }
     .fade-left { transform: translateX(-32px); }
     .fade-right { transform: translateX(32px); }
-    .visible.fade-in, .visible.fade-left, .visible.fade-right { opacity: 1; transform: translate(0, 0); }
-    footer { padding: 2.4rem 0 3rem; text-align: center; color: var(--muted); }
-    /* TIME cover card styles */
-    .time-cover-visual {
-      position: absolute; inset: 0; overflow: hidden;
+
+    .visible.fade-in,
+    .visible.fade-left,
+    .visible.fade-right {
+      opacity: 1;
+      transform: translate(0, 0);
     }
-    .time-cover-visual img {
-      width: 100%; height: 100%; object-fit: cover; object-position: top center;
-      transition: transform 0.32s ease, filter 0.32s ease;
-      display: block;
+
+    footer {
+      padding: 2.4rem 0 3rem;
+      text-align: center;
+      color: var(--muted);
     }
-    .time-cover-card:hover .time-cover-visual img {
-      transform: scale(1.05); filter: saturate(1.1);
-    }
-    /* hide unused CSS elements */
-    .time-frame, .time-date, .time-title, .time-person, .time-logo,
-    .time-subject, .time-side { display: none; }
-    .time-cover-card:hover .time-logo { transform: scale(1.05); transition: 0.3s ease; }
-    .time-cover-card:hover .time-frame { transform: scale(1.02); transition: 0.3s ease; }
-    /* TIME card: hide standard overlay text, remove dark gradient */
-    .time-cover-card::before { display: none; }
-    .time-cover-card .project-content { display: none; }
-    /* Clean CTA strip at bottom of TIME card */
-    .time-cta {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      z-index: 10;
-      background: #e41d1d;
-      color: white;
-      font-family: Georgia, serif;
-      font-size: 0.88rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.7rem 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: background 0.2s ease;
-    }
-    .time-cover-card:hover .time-cta { background: #c01818; }
-    .time-cta-arrow { font-size: 1rem; transition: transform 0.2s ease; }
-    .time-cover-card:hover .time-cta-arrow { transform: translateX(4px); }
+
     @media (max-width: 980px) {
-      .hero-grid, .contact-grid, .about-grid, .case-meta-grid, .case-body-grid { grid-template-columns: 1fr; }
-      .hero-stats, .mini-grid { grid-template-columns: 1fr; }
-      .nav-inner { flex-direction: column; align-items: flex-start; }
-      .hero-copy { padding: 1.5rem; }
+      .hero-grid,
+      .contact-grid,
+      .about-grid,
+      .case-meta-grid,
+      .case-body-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-copy {
+        padding: 1.5rem;
+      }
+
+      .embedded-frame,
+      .embedded-pdf,
+      .embedded-figma {
+        height: 72vh;
+      }
     }
+
     @media (max-width: 760px) {
-      .hero h1 { max-width: 100%; }
-      .work-carousel .project-card { flex: 0 0 270px; min-height: 340px; }
-      .work-track { animation-duration: 22s; }
-      .pdf-viewer-iframe { height: 420px; }
+      .hero h1 {
+        max-width: 100%;
+      }
+
+      .project-card {
+        flex: 0 0 270px;
+        min-height: 350px;
+      }
+
+      .work-track {
+        animation-duration: 22s;
+      }
+
+      .time-logo {
+        font-size: 4.4rem;
+      }
+
+      .time-subject,
+      .time-side {
+        bottom: 105px;
+      }
+
+      .time-side {
+        max-width: 140px;
+      }
+
+      .embedded-frame,
+      .embedded-pdf,
+      .embedded-figma {
+        height: 60vh;
+      }
     }
   </style>
 </head>
 <body>
   <div class="bg-grid"></div>
   <div class="cursor-glow"></div>
+
   <nav class="nav">
     <div class="container nav-inner">
       <a href="#top" class="brand">
         <div class="brand-mark">S</div>
         <div>Shania Swan</div>
       </a>
+
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
@@ -230,125 +1042,342 @@
       </div>
     </div>
   </nav>
+
   <main id="top">
     <section class="hero fade-in">
       <div class="container hero-grid">
         <div class="panel hero-copy" id="heroCopy">
           <div class="eyebrow">UX/UI • XR • Creative Technology • Human-Centered Design</div>
-          <h1>Hi, I'm <span class="name-flip">Shania</span>.</h1>
-          <p>I'm a University of Miami Innovation, Technology, and Design student creating polished digital experiences across UX/UI, immersive media, and creative technology. My work sits at the intersection of clarity, storytelling, and interaction design.</p>
+          <h1>Hi, I’m <span class="name-flip">Shania</span>.</h1>
+          <p>
+            I’m a University of Miami Innovation, Technology, and Design student creating polished digital experiences across UX/UI, immersive media, and creative technology. My work sits at the intersection of clarity, storytelling, and interaction design.
+          </p>
+
           <div class="hero-actions">
             <a class="btn btn-primary" href="#projects">Explore My Work</a>
             <a class="btn btn-secondary" href="resume.pdf" target="_blank">Open Resume</a>
           </div>
+
           <div class="hero-stats">
-            <div class="stat"><small>Degree</small><strong>B.S. Innovation, Technology, Design</strong></div>
-            <div class="stat"><small>Strengths</small><strong>UX/UI, immersive learning, visual communication</strong></div>
-            <div class="stat"><small>Tools</small><strong>Figma, Unity, Canva, Adobe, UX research</strong></div>
+            <div class="stat">
+              <small>Degree</small>
+              <strong>B.S. Innovation, Technology, Design</strong>
+            </div>
+            <div class="stat">
+              <small>Strengths</small>
+              <strong>UX/UI, immersive learning, visual communication</strong>
+            </div>
+            <div class="stat">
+              <small>Tools</small>
+              <strong>Figma, Unity, Canva, Adobe, UX research</strong>
+            </div>
           </div>
         </div>
+
         <div class="panel hero-side fade-right">
           <div class="portrait-card" id="heroPortrait">
-            <img src="shania-headshot.jpg" alt="Headshot of Shania Swan">
+            <img src="shania-headshot.jpg" alt="Headshot of Shania Swan" />
           </div>
+
           <div class="mini-grid">
-            <div class="mini-card"><h3>Current Focus</h3><p>Designing experiences that blend interface design, emerging tech, and real-world impact.</p></div>
-            <div class="mini-card"><h3>Interests</h3><p>XR/VR, AI, fashion, design systems, wellness-centered experiences, and storytelling.</p></div>
+            <div class="mini-card">
+              <h3>Current Focus</h3>
+              <p>Designing experiences that blend interface design, emerging tech, and real-world impact.</p>
+            </div>
+            <div class="mini-card">
+              <h3>Interests</h3>
+              <p>XR/VR, AI, fashion, design systems, wellness-centered experiences, and storytelling.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
     <section class="section fade-left" id="about">
       <div class="container">
-        <div class="section-head"><h2 class="section-title">About</h2></div>
+        <div class="section-head">
+          <h2 class="section-title">About</h2>
+        </div>
+
         <div class="panel about-panel">
           <div class="about-grid">
-            <div class="about-card"><h3>Design Perspective</h3><p>I approach design through usability, visual clarity, and emotion, aiming to create experiences that feel thoughtful and memorable.</p></div>
-            <div class="about-card"><h3>Technical Range</h3><p>My toolkit spans interface design, prototyping, immersive technology, creative direction, and collaborative problem-solving.</p></div>
-            <div class="about-card"><h3>Experience</h3><p>I've worked across student services, immersive learning environments, brand storytelling, and interactive healthcare training.</p></div>
-            <div class="about-card"><h3>Goal</h3><p>I want to build human-centered digital products and experiences that merge innovation with a strong visual voice.</p></div>
+            <div class="about-card">
+              <h3>Design Perspective</h3>
+              <p>I approach design through usability, visual clarity, and emotion, aiming to create experiences that feel thoughtful and memorable.</p>
+            </div>
+            <div class="about-card">
+              <h3>Technical Range</h3>
+              <p>My toolkit spans interface design, prototyping, immersive technology, creative direction, and collaborative problem-solving.</p>
+            </div>
+            <div class="about-card">
+              <h3>Experience</h3>
+              <p>I’ve worked across student services, immersive learning environments, brand storytelling, and interactive healthcare training.</p>
+            </div>
+            <div class="about-card">
+              <h3>Goal</h3>
+              <p>I want to build human-centered digital products and experiences that merge innovation with a strong visual voice.</p>
+            </div>
           </div>
+
           <div class="tags">
-            <span class="tag">UX/UI Design</span><span class="tag">XR / VR</span><span class="tag">Creative Technology</span>
-            <span class="tag">Unity Prototyping</span><span class="tag">Figma</span><span class="tag">Visual Storytelling</span>
-            <span class="tag">Design Thinking</span><span class="tag">Brand Direction</span>
+            <span class="tag">UX/UI Design</span>
+            <span class="tag">XR / VR</span>
+            <span class="tag">Creative Technology</span>
+            <span class="tag">Unity Prototyping</span>
+            <span class="tag">Figma</span>
+            <span class="tag">Visual Storytelling</span>
+            <span class="tag">Design Thinking</span>
+            <span class="tag">Brand Direction</span>
           </div>
         </div>
       </div>
     </section>
+
     <section class="section fade-in" id="projects">
       <div class="container">
-        <div class="section-head"><h2 class="section-title">Selected Work</h2></div>
+        <div class="section-head">
+          <h2 class="section-title">Selected Work</h2>
+        </div>
+
         <div class="work-carousel" id="workCarousel">
           <div class="work-track">
-            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="mocaad">
-              <div class="project-visual"><div class="project-label">MOCAAD XR MUSEUM</div></div>
-              <div class="project-content"><span class="project-kicker">XR / Cultural Experience</span><h3>Miami MoCAAD Virtual Museum</h3><p>Immersive XR exhibition expanding access to African Diaspora art beyond the physical museum.</p><span class="project-arrow">View case study →</span></div>
+            <a class="project-card case-trigger mocaad-cover-card" href="#caseStudyViewer" data-case="mocaad">
+              <div class="project-visual mocaad-cover-visual">
+                <img src="mocaad-cover.jpeg" alt="Miami MoCAAD cover" class="cover-image" />
+                <div class="cover-overlay"></div>
+              </div>
+              <div class="project-content">
+                <span class="project-kicker">XR / Cultural Experience</span>
+                <h3>Miami MoCAAD Virtual Museum</h3>
+                <p>Immersive XR exhibition expanding access to African Diaspora art beyond the physical museum.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
             </a>
-            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="frost">
-              <div class="project-visual"><div class="project-label">FROST SCIENCE</div></div>
-              <div class="project-content"><span class="project-kicker">AR / VR Experience</span><h3>Frost Science Sensory AR/VR Experience</h3><p>Sensory-friendly immersive learning designed for neurodivergent children.</p><span class="project-arrow">View case study →</span></div>
+
+            <a class="project-card case-trigger frost-cover-card" href="#caseStudyViewer" data-case="frost">
+              <div class="project-visual frost-cover-visual">
+                <img src="frost-cover.jpeg" alt="Frost Science cover" class="cover-image" />
+                <div class="cover-overlay"></div>
+              </div>
+              <div class="project-content">
+                <span class="project-kicker">AR / VR Experience</span>
+                <h3>Frost Science Sensory AR/VR Experience</h3>
+                <p>Sensory-friendly immersive learning designed for neurodivergent children.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
             </a>
-            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="spotify">
-              <div class="project-visual"><div class="project-label">SPOTIFY AI DJ</div></div>
-              <div class="project-content"><span class="project-kicker">Product / UX Design</span><h3>Spotify AI DJ Personalization</h3><p>A music-first AI DJ concept built to improve discovery and restore personalization.</p><span class="project-arrow">View case study →</span></div>
+
+            <a class="project-card case-trigger spotify-cover-card" href="#caseStudyViewer" data-case="spotify">
+              <div class="project-visual spotify-cover-visual">
+                <img src="spotify-cover.jpeg" alt="Spotify AI DJ cover" class="cover-image" />
+                <div class="cover-overlay"></div>
+              </div>
+              <div class="project-content">
+                <span class="project-kicker">Product / UX Design</span>
+                <h3>Spotify AI DJ Personalization</h3>
+                <p>A music-first AI DJ concept built to improve discovery and restore personalization.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
             </a>
-            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="campuscats">
-              <div class="project-visual"><div class="project-label">CAMPUS CATS</div></div>
-              <div class="project-content"><span class="project-kicker">Social / Brand Sprint</span><h3>UM Campus Cats Social Media</h3><p>One-week brand sprint using AI visuals, content strategy, and social storytelling.</p><span class="project-arrow">View case study →</span></div>
+
+            <a class="project-card case-trigger umcats-cover-card" href="#caseStudyViewer" data-case="campuscats">
+              <div class="project-visual umcats-cover-visual">
+                <img src="umcats-cover.jpeg" alt="UM Campus Cats cover" class="cover-image" />
+                <div class="cover-overlay"></div>
+              </div>
+              <div class="project-content">
+                <span class="project-kicker">Social Media / UX Strategy</span>
+                <h3>UM Campus Cats Social Media</h3>
+                <p>I designed a content strategy and interactive experience to increase engagement and awareness.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
             </a>
+
             <a class="project-card case-trigger time-cover-card" href="#caseStudyViewer" data-case="time">
               <div class="project-visual time-cover-visual">
-                <img src="time-cover.jpg" alt="Pharrell Williams TIME Magazine Cover">
+                <div class="time-frame"></div>
+                <div class="time-date">MARCH 31, 2026</div>
+
+                <div class="time-title">
+                  <span class="time-person">PERSON of the YEAR</span>
+                  <span class="time-logo">TIME</span>
+                </div>
+
+                <div class="time-subject">
+                  Pharrell Williams
+                  <span>Where music, fashion, and vision move as one.</span>
+                </div>
+
+                <div class="time-side">
+                  <span>Redefining Creative Boundaries</span>
+                  <p>From sound to style, Pharrell reshapes modern design.</p>
+                </div>
               </div>
-              <div class="time-cta"><span>View Case Study</span><span class="time-cta-arrow">→</span></div>
+
+              <div class="project-content">
+                <span class="project-kicker">Editorial / InDesign</span>
+                <h3>Pharrell Williams TIME Magazine</h3>
+                <p>Magazine editorial exploring music, fashion, and cultural impact through layout, typography, and storytelling.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
             </a>
-            <!-- duplicates for infinite scroll -->
-            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="mocaad"><div class="project-visual"><div class="project-label">MOCAAD XR MUSEUM</div></div><div class="project-content"><span class="project-kicker">XR / Cultural Experience</span><h3>Miami MoCAAD Virtual Museum</h3><p>Immersive XR exhibition expanding access to African Diaspora art beyond the physical museum.</p><span class="project-arrow">View case study →</span></div></a>
-            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="frost"><div class="project-visual"><div class="project-label">FROST SCIENCE</div></div><div class="project-content"><span class="project-kicker">AR / VR Experience</span><h3>Frost Science Sensory AR/VR Experience</h3><p>Sensory-friendly immersive learning designed for neurodivergent children.</p><span class="project-arrow">View case study →</span></div></a>
-            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="spotify"><div class="project-visual"><div class="project-label">SPOTIFY AI DJ</div></div><div class="project-content"><span class="project-kicker">Product / UX Design</span><h3>Spotify AI DJ Personalization</h3><p>A music-first AI DJ concept built to improve discovery and restore personalization.</p><span class="project-arrow">View case study →</span></div></a>
-            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="campuscats"><div class="project-visual"><div class="project-label">CAMPUS CATS</div></div><div class="project-content"><span class="project-kicker">Social / Brand Sprint</span><h3>UM Campus Cats Social Media</h3><p>One-week brand sprint using AI visuals, content strategy, and social storytelling.</p><span class="project-arrow">View case study →</span></div></a>
+
+            <a class="project-card case-trigger mocaad-cover-card" href="#caseStudyViewer" data-case="mocaad">
+              <div class="project-visual mocaad-cover-visual">
+                <img src="mocaad-cover.jpeg" alt="Miami MoCAAD cover" class="cover-image" />
+                <div class="cover-overlay"></div>
+              </div>
+              <div class="project-content">
+                <span class="project-kicker">XR / Cultural Experience</span>
+                <h3>Miami MoCAAD Virtual Museum</h3>
+                <p>Immersive XR exhibition expanding access to African Diaspora art beyond the physical museum.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
+            </a>
+
+            <a class="project-card case-trigger frost-cover-card" href="#caseStudyViewer" data-case="frost">
+              <div class="project-visual frost-cover-visual">
+                <img src="frost-cover.jpeg" alt="Frost Science cover" class="cover-image" />
+                <div class="cover-overlay"></div>
+              </div>
+              <div class="project-content">
+                <span class="project-kicker">AR / VR Experience</span>
+                <h3>Frost Science Sensory AR/VR Experience</h3>
+                <p>Sensory-friendly immersive learning designed for neurodivergent children.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
+            </a>
+
+            <a class="project-card case-trigger spotify-cover-card" href="#caseStudyViewer" data-case="spotify">
+              <div class="project-visual spotify-cover-visual">
+                <img src="spotify-cover.jpeg" alt="Spotify AI DJ cover" class="cover-image" />
+                <div class="cover-overlay"></div>
+              </div>
+              <div class="project-content">
+                <span class="project-kicker">Product / UX Design</span>
+                <h3>Spotify AI DJ Personalization</h3>
+                <p>A music-first AI DJ concept built to improve discovery and restore personalization.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
+            </a>
+
+            <a class="project-card case-trigger umcats-cover-card" href="#caseStudyViewer" data-case="campuscats">
+              <div class="project-visual umcats-cover-visual">
+                <img src="umcats-cover.jpeg" alt="UM Campus Cats cover" class="cover-image" />
+                <div class="cover-overlay"></div>
+              </div>
+              <div class="project-content">
+                <span class="project-kicker">Social Media / UX Strategy</span>
+                <h3>UM Campus Cats Social Media</h3>
+                <p>I designed a content strategy and interactive experience to increase engagement and awareness.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
+            </a>
+
             <a class="project-card case-trigger time-cover-card" href="#caseStudyViewer" data-case="time">
               <div class="project-visual time-cover-visual">
-                <img src="time-cover.jpg" alt="Pharrell Williams TIME Magazine Cover">
+                <div class="time-frame"></div>
+                <div class="time-date">MARCH 31, 2026</div>
+
+                <div class="time-title">
+                  <span class="time-person">PERSON of the YEAR</span>
+                  <span class="time-logo">TIME</span>
+                </div>
+
+                <div class="time-subject">
+                  Pharrell Williams
+                  <span>Where music, fashion, and vision move as one.</span>
+                </div>
+
+                <div class="time-side">
+                  <span>Redefining Creative Boundaries</span>
+                  <p>From sound to style, Pharrell reshapes modern design.</p>
+                </div>
               </div>
-              <div class="time-cta"><span>View Case Study</span><span class="time-cta-arrow">→</span></div>
+
+              <div class="project-content">
+                <span class="project-kicker">Editorial / InDesign</span>
+                <h3>Pharrell Williams TIME Magazine</h3>
+                <p>Magazine editorial exploring music, fashion, and cultural impact through layout, typography, and storytelling.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
             </a>
           </div>
         </div>
       </div>
     </section>
+
     <section class="section fade-in hidden-case-study" id="caseStudyViewer">
       <div class="container">
-        <div class="case-viewer" id="caseViewerCard">
+        <div class="case-viewer">
           <div class="case-viewer-top">
-            <div><p class="case-label" id="caseLabel"></p><h2 id="caseTitle"></h2></div>
+            <div>
+              <p class="case-label" id="caseLabel"></p>
+              <h2 id="caseTitle"></h2>
+            </div>
             <button class="case-close" id="closeCaseStudy">✕</button>
           </div>
+
           <p class="case-intro" id="caseIntro"></p>
+
           <div class="case-meta-grid">
-            <div class="case-meta-item"><strong>Role</strong><span id="caseRole"></span></div>
-            <div class="case-meta-item"><strong>Tools</strong><span id="caseTools"></span></div>
-            <div class="case-meta-item"><strong>Focus</strong><span id="caseFocus"></span></div>
-            <div class="case-meta-item"><strong>Outcome</strong><span id="caseOutcome"></span></div>
+            <div class="case-meta-item">
+              <strong>Role</strong>
+              <span id="caseRole"></span>
+            </div>
+            <div class="case-meta-item">
+              <strong>Tools</strong>
+              <span id="caseTools"></span>
+            </div>
+            <div class="case-meta-item">
+              <strong>Focus</strong>
+              <span id="caseFocus"></span>
+            </div>
+            <div class="case-meta-item">
+              <strong>Outcome</strong>
+              <span id="caseOutcome"></span>
+            </div>
           </div>
+
           <div class="case-body-grid">
-            <div class="case-panel"><h3>Overview</h3><p id="caseOverview"></p></div>
-            <div class="case-panel"><h3>Problem</h3><p id="caseProblem"></p></div>
-            <div class="case-panel"><h3>Approach</h3><p id="caseApproach"></p></div>
-            <div class="case-panel"><h3>Impact</h3><p id="caseImpact"></p></div>
+            <div class="case-panel">
+              <h3>Overview</h3>
+              <p id="caseOverview"></p>
+            </div>
+
+            <div class="case-panel">
+              <h3>Problem</h3>
+              <p id="caseProblem"></p>
+            </div>
+
+            <div class="case-panel">
+              <h3>Approach</h3>
+              <p id="caseApproach"></p>
+            </div>
+
+            <div class="case-panel">
+              <h3>Impact</h3>
+              <p id="caseImpact"></p>
+            </div>
           </div>
+
           <div class="case-panel">
-            <h3>Media &amp; Links</h3>
-            <div id="caseMedia"><div class="case-media-placeholder">Add your screenshots, videos, prototype links, and final deliverables here</div></div>
+            <h3>Media & Links</h3>
+            <div class="case-media" id="caseMedia">
+              Add your screenshots, videos, prototype links, and final deliverables here
+            </div>
             <div class="case-links" id="caseLinks"></div>
           </div>
         </div>
       </div>
     </section>
+
     <section class="section fade-in" id="resume">
       <div class="container">
-        <div class="section-head"><h2 class="section-title">Resume</h2></div>
+        <div class="section-head">
+          <h2 class="section-title">Resume</h2>
+        </div>
+
         <div class="resume-card">
           <h3>My Resume</h3>
           <p>A deeper look into my experience, leadership, and design work.</p>
@@ -358,123 +1387,341 @@
         </div>
       </div>
     </section>
+
     <section class="section fade-in" id="contact">
       <div class="container">
-        <div class="section-head"><h2 class="section-title">Contact</h2></div>
+        <div class="section-head">
+          <h2 class="section-title">Contact</h2>
+        </div>
+
         <div class="panel contact-panel">
           <div class="contact-grid">
-            <div class="contact-card"><h3>Email</h3><a href="mailto:swanshania210@gmail.com">swanshania210@gmail.com</a></div>
-            <div class="contact-card"><h3>Phone</h3><a href="tel:6146072900">614-607-2900</a></div>
-            <div class="contact-card"><h3>LinkedIn</h3><a href="https://www.linkedin.com/in/shania-swan-265802335" target="_blank">linkedin.com/in/shania-swan-265802335</a></div>
-            <div class="contact-card"><h3>Education</h3><p>University of Miami • B.S. Innovation, Technology, Design • May 2027</p></div>
+            <div class="contact-card">
+              <h3>Email</h3>
+              <a href="mailto:swanshania210@gmail.com">swanshania210@gmail.com</a>
+            </div>
+            <div class="contact-card">
+              <h3>Phone</h3>
+              <a href="tel:6146072900">614-607-2900</a>
+            </div>
+            <div class="contact-card">
+              <h3>LinkedIn</h3>
+              <a href="https://www.linkedin.com/in/shania-swan-265802335" target="_blank">linkedin.com/in/shania-swan-265802335</a>
+            </div>
+            <div class="contact-card">
+              <h3>Education</h3>
+              <p>University of Miami • B.S. Innovation, Technology, Design • May 2027</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </main>
-  <footer><div class="container"><p>© 2026 Shania Swan</p></div></footer>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Shania Swan</p>
+    </div>
+  </footer>
+
   <script>
     const root = document.documentElement;
-    window.addEventListener('mousemove', function(e) {
-      root.style.setProperty('--mx', e.clientX + 'px');
-      root.style.setProperty('--my', e.clientY + 'px');
+
+    window.addEventListener("mousemove", function (e) {
+      root.style.setProperty("--mx", e.clientX + "px");
+      root.style.setProperty("--my", e.clientY + "px");
     });
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.fade-in, .fade-left, .fade-right').forEach(function(el) { observer.observe(el); });
-    const heroCopy = document.getElementById('heroCopy');
-    const heroPortrait = document.getElementById('heroPortrait');
+
+    const revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll(".fade-in, .fade-left, .fade-right").forEach(function (el) {
+      revealObserver.observe(el);
+    });
+
+    const heroCopy = document.getElementById("heroCopy");
+    const heroPortrait = document.getElementById("heroPortrait");
+
     function parallaxCard(el, e, amount) {
       const rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      el.style.transform = 'rotateY(' + (x / amount) + 'deg) rotateX(' + (-y / amount) + 'deg)';
+      el.style.transform = "rotateY(" + x / amount + "deg) rotateX(" + -y / amount + "deg)";
     }
+
     if (heroCopy) {
-      heroCopy.addEventListener('mousemove', function(e) { parallaxCard(heroCopy, e, 28); });
-      heroCopy.addEventListener('mouseleave', function() { heroCopy.style.transform = 'rotateY(0deg) rotateX(0deg)'; });
-    }
-    if (heroPortrait) {
-      heroPortrait.addEventListener('mousemove', function(e) { parallaxCard(heroPortrait, e, 32); });
-      heroPortrait.addEventListener('mouseleave', function() { heroPortrait.style.transform = 'rotateY(0deg) rotateX(0deg)'; });
-    }
-    const sections = document.querySelectorAll('main section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    const navObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          navLinks.forEach(function(link) { link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id); });
-        }
+      heroCopy.addEventListener("mousemove", function (e) {
+        parallaxCard(heroCopy, e, 28);
       });
-    }, { threshold: 0.45 });
-    sections.forEach(function(section) { navObserver.observe(section); });
-    const workCarousel = document.getElementById('workCarousel');
-    const caseStudySection = document.getElementById('caseStudyViewer');
-    const closeCaseStudy = document.getElementById('closeCaseStudy');
-    // Base64-encoded PDF for TIME magazine case study
-    const TIME_PDF_URI = 'S_Swan_Q_Proj2.pdf';
+      heroCopy.addEventListener("mouseleave", function () {
+        heroCopy.style.transform = "rotateY(0deg) rotateX(0deg)";
+      });
+    }
+
+    if (heroPortrait) {
+      heroPortrait.addEventListener("mousemove", function (e) {
+        parallaxCard(heroPortrait, e, 32);
+      });
+      heroPortrait.addEventListener("mouseleave", function () {
+        heroPortrait.style.transform = "rotateY(0deg) rotateX(0deg)";
+      });
+    }
+
+    const sections = document.querySelectorAll("main section[id]");
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    const navObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            navLinks.forEach(function (link) {
+              const isActive = link.getAttribute("href") === "#" + entry.target.id;
+              link.classList.toggle("active", isActive);
+            });
+          }
+        });
+      },
+      { threshold: 0.45 }
+    );
+
+    sections.forEach(function (section) {
+      navObserver.observe(section);
+    });
+
+    const workCarousel = document.getElementById("workCarousel");
+    const caseStudySection = document.getElementById("caseStudyViewer");
+    const closeCaseStudy = document.getElementById("closeCaseStudy");
+    const caseMedia = document.getElementById("caseMedia");
+    const caseLinks = document.getElementById("caseLinks");
+
     const caseData = {
-      mocaad: { label: 'XR / Cultural Experience', title: 'Miami MoCAAD Virtual Museum', intro: 'An immersive XR museum experience designed to expand access to contemporary African Diaspora art beyond the physical gallery.', role: 'Research, spatial design planning, 3D scanning, immersive prototyping', tools: 'Figma, PolyCam, XR design, prototyping', focus: 'Accessibility, cultural preservation, spatial storytelling', outcome: 'Launched during Miami Art Week for MoCAAD\'s 10th anniversary', overview: 'Developed in partnership with Miami MoCAAD, this project explored how XR can extend access to contemporary African Diaspora art while preserving artistic intent and cultural context.', problem: 'Traditional museum spaces can limit access through physical, geographic, and institutional barriers. The museum needed a way to reach audiences beyond its walls without losing community connection.', approach: 'We designed a virtual gallery experience where users could navigate the space, zoom into artworks, and explore artist information digitally. The direction was informed by museum visits, artist conversations, stakeholder interviews, and community engagement in Historic Overtown.', impact: 'The final exhibition demonstrated how XR can support cultural preservation, education, and broader accessibility while creating a scalable model for future virtual outreach.', mediaHTML: null },
-      frost: { label: 'AR / VR Experience', title: 'Frost Science Sensory AR/VR Experience', intro: 'A sensory-friendly immersive learning experience designed to make science education more calming, accessible, and engaging for neurodivergent children.', role: 'UX planning, AR/VR environment development, spatial design, AI integration', tools: 'ENGAGE VR, AR/VR design, AI script support, video integration', focus: 'Accessibility, sensory design, educational immersion', outcome: 'Concept for a calmer museum learning environment', overview: 'Created with the Frost Museum of Science, this concept reimagined museum learning through a calming underwater AR/VR environment that reduces overstimulation while keeping children engaged.', problem: 'Museum spaces can be overstimulating for neurodivergent children, making it difficult to comfortably engage with exhibits and educational content.', approach: 'I helped design a guided underwater experience with soft lighting, calming visuals, educational video integration, animal animations, and an AI marine biologist guide to make learning more supportive and structured.', impact: 'The project showed how immersive design can support accessibility and create more inclusive science-learning environments for children with different sensory needs.', mediaHTML: null },
-      spotify: { label: 'Product / UX Design', title: 'Spotify AI DJ Personalization', intro: 'A music-first AI DJ concept designed to improve discovery and restore personalization across songs, artists, playlists, and podcasts.', role: 'UX research, product thinking, interaction design, prototyping', tools: 'Figma, wireframing, prototyping, UX research', focus: 'Personalization, discovery, AI interaction', outcome: 'Concept for better music exploration and playlist generation', overview: 'This concept responds to a shift within Spotify: as the platform placed more emphasis on podcasts, the music experience felt less personal and discovering the right songs became harder.', problem: 'Users may struggle to discover new music that actually fits what they want in the moment. The experience can feel less personalized when users want niche genre exploration or recommendations based on recent listening behavior.', approach: 'I designed an AI DJ experience that uses recent listening history and direct user prompts. Users can ask for a mood, genre, artist type, or vibe, and the AI responds with songs, artists, curated playlists, and even relevant podcasts.', impact: 'This project reframes personalization as an active experience rather than passive recommendation, giving users more control over discovery while still using AI to reduce friction.', mediaHTML: null },
-      campuscats: { label: 'Social / Brand Sprint', title: 'UM Campus Cats Social Media', intro: 'A one-week design sprint focused on building a full social media brand concept rooted in campus culture and fast-turn content strategy.', role: 'Concept development, AI image generation, UX/UI, feed layout, video content', tools: 'Figma, AI image generation, content strategy, video editing', focus: 'Branding, storytelling, audience engagement', outcome: 'Rapid brand concept with social storytelling system', overview: 'This sprint challenged me to create a full Instagram presence around a real campus subject. I centered the concept on the University of Miami\'s campus cats as a way to build a community-driven, culturally specific digital brand.', problem: 'The challenge was to rapidly design a recognizable and engaging social identity in a short timeframe while balancing storytelling, visual consistency, and audience connection.', approach: 'I developed AI-generated visuals, designed an Instagram feed system, and created short-form video concepts that simulated Reels. The work focused on profile structure, captions, layout, and engagement-driven content.', impact: 'The final concept shows my ability to move quickly from idea to polished social brand execution while combining AI-assisted content creation with visual strategy and UX thinking.', mediaHTML: null },
+      mocaad: {
+        label: "XR / Cultural Experience",
+        title: "Miami MoCAAD Virtual Museum",
+        intro: "An immersive XR museum experience designed to expand access to contemporary African Diaspora art beyond the physical gallery.",
+        role: "Research, spatial design planning, 3D scanning, immersive prototyping",
+        tools: "Figma, PolyCam, XR design, prototyping",
+        focus: "Accessibility, cultural preservation, spatial storytelling",
+        outcome: "Launched during Miami Art Week as an immersive cultural design collaboration",
+        overview: "Developed in collaboration with Miami MoCAAD, this project explored how XR can extend access to contemporary African Diaspora art while preserving artistic intent and cultural context.",
+        problem: "Traditional museum spaces can limit access through physical, geographic, and institutional barriers. The museum needed a way to reach audiences beyond its walls without losing community connection.",
+        approach: "I contributed to a virtual gallery experience where users could engage with artworks digitally and experience a larger cultural moment through immersive storytelling and visual space design.",
+        impact: "The project demonstrated how XR can support cultural preservation, broaden access, and create new ways for audiences to engage with art outside the physical museum."
+      },
+
+      frost: {
+        label: "AR / VR Experience",
+        title: "Frost Science Sensory AR/VR Experience",
+        intro: "A sensory-friendly immersive learning concept designed to make science education calmer, more accessible, and more engaging for neurodivergent children.",
+        role: "UX planning, AR/VR concept development, spatial design, presentation design",
+        tools: "ENGAGE VR, Canva, immersive design, research",
+        focus: "Accessibility, sensory design, educational immersion",
+        outcome: "A sensory-friendly VR concept rooted in real museum elements",
+        overview: "This project reimagined a Frost Science experience for children ages 5–11 who may become overstimulated or need more supportive, low-stim environments.",
+        problem: "Museum environments can be overwhelming for some children, making it difficult to engage with exhibits comfortably while still learning.",
+        approach: "Our team focused on a calm underwater observation-box concept inspired by real aquarium elements, sensory-support tools, and guided educational interaction.",
+        impact: "The final concept showed how immersive design can create more inclusive educational spaces by combining low-stim visuals, calming interaction, and structured learning."
+      },
+
+      spotify: {
+        label: "Product / UX Design",
+        title: "Spotify AI DJ Personalization",
+        intro: "A music-first AI DJ concept designed to improve discovery and restore personalization across songs, artists, playlists, and podcasts.",
+        role: "UX research, product thinking, interaction design, prototyping",
+        tools: "Figma, wireframing, prototyping, UX research",
+        focus: "Personalization, discovery, AI interaction",
+        outcome: "Concept for a more intentional music discovery experience",
+        overview: "This concept responds to a shift in Spotify’s experience where music discovery can feel less personal and users may struggle to find the right songs for the moment.",
+        problem: "Users may want more active control over recommendations, moods, and playlist generation instead of relying only on passive suggestions.",
+        approach: "I designed an AI DJ experience where users can choose categories, tap recommendation chips, or type exactly what kind of music they want, making discovery feel more direct and tailored.",
+        impact: "The project reframes personalization as an interactive experience that helps users find better music faster while still feeling intuitive and lightweight."
+      },
+
+      campuscats: {
+        label: "Social Media / UX Strategy",
+        title: "UM Campus Cats Social Media",
+        intro: "A social content concept centered on campus culture, storytelling, and interactive engagement around the University of Miami’s campus cats.",
+        role: "Content strategy, concept development, AI image generation, prototype design",
+        tools: "Figma, content strategy, AI visuals, social UX thinking",
+        focus: "Branding, storytelling, engagement",
+        outcome: "Interactive prototype and branded social concept",
+        overview: "I created a concept for a campus-specific social presence focused on the University of Miami’s campus cats, using playful visuals and interactive flows to drive awareness and engagement.",
+        problem: "The challenge was to turn a niche campus subject into a recognizable and engaging digital concept with a clear visual identity and interactive structure.",
+        approach: "I developed a cat-centered visual direction, social content ideas, and a Figma prototype to show how the experience could feel both community-driven and highly engaging.",
+        impact: "The project shows my ability to blend storytelling, brand direction, and interface thinking into a concept that feels playful, memorable, and culturally specific."
+      },
+
       time: {
-        label: 'Editorial / InDesign',
-        title: 'Pharrell Williams TIME Magazine',
-        intro: 'A five-page editorial layout inspired by TIME magazine, designed to communicate cultural influence through typography, hierarchy, and image-led storytelling.',
-        role: 'Editorial layout, typography, image editing, visual storytelling',
-        tools: 'Adobe InDesign, Adobe Photoshop',
-        focus: 'Hierarchy, storytelling, publication design',
-        outcome: 'Professional editorial layout system',
-        overview: 'I designed a five-page magazine layout inspired by TIME, centered on Pharrell Williams\'s impact across music, fashion, and culture. The goal was to create a professional editorial experience using strong visual hierarchy and consistent page structure.',
-        problem: 'The challenge was to create a multi-page editorial system that felt cohesive, visually credible, and engaging while balancing headlines, imagery, captions, and long-form text.',
-        approach: 'I used Adobe InDesign for layout and Photoshop for image preparation. The design system relied on a recognizable cover treatment, strong headlines, restrained typography, and visual pacing across the interior spreads.',
-        impact: 'This project strengthened my editorial design skills and shows my ability to shape narrative through layout, typography, composition, and publication-style structure.',
-        mediaHTML: `<div class="pdf-viewer-wrap">
-          <div class="pdf-viewer-header">
-            <span>📄 Pharrell Williams TIME Magazine — Full Editorial (3 pages)</span>
-            <div class="pdf-viewer-actions">
-              <a class="pdf-download-btn" href="${TIME_PDF_URI}" download="Shania_Swan_TIME_Magazine.pdf">⬇ Download PDF</a>
-            </div>
-          </div>
-          <iframe class="pdf-viewer-iframe" src="S_Swan_Q_Proj2.pdf" title="Pharrell Williams TIME Magazine Editorial"></iframe>
-        </div>`
+        label: "Editorial / InDesign",
+        title: "Pharrell Williams TIME Magazine",
+        intro: "A multi-page editorial layout inspired by TIME magazine, designed to communicate Pharrell Williams’ influence across music, fashion, and creativity through strong hierarchy, typography, and image-led storytelling.",
+        role: "Editorial layout, typography, image editing, visual storytelling",
+        tools: "Adobe InDesign, Adobe Photoshop",
+        focus: "Hierarchy, storytelling, publication design",
+        outcome: "A polished editorial system spanning a cover and two interior spreads",
+        overview: "I designed a magazine project inspired by TIME that explores Pharrell Williams’ creative influence across music, fashion, and culture through a branded editorial system.",
+        problem: "The challenge was to create a professional editorial layout that felt cohesive, visually credible, and engaging across multiple pages while balancing headlines, imagery, and long-form text.",
+        approach: "I designed a TIME-style cover treatment and interior spreads focused on strong hierarchy, restrained typography, and a narrative that moves through music, LEGO, and Louis Vuitton.",
+        impact: "This project strengthened my editorial design skills and shows my ability to shape narrative through layout, typography, composition, and publication-style structure."
       }
     };
-    document.querySelectorAll('.case-trigger').forEach(function(card) {
-      card.addEventListener('click', function(e) {
+
+    function getMediaMarkup(key) {
+      if (key === "mocaad") {
+        return {
+          media: `
+            <div class="media-wrap">
+              <div class="media-topbar">
+                <span>Miami MoCAAD Project Video</span>
+              </div>
+              <iframe
+                class="embedded-frame"
+                src="https://drive.google.com/file/d/1aAJ6k5q9MQQJZpWxyVQ-0Z2KD1yICZof/preview"
+                allow="autoplay"
+                allowfullscreen>
+              </iframe>
+            </div>
+          `,
+          links: `
+            <a class="btn btn-primary" href="https://drive.google.com/file/d/1aAJ6k5q9MQQJZpWxyVQ-0Z2KD1yICZof/view?usp=sharing" target="_blank">Open Project Video</a>
+            <a class="btn btn-secondary" href="https://news.miami.edu/stories/2026/02/learning-overtowns-history-through-art.html" target="_blank">Read UM Article</a>
+          `
+        };
+      }
+
+      if (key === "frost") {
+        return {
+          media: `
+            <div class="media-wrap">
+              <div class="media-topbar">
+                <span>Frost Science Presentation</span>
+              </div>
+              <iframe
+                class="embedded-frame"
+                src="https://www.canva.com/design/DAG5E11HThA/view?embed"
+                allowfullscreen
+                loading="lazy">
+              </iframe>
+            </div>
+          `,
+          links: `
+            <a class="btn btn-primary" href="https://www.canva.com/design/DAG5E11HThA/view" target="_blank">Open Full Presentation</a>
+          `
+        };
+      }
+
+      if (key === "spotify") {
+        return {
+          media: `
+            <div class="media-wrap">
+              <div class="media-topbar">
+                <span>Spotify AI DJ Demo</span>
+              </div>
+              <iframe
+                class="embedded-frame"
+                src="https://drive.google.com/file/d/18FWjMTTXcKJ-6qDG6Ln4f0SFsKSEyrNb/preview"
+                allow="autoplay"
+                allowfullscreen>
+              </iframe>
+            </div>
+          `,
+          links: `
+            <a class="btn btn-primary" href="https://drive.google.com/file/d/18FWjMTTXcKJ-6qDG6Ln4f0SFsKSEyrNb/view?usp=drive_link" target="_blank">Open Full Video</a>
+          `
+        };
+      }
+
+      if (key === "campuscats") {
+        return {
+          media: `
+            <div class="media-wrap">
+              <div class="media-topbar">
+                <span>Figma Prototype</span>
+              </div>
+              <iframe
+                class="embedded-figma"
+                src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/4T7SfxOkRg7YgMLavRm9C4/Design-Sprint-3?node-id=0-1802&page-id=0%3A2&starting-point-node-id=0%3A1802&show-proto-sidebar=1&t=U8sWg0aQzhOlIL2a-1"
+                allowfullscreen>
+              </iframe>
+            </div>
+          `,
+          links: `
+            <a class="btn btn-primary" href="https://www.figma.com/proto/4T7SfxOkRg7YgMLavRm9C4/Design-Sprint-3?node-id=0-1802&page-id=0%3A2&starting-point-node-id=0%3A1802&show-proto-sidebar=1&t=U8sWg0aQzhOlIL2a-1" target="_blank">Open Full Prototype</a>
+          `
+        };
+      }
+
+      if (key === "time") {
+        return {
+          media: `
+            <div class="media-wrap">
+              <div class="media-topbar">
+                <span>Pharrell Williams TIME Magazine</span>
+              </div>
+              <iframe
+                class="embedded-pdf"
+                src="S.Swan_Q_Proj2.pdf">
+              </iframe>
+            </div>
+          `,
+          links: ""
+        };
+      }
+
+      return {
+        media: "Add your screenshots, videos, prototype links, and final deliverables here",
+        links: ""
+      };
+    }
+
+    document.querySelectorAll(".case-trigger").forEach(function (card) {
+      card.addEventListener("click", function (e) {
         e.preventDefault();
+
         const key = this.dataset.case;
         const data = caseData[key];
         if (!data) return;
-        document.getElementById('caseLabel').textContent = data.label;
-        document.getElementById('caseTitle').textContent = data.title;
-        document.getElementById('caseIntro').textContent = data.intro;
-        document.getElementById('caseRole').textContent = data.role;
-        document.getElementById('caseTools').textContent = data.tools;
-        document.getElementById('caseFocus').textContent = data.focus;
-        document.getElementById('caseOutcome').textContent = data.outcome;
-        document.getElementById('caseOverview').textContent = data.overview;
-        document.getElementById('caseProblem').textContent = data.problem;
-        document.getElementById('caseApproach').textContent = data.approach;
-        document.getElementById('caseImpact').textContent = data.impact;
-        const mediaEl = document.getElementById('caseMedia');
-        if (data.mediaHTML) {
-          mediaEl.innerHTML = data.mediaHTML;
-        } else {
-          mediaEl.innerHTML = '<div class="case-media-placeholder">Add your screenshots, videos, prototype links, and final deliverables here</div>';
+
+        document.getElementById("caseLabel").textContent = data.label;
+        document.getElementById("caseTitle").textContent = data.title;
+        document.getElementById("caseIntro").textContent = data.intro;
+        document.getElementById("caseRole").textContent = data.role;
+        document.getElementById("caseTools").textContent = data.tools;
+        document.getElementById("caseFocus").textContent = data.focus;
+        document.getElementById("caseOutcome").textContent = data.outcome;
+        document.getElementById("caseOverview").textContent = data.overview;
+        document.getElementById("caseProblem").textContent = data.problem;
+        document.getElementById("caseApproach").textContent = data.approach;
+        document.getElementById("caseImpact").textContent = data.impact;
+
+        const mediaConfig = getMediaMarkup(key);
+        caseMedia.innerHTML = mediaConfig.media;
+        caseLinks.innerHTML = mediaConfig.links;
+
+        caseStudySection.classList.add("open");
+        if (workCarousel) {
+          workCarousel.classList.add("paused");
         }
-        caseStudySection.classList.add('open');
-        if (workCarousel) workCarousel.classList.add('paused');
-        caseStudySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        caseStudySection.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
+
     if (closeCaseStudy) {
-      closeCaseStudy.addEventListener('click', function() {
-        caseStudySection.classList.remove('open');
-        if (workCarousel) workCarousel.classList.remove('paused');
-        document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      closeCaseStudy.addEventListener("click", function () {
+        caseStudySection.classList.remove("open");
+        if (workCarousel) {
+          workCarousel.classList.remove("paused");
+        }
+        document.getElementById("projects").scrollIntoView({ behavior: "smooth", block: "start" });
       });
     }
   </script>
