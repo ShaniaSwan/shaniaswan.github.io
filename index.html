@@ -473,7 +473,7 @@
 
     .work-carousel .project-card {
       flex: 0 0 320px;
-      min-height: 390px;
+      min-height: 380px;
     }
 
     @keyframes workScroll {
@@ -507,25 +507,6 @@
       z-index: 1;
     }
 
-    .project-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      pointer-events: none;
-      background: radial-gradient(
-        220px circle at var(--spot-x, 50%) var(--spot-y, 50%),
-        rgba(255,255,255,0.10),
-        transparent 45%
-      );
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .project-card:hover::after {
-      opacity: 1;
-    }
-
     .project-visual {
       position: absolute;
       inset: 0;
@@ -554,27 +535,12 @@
       text-transform: uppercase;
       z-index: 1;
       transition: opacity 0.25s ease;
+      text-align: center;
+      padding: 1rem;
     }
 
     .project-card:hover .project-label {
       opacity: 0.18;
-    }
-
-    .project-image {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transform: scale(1.04);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-      filter: saturate(1.05);
-    }
-
-    .project-card:hover .project-image {
-      opacity: 1;
-      transform: scale(1);
     }
 
     .project-content {
@@ -603,14 +569,6 @@
       color: rgba(248,245,239,0.82);
       font-size: 0.92rem;
       line-height: 1.45;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.28s ease, margin-top 0.28s ease;
-    }
-
-    .project-card:hover .project-content p {
-      max-height: 160px;
-      margin-top: 0.6rem;
     }
 
     .project-arrow {
@@ -623,6 +581,136 @@
 
     .project-card:hover .project-arrow {
       transform: translateX(4px);
+    }
+
+    .hidden-case-study {
+      display: none;
+      scroll-margin-top: 100px;
+    }
+
+    .hidden-case-study.open {
+      display: block;
+    }
+
+    .case-viewer {
+      padding: 1.75rem;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      box-shadow: var(--shadow);
+    }
+
+    .case-viewer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .case-label {
+      display: inline-block;
+      margin-bottom: 0.7rem;
+      color: #ffd999;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .case-viewer h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+    }
+
+    .case-intro {
+      margin-top: 0.8rem;
+      color: var(--muted);
+      max-width: 70ch;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .case-close {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .case-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1.4rem;
+    }
+
+    .case-meta-item {
+      padding: 1rem;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .case-meta-item strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .case-meta-item span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      display: block;
+    }
+
+    .case-body-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .case-panel {
+      padding: 1.4rem;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .case-panel h3 {
+      margin-bottom: 0.55rem;
+      font-size: 1.08rem;
+    }
+
+    .case-panel p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .case-media {
+      margin-top: 0.8rem;
+      min-height: 240px;
+      border-radius: 22px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1rem;
+      color: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .case-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
     }
 
     .resume-card {
@@ -700,97 +788,6 @@
       transform: translate(0, 0);
     }
 
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      place-items: center;
-      background: rgba(8,9,12,0.72);
-      backdrop-filter: blur(12px);
-      z-index: 100;
-      padding: 1rem;
-    }
-
-    .modal.open {
-      display: grid;
-    }
-
-    .modal-card {
-      width: min(760px, 100%);
-      border-radius: 28px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(20,22,28,0.96), rgba(12,13,18,0.98));
-      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
-      overflow: hidden;
-    }
-
-    .modal-media {
-      position: relative;
-      height: 280px;
-      background:
-        radial-gradient(circle at top right, rgba(123,97,255,0.22), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(53,208,186,0.18), transparent 30%),
-        linear-gradient(135deg, rgba(240,194,79,0.18), rgba(255,255,255,0.03)),
-        #1a1c22;
-    }
-
-    .modal-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.9;
-    }
-
-    .modal-body {
-      padding: 1.4rem;
-    }
-
-    .modal-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: start;
-      margin-bottom: 0.8rem;
-    }
-
-    .modal-kicker {
-      display: inline-block;
-      color: #ffd999;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.76rem;
-      margin-bottom: 0.45rem;
-    }
-
-    .modal-body h3 {
-      font-size: 1.45rem;
-      line-height: 1.15;
-    }
-
-    .modal-body p {
-      color: var(--muted);
-      line-height: 1.65;
-      margin-top: 0.9rem;
-    }
-
-    .modal-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1rem;
-    }
-
-    .modal-close {
-      background: rgba(255,255,255,0.05);
-      color: var(--text);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      width: 42px;
-      height: 42px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
     footer {
       padding: 2.4rem 0 3rem;
       text-align: center;
@@ -800,7 +797,9 @@
     @media (max-width: 980px) {
       .hero-grid,
       .contact-grid,
-      .about-grid {
+      .about-grid,
+      .case-meta-grid,
+      .case-body-grid {
         grid-template-columns: 1fr;
       }
 
@@ -831,10 +830,6 @@
 
       .work-track {
         animation-duration: 22s;
-      }
-
-      .modal-media {
-        height: 220px;
       }
     }
   </style>
@@ -870,8 +865,8 @@
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary magnetic" href="#projects">Explore My Work</a>
-            <a class="btn btn-secondary magnetic" href="resume.pdf" target="_blank">Open Resume</a>
+            <a class="btn btn-primary" href="#projects">Explore My Work</a>
+            <a class="btn btn-secondary" href="resume.pdf" target="_blank">Open Resume</a>
           </div>
 
           <div class="hero-stats">
@@ -957,191 +952,188 @@
 
         <div class="work-carousel" id="workCarousel">
           <div class="work-track">
-            <a class="project-card open-modal" href="javascript:void(0)"
-               data-title="Frost Science Sensory AR/VR Experience"
-               data-kicker="AR / VR Experience"
-               data-desc="Designed a calming underwater learning environment for neurodivergent children with guided interaction, soft visual effects, timed animations, and an AI marine biologist guide."
-               data-image="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=1200&q=80"
-               data-link="#">
-              <div class="project-visual">
-                <div class="project-label">FROST SCIENCE MUSEUM</div>
-                <img class="project-image" src="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=1200&q=80" alt="Frost Science preview">
-              </div>
-              <div class="project-content">
-                <span class="project-kicker">AR / VR Experience</span>
-                <h3>Frost Science Sensory AR/VR Experience</h3>
-                <p>Designed a calming underwater learning environment for neurodivergent children with guided interaction, soft visual effects, timed animations, and an AI marine biologist guide.</p>
-                <span class="project-arrow">Open case study →</span>
-              </div>
-            </a>
 
-            <a class="project-card open-modal" href="javascript:void(0)"
-               data-title="Miami MoCAAD Virtual Museum"
-               data-kicker="XR / Cultural Experience"
-               data-desc="Helped create an immersive virtual gallery that expanded access to African Diaspora art through artwork scanning, spatial planning, XR navigation, and stakeholder-centered design."
-               data-image="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
-               data-link="#">
+            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="mocaad">
               <div class="project-visual">
                 <div class="project-label">MOCAAD XR MUSEUM</div>
-                <img class="project-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="MoCAAD preview">
               </div>
               <div class="project-content">
                 <span class="project-kicker">XR / Cultural Experience</span>
                 <h3>Miami MoCAAD Virtual Museum</h3>
-                <p>Helped create an immersive virtual gallery that expanded access to African Diaspora art through artwork scanning, spatial planning, XR navigation, and stakeholder-centered design.</p>
-                <span class="project-arrow">Open case study →</span>
+                <p>Immersive XR exhibition expanding access to African Diaspora art beyond the physical museum.</p>
+                <span class="project-arrow">View case study →</span>
               </div>
             </a>
 
-            <a class="project-card open-modal" href="javascript:void(0)"
-               data-title="Spotify DJ Shared Queue"
-               data-kicker="UX / Interaction Design"
-               data-desc="Designed a collaborative listening interface where users can join live sessions, contribute songs to a shared queue, and interact in real time through a clearer social music experience."
-               data-image="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80"
-               data-link="#">
+            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="frost">
               <div class="project-visual">
-                <div class="project-label">SPOTIFY DJ SOCIAL+</div>
-                <img class="project-image" src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80" alt="Spotify preview">
-              </div>
-              <div class="project-content">
-                <span class="project-kicker">UX / Interaction Design</span>
-                <h3>Spotify DJ Shared Queue</h3>
-                <p>Designed a collaborative listening interface where users can join live sessions, contribute songs to a shared queue, and interact in real time through a clearer social music experience.</p>
-                <span class="project-arrow">Open case study →</span>
-              </div>
-            </a>
-
-            <a class="project-card open-modal" href="javascript:void(0)"
-               data-title="UM Campus Cats Social Media"
-               data-kicker="Social / Brand Sprint"
-               data-desc="Built a one-week Instagram brand concept around campus cats using AI-generated visuals, short-form video ideas, content structure, and Figma prototyping for community engagement."
-               data-image="https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=1200&q=80"
-               data-link="#">
-              <div class="project-visual">
-                <div class="project-label">CAMPUS CATS SPRINT</div>
-                <img class="project-image" src="https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=1200&q=80" alt="Campus Cats preview">
-              </div>
-              <div class="project-content">
-                <span class="project-kicker">Social / Brand Sprint</span>
-                <h3>UM Campus Cats Social Media</h3>
-                <p>Built a one-week Instagram brand concept around campus cats using AI-generated visuals, short-form video ideas, content structure, and Figma prototyping for community engagement.</p>
-                <span class="project-arrow">Open case study →</span>
-              </div>
-            </a>
-
-            <a class="project-card open-modal" href="javascript:void(0)"
-               data-title="Pharrell Williams TIME Magazine"
-               data-kicker="InDesign / Editorial"
-               data-desc="Created a five-page editorial layout inspired by TIME, combining typography, hierarchy, image treatment, and visual balance across a cover and two interior spreads."
-               data-image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
-               data-link="#">
-              <div class="project-visual">
-                <div class="project-label">EDITORIAL DESIGN</div>
-                <img class="project-image" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Editorial preview">
-              </div>
-              <div class="project-content">
-                <span class="project-kicker">InDesign / Editorial</span>
-                <h3>Pharrell Williams TIME Magazine</h3>
-                <p>Created a five-page editorial layout inspired by TIME, combining typography, hierarchy, image treatment, and visual balance across a cover and two interior spreads.</p>
-                <span class="project-arrow">Open case study →</span>
-              </div>
-            </a>
-
-            <a class="project-card open-modal" href="javascript:void(0)"
-               data-title="Frost Science Sensory AR/VR Experience"
-               data-kicker="AR / VR Experience"
-               data-desc="Designed a calming underwater learning environment for neurodivergent children with guided interaction, soft visual effects, timed animations, and an AI marine biologist guide."
-               data-image="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=1200&q=80"
-               data-link="#">
-              <div class="project-visual">
-                <div class="project-label">FROST SCIENCE MUSEUM</div>
-                <img class="project-image" src="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=1200&q=80" alt="Frost Science preview duplicate">
+                <div class="project-label">FROST SCIENCE</div>
               </div>
               <div class="project-content">
                 <span class="project-kicker">AR / VR Experience</span>
                 <h3>Frost Science Sensory AR/VR Experience</h3>
-                <p>Designed a calming underwater learning environment for neurodivergent children with guided interaction, soft visual effects, timed animations, and an AI marine biologist guide.</p>
-                <span class="project-arrow">Open case study →</span>
+                <p>Sensory-friendly immersive learning designed for neurodivergent children.</p>
+                <span class="project-arrow">View case study →</span>
               </div>
             </a>
 
-            <a class="project-card open-modal" href="javascript:void(0)"
-               data-title="Miami MoCAAD Virtual Museum"
-               data-kicker="XR / Cultural Experience"
-               data-desc="Helped create an immersive virtual gallery that expanded access to African Diaspora art through artwork scanning, spatial planning, XR navigation, and stakeholder-centered design."
-               data-image="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
-               data-link="#">
+            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="spotify">
               <div class="project-visual">
-                <div class="project-label">MOCAAD XR MUSEUM</div>
-                <img class="project-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="MoCAAD preview duplicate">
+                <div class="project-label">SPOTIFY AI DJ</div>
               </div>
               <div class="project-content">
-                <span class="project-kicker">XR / Cultural Experience</span>
-                <h3>Miami MoCAAD Virtual Museum</h3>
-                <p>Helped create an immersive virtual gallery that expanded access to African Diaspora art through artwork scanning, spatial planning, XR navigation, and stakeholder-centered design.</p>
-                <span class="project-arrow">Open case study →</span>
+                <span class="project-kicker">Product / UX Design</span>
+                <h3>Spotify AI DJ Personalization</h3>
+                <p>A music-first AI DJ concept built to improve discovery and restore personalization.</p>
+                <span class="project-arrow">View case study →</span>
               </div>
             </a>
 
-            <a class="project-card open-modal" href="javascript:void(0)"
-               data-title="Spotify DJ Shared Queue"
-               data-kicker="UX / Interaction Design"
-               data-desc="Designed a collaborative listening interface where users can join live sessions, contribute songs to a shared queue, and interact in real time through a clearer social music experience."
-               data-image="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80"
-               data-link="#">
+            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="campuscats">
               <div class="project-visual">
-                <div class="project-label">SPOTIFY DJ SOCIAL+</div>
-                <img class="project-image" src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80" alt="Spotify preview duplicate">
-              </div>
-              <div class="project-content">
-                <span class="project-kicker">UX / Interaction Design</span>
-                <h3>Spotify DJ Shared Queue</h3>
-                <p>Designed a collaborative listening interface where users can join live sessions, contribute songs to a shared queue, and interact in real time through a clearer social music experience.</p>
-                <span class="project-arrow">Open case study →</span>
-              </div>
-            </a>
-
-            <a class="project-card open-modal" href="javascript:void(0)"
-               data-title="UM Campus Cats Social Media"
-               data-kicker="Social / Brand Sprint"
-               data-desc="Built a one-week Instagram brand concept around campus cats using AI-generated visuals, short-form video ideas, content structure, and Figma prototyping for community engagement."
-               data-image="https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=1200&q=80"
-               data-link="#">
-              <div class="project-visual">
-                <div class="project-label">CAMPUS CATS SPRINT</div>
-                <img class="project-image" src="https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=1200&q=80" alt="Campus Cats preview duplicate">
+                <div class="project-label">CAMPUS CATS</div>
               </div>
               <div class="project-content">
                 <span class="project-kicker">Social / Brand Sprint</span>
                 <h3>UM Campus Cats Social Media</h3>
-                <p>Built a one-week Instagram brand concept around campus cats using AI-generated visuals, short-form video ideas, content structure, and Figma prototyping for community engagement.</p>
-                <span class="project-arrow">Open case study →</span>
+                <p>One-week brand sprint using AI visuals, content strategy, and social storytelling.</p>
+                <span class="project-arrow">View case study →</span>
               </div>
             </a>
 
-            <a class="project-card open-modal" href="javascript:void(0)"
-               data-title="Pharrell Williams TIME Magazine"
-               data-kicker="InDesign / Editorial"
-               data-desc="Created a five-page editorial layout inspired by TIME, combining typography, hierarchy, image treatment, and visual balance across a cover and two interior spreads."
-               data-image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
-               data-link="#">
+            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="time">
               <div class="project-visual">
                 <div class="project-label">EDITORIAL DESIGN</div>
-                <img class="project-image" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Editorial preview duplicate">
               </div>
               <div class="project-content">
-                <span class="project-kicker">InDesign / Editorial</span>
+                <span class="project-kicker">Editorial / InDesign</span>
                 <h3>Pharrell Williams TIME Magazine</h3>
-                <p>Created a five-page editorial layout inspired by TIME, combining typography, hierarchy, image treatment, and visual balance across a cover and two interior spreads.</p>
-                <span class="project-arrow">Open case study →</span>
+                <p>Multi-page editorial layout focused on typography, hierarchy, and visual storytelling.</p>
+                <span class="project-arrow">View case study →</span>
               </div>
             </a>
+
+            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="mocaad">
+              <div class="project-visual"><div class="project-label">MOCAAD XR MUSEUM</div></div>
+              <div class="project-content">
+                <span class="project-kicker">XR / Cultural Experience</span>
+                <h3>Miami MoCAAD Virtual Museum</h3>
+                <p>Immersive XR exhibition expanding access to African Diaspora art beyond the physical museum.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
+            </a>
+
+            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="frost">
+              <div class="project-visual"><div class="project-label">FROST SCIENCE</div></div>
+              <div class="project-content">
+                <span class="project-kicker">AR / VR Experience</span>
+                <h3>Frost Science Sensory AR/VR Experience</h3>
+                <p>Sensory-friendly immersive learning designed for neurodivergent children.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
+            </a>
+
+            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="spotify">
+              <div class="project-visual"><div class="project-label">SPOTIFY AI DJ</div></div>
+              <div class="project-content">
+                <span class="project-kicker">Product / UX Design</span>
+                <h3>Spotify AI DJ Personalization</h3>
+                <p>A music-first AI DJ concept built to improve discovery and restore personalization.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
+            </a>
+
+            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="campuscats">
+              <div class="project-visual"><div class="project-label">CAMPUS CATS</div></div>
+              <div class="project-content">
+                <span class="project-kicker">Social / Brand Sprint</span>
+                <h3>UM Campus Cats Social Media</h3>
+                <p>One-week brand sprint using AI visuals, content strategy, and social storytelling.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
+            </a>
+
+            <a class="project-card case-trigger" href="#caseStudyViewer" data-case="time">
+              <div class="project-visual"><div class="project-label">EDITORIAL DESIGN</div></div>
+              <div class="project-content">
+                <span class="project-kicker">Editorial / InDesign</span>
+                <h3>Pharrell Williams TIME Magazine</h3>
+                <p>Multi-page editorial layout focused on typography, hierarchy, and visual storytelling.</p>
+                <span class="project-arrow">View case study →</span>
+              </div>
+            </a>
+
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section fade-right" id="resume">
+    <section class="section fade-in hidden-case-study" id="caseStudyViewer">
+      <div class="container">
+        <div class="case-viewer" id="caseViewerCard">
+          <div class="case-viewer-top">
+            <div>
+              <p class="case-label" id="caseLabel"></p>
+              <h2 id="caseTitle"></h2>
+            </div>
+            <button class="case-close" id="closeCaseStudy">✕</button>
+          </div>
+
+          <p class="case-intro" id="caseIntro"></p>
+
+          <div class="case-meta-grid">
+            <div class="case-meta-item">
+              <strong>Role</strong>
+              <span id="caseRole"></span>
+            </div>
+            <div class="case-meta-item">
+              <strong>Tools</strong>
+              <span id="caseTools"></span>
+            </div>
+            <div class="case-meta-item">
+              <strong>Focus</strong>
+              <span id="caseFocus"></span>
+            </div>
+            <div class="case-meta-item">
+              <strong>Outcome</strong>
+              <span id="caseOutcome"></span>
+            </div>
+          </div>
+
+          <div class="case-body-grid">
+            <div class="case-panel">
+              <h3>Overview</h3>
+              <p id="caseOverview"></p>
+            </div>
+
+            <div class="case-panel">
+              <h3>Problem</h3>
+              <p id="caseProblem"></p>
+            </div>
+
+            <div class="case-panel">
+              <h3>Approach</h3>
+              <p id="caseApproach"></p>
+            </div>
+
+            <div class="case-panel">
+              <h3>Impact</h3>
+              <p id="caseImpact"></p>
+            </div>
+          </div>
+
+          <div class="case-panel">
+            <h3>Media & Links</h3>
+            <div class="case-media" id="caseMedia">
+              Add your screenshots, videos, prototype links, and final deliverables here
+            </div>
+            <div class="case-links" id="caseLinks"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade-in" id="resume">
       <div class="container">
         <div class="section-head">
           <h2 class="section-title">Resume</h2>
@@ -1151,7 +1143,7 @@
           <h3>My Resume</h3>
           <p>A deeper look into my experience, leadership, and design work.</p>
           <div class="hero-actions" style="margin-top: 1rem;">
-            <a class="btn btn-primary magnetic" href="resume.pdf" target="_blank">Open Resume</a>
+            <a class="btn btn-primary" href="resume.pdf" target="_blank">Open Resume</a>
           </div>
         </div>
       </div>
@@ -1193,27 +1185,6 @@
     </div>
   </footer>
 
-  <div class="modal" id="projectModal" aria-hidden="true">
-    <div class="modal-card">
-      <div class="modal-media">
-        <img id="modalImage" src="" alt="Project preview">
-      </div>
-      <div class="modal-body">
-        <div class="modal-top">
-          <div>
-            <span class="modal-kicker" id="modalKicker"></span>
-            <h3 id="modalTitle"></h3>
-          </div>
-          <button class="modal-close" id="modalClose" aria-label="Close modal">✕</button>
-        </div>
-        <p id="modalDesc"></p>
-        <div class="modal-actions">
-          <a class="btn btn-primary" id="modalLink" href="#" target="_blank">Open Project</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script>
     const root = document.documentElement;
 
@@ -1232,19 +1203,6 @@
 
     document.querySelectorAll('.fade-in, .fade-left, .fade-right').forEach(function(el) {
       observer.observe(el);
-    });
-
-    document.querySelectorAll('.magnetic').forEach(function(btn) {
-      btn.addEventListener('mousemove', function(e) {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = 'translate(' + (x * 0.08) + 'px, ' + (y * 0.08) + 'px)';
-      });
-
-      btn.addEventListener('mouseleave', function() {
-        btn.style.transform = 'translate(0, 0)';
-      });
     });
 
     const heroCopy = document.getElementById('heroCopy');
@@ -1275,85 +1233,6 @@
       });
     }
 
-    const workCarousel = document.getElementById('workCarousel');
-
-    if (workCarousel) {
-      function pauseCarousel() {
-        workCarousel.classList.add('paused');
-      }
-
-      function resumeCarousel() {
-        workCarousel.classList.remove('paused');
-      }
-
-      workCarousel.addEventListener('mouseenter', pauseCarousel);
-      workCarousel.addEventListener('mouseleave', resumeCarousel);
-      workCarousel.addEventListener('focusin', pauseCarousel);
-      workCarousel.addEventListener('focusout', resumeCarousel);
-      workCarousel.addEventListener('pointerdown', pauseCarousel);
-    }
-
-    document.querySelectorAll('.project-card').forEach(function(card) {
-      card.addEventListener('mousemove', function(e) {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--spot-x', x + 'px');
-        card.style.setProperty('--spot-y', y + 'px');
-      });
-    });
-
-    const modal = document.getElementById('projectModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalKicker = document.getElementById('modalKicker');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalImage = document.getElementById('modalImage');
-    const modalLink = document.getElementById('modalLink');
-    const modalClose = document.getElementById('modalClose');
-
-    document.querySelectorAll('.open-modal').forEach(function(card) {
-      card.addEventListener('click', function() {
-        if (workCarousel) {
-          workCarousel.classList.add('paused');
-        }
-
-        modalTitle.textContent = this.dataset.title || '';
-        modalKicker.textContent = this.dataset.kicker || '';
-        modalDesc.textContent = this.dataset.desc || '';
-        modalImage.src = this.dataset.image || '';
-        modalLink.href = this.dataset.link || '#';
-
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden', 'false');
-      });
-    });
-
-    function closeModal() {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-      if (workCarousel) {
-        workCarousel.classList.remove('paused');
-      }
-    }
-
-    if (modalClose) {
-      modalClose.addEventListener('click', closeModal);
-    }
-
-    if (modal) {
-      modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-          closeModal();
-        }
-      });
-    }
-
-    window.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && modal.classList.contains('open')) {
-        closeModal();
-      }
-    });
-
     const sections = document.querySelectorAll('main section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -1371,6 +1250,124 @@
     sections.forEach(function(section) {
       navObserver.observe(section);
     });
+
+    const workCarousel = document.getElementById('workCarousel');
+    const caseStudySection = document.getElementById('caseStudyViewer');
+    const closeCaseStudy = document.getElementById('closeCaseStudy');
+
+    const caseData = {
+      mocaad: {
+        label: 'XR / Cultural Experience',
+        title: 'Miami MoCAAD Virtual Museum',
+        intro: 'An immersive XR museum experience designed to expand access to contemporary African Diaspora art beyond the physical gallery.',
+        role: 'Research, spatial design planning, 3D scanning, immersive prototyping',
+        tools: 'Figma, PolyCam, XR design, prototyping',
+        focus: 'Accessibility, cultural preservation, spatial storytelling',
+        outcome: 'Launched during Miami Art Week for MoCAAD’s 10th anniversary',
+        overview: 'Developed in partnership with Miami MoCAAD, this project explored how XR can extend access to contemporary African Diaspora art while preserving artistic intent and cultural context.',
+        problem: 'Traditional museum spaces can limit access through physical, geographic, and institutional barriers. The museum needed a way to reach audiences beyond its walls without losing community connection.',
+        approach: 'We designed a virtual gallery experience where users could navigate the space, zoom into artworks, and explore artist information digitally. The direction was informed by museum visits, artist conversations, stakeholder interviews, and community engagement in Historic Overtown.',
+        impact: 'The final exhibition demonstrated how XR can support cultural preservation, education, and broader accessibility while creating a scalable model for future virtual outreach.'
+      },
+
+      frost: {
+        label: 'AR / VR Experience',
+        title: 'Frost Science Sensory AR/VR Experience',
+        intro: 'A sensory-friendly immersive learning experience designed to make science education more calming, accessible, and engaging for neurodivergent children.',
+        role: 'UX planning, AR/VR environment development, spatial design, AI integration',
+        tools: 'ENGAGE VR, AR/VR design, AI script support, video integration',
+        focus: 'Accessibility, sensory design, educational immersion',
+        outcome: 'Concept for a calmer museum learning environment',
+        overview: 'Created with the Frost Museum of Science, this concept reimagined museum learning through a calming underwater AR/VR environment that reduces overstimulation while keeping children engaged.',
+        problem: 'Museum spaces can be overstimulating for neurodivergent children, making it difficult to comfortably engage with exhibits and educational content.',
+        approach: 'I helped design a guided underwater experience with soft lighting, calming visuals, educational video integration, animal animations, and an AI marine biologist guide to make learning more supportive and structured.',
+        impact: 'The project showed how immersive design can support accessibility and create more inclusive science-learning environments for children with different sensory needs.'
+      },
+
+      spotify: {
+        label: 'Product / UX Design',
+        title: 'Spotify AI DJ Personalization',
+        intro: 'A music-first AI DJ concept designed to improve discovery and restore personalization across songs, artists, playlists, and podcasts.',
+        role: 'UX research, product thinking, interaction design, prototyping',
+        tools: 'Figma, wireframing, prototyping, UX research',
+        focus: 'Personalization, discovery, AI interaction',
+        outcome: 'Concept for better music exploration and playlist generation',
+        overview: 'This concept responds to a shift within Spotify: as the platform placed more emphasis on podcasts, the music experience felt less personal and discovering the right songs became harder. I designed an AI DJ that helps users find music and podcasts that better match their listening habits or current intent.',
+        problem: 'Users may struggle to discover new music that actually fits what they want in the moment. The experience can feel less personalized when users want niche genre exploration, intentional discovery, or recommendations based on recent listening behavior.',
+        approach: 'I designed an AI DJ experience that uses recent listening history and direct user prompts. Users can ask for a mood, genre, artist type, or vibe, and the AI responds with songs, artists, curated playlists, and even relevant podcasts.',
+        impact: 'This project reframes personalization as an active experience rather than passive recommendation, giving users more control over discovery while still using AI to reduce friction.'
+      },
+
+      campuscats: {
+        label: 'Social / Brand Sprint',
+        title: 'UM Campus Cats Social Media',
+        intro: 'A one-week design sprint focused on building a full social media brand concept rooted in campus culture and fast-turn content strategy.',
+        role: 'Concept development, AI image generation, UX/UI, feed layout, video content',
+        tools: 'Figma, AI image generation, content strategy, video editing',
+        focus: 'Branding, storytelling, audience engagement',
+        outcome: 'Rapid brand concept with social storytelling system',
+        overview: 'This sprint challenged our team to create a full Instagram presence around a real campus subject. We centered the concept on the University of Miami’s campus cats as a way to build a community-driven, culturally specific digital brand.',
+        problem: 'The challenge was to rapidly design a recognizable and engaging social identity in a short timeframe while balancing storytelling, visual consistency, and audience connection.',
+        approach: 'We developed AI-generated visuals, designed an Instagram feed system, and created short-form video concepts that simulated Reels. The work focused on profile structure, captions, layout, and engagement-driven content.',
+        impact: 'The final concept shows my ability to move quickly from idea to polished social brand execution while combining AI-assisted content creation with visual strategy and UX thinking.'
+      },
+
+      time: {
+        label: 'Editorial / InDesign',
+        title: 'Pharrell Williams TIME Magazine',
+        intro: 'A five-page editorial layout inspired by TIME magazine, designed to communicate cultural influence through typography, hierarchy, and image-led storytelling.',
+        role: 'Editorial layout, typography, image editing, visual storytelling',
+        tools: 'Adobe InDesign, Adobe Photoshop',
+        focus: 'Hierarchy, storytelling, publication design',
+        outcome: 'Professional editorial layout system',
+        overview: 'I designed a five-page magazine layout inspired by TIME, centered on Pharrell Williams’ impact across music, fashion, and culture. The goal was to create a professional editorial experience using strong visual hierarchy and consistent page structure.',
+        problem: 'The challenge was to create a multi-page editorial system that felt cohesive, visually credible, and engaging while balancing headlines, imagery, captions, and long-form text.',
+        approach: 'I used Adobe InDesign for layout and Photoshop for image preparation. The design system relied on a recognizable cover treatment, strong headlines, restrained typography, and visual pacing across the interior spreads.',
+        impact: 'This project strengthened my editorial design skills and shows my ability to shape narrative through layout, typography, composition, and publication-style structure.'
+      }
+    };
+
+    document.querySelectorAll('.case-trigger').forEach((card) => {
+      card.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const key = this.dataset.case;
+        const data = caseData[key];
+        if (!data) return;
+
+        document.getElementById('caseLabel').textContent = data.label;
+        document.getElementById('caseTitle').textContent = data.title;
+        document.getElementById('caseIntro').textContent = data.intro;
+        document.getElementById('caseRole').textContent = data.role;
+        document.getElementById('caseTools').textContent = data.tools;
+        document.getElementById('caseFocus').textContent = data.focus;
+        document.getElementById('caseOutcome').textContent = data.outcome;
+        document.getElementById('caseOverview').textContent = data.overview;
+        document.getElementById('caseProblem').textContent = data.problem;
+        document.getElementById('caseApproach').textContent = data.approach;
+        document.getElementById('caseImpact').textContent = data.impact;
+
+        caseStudySection.classList.add('open');
+
+        if (workCarousel) {
+          workCarousel.classList.add('paused');
+        }
+
+        caseStudySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    if (closeCaseStudy) {
+      closeCaseStudy.addEventListener('click', function() {
+        caseStudySection.classList.remove('open');
+
+        if (workCarousel) {
+          workCarousel.classList.remove('paused');
+        }
+
+        document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
   </script>
 </body>
 </html>
