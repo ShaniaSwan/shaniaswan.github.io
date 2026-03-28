@@ -1380,9 +1380,7 @@ that feel as good as they function.
 
           <div class="case-panel">
             <h3>Media & Links</h3>
-            <div class="case-media" id="caseMedia">
-              Add your screenshots, videos, prototype links, and final deliverables here
-            </div>
+            <div class="case-media" id="caseMedia"></div>
             <div class="case-links" id="caseLinks"></div>
           </div>
         </div>
@@ -1703,9 +1701,9 @@ that feel as good as they function.
       }
 
       return {
-        media: "Add your screenshots, videos, prototype links, and final deliverables here",
-        links: ""
-      };
+  media: "",
+  links: ""
+};
     }
 
     document.querySelectorAll(".case-trigger").forEach(function (card) {
