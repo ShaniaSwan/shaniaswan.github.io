@@ -713,6 +713,39 @@
       margin-top: 1rem;
     }
 
+    .pdf-viewer-wrap {
+      margin-top: 0.8rem;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+    }
+
+    .pdf-viewer-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .pdf-viewer-topbar span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .pdf-viewer {
+      width: 100%;
+      height: 760px;
+      border: none;
+      display: block;
+      background: #111;
+    }
+
     .resume-card {
       padding: 1.5rem;
       border-radius: 22px;
@@ -816,6 +849,10 @@
       .hero-copy {
         padding: 1.5rem;
       }
+
+      .pdf-viewer {
+        height: 620px;
+      }
     }
 
     @media (max-width: 760px) {
@@ -830,6 +867,10 @@
 
       .work-track {
         animation-duration: 22s;
+      }
+
+      .pdf-viewer {
+        height: 520px;
       }
     }
   </style>
@@ -952,7 +993,6 @@
 
         <div class="work-carousel" id="workCarousel">
           <div class="work-track">
-
             <a class="project-card case-trigger" href="#caseStudyViewer" data-case="mocaad">
               <div class="project-visual">
                 <div class="project-label">MOCAAD XR MUSEUM</div>
@@ -1008,7 +1048,7 @@
               <div class="project-content">
                 <span class="project-kicker">Editorial / InDesign</span>
                 <h3>Pharrell Williams TIME Magazine</h3>
-                <p>Multi-page editorial layout focused on typography, hierarchy, and visual storytelling.</p>
+                <p>Editorial magazine layout covering Pharrell’s music career, LEGO partnership, and Louis Vuitton creative direction.</p>
                 <span class="project-arrow">View case study →</span>
               </div>
             </a>
@@ -1058,11 +1098,10 @@
               <div class="project-content">
                 <span class="project-kicker">Editorial / InDesign</span>
                 <h3>Pharrell Williams TIME Magazine</h3>
-                <p>Multi-page editorial layout focused on typography, hierarchy, and visual storytelling.</p>
+                <p>Editorial magazine layout covering Pharrell’s music career, LEGO partnership, and Louis Vuitton creative direction.</p>
                 <span class="project-arrow">View case study →</span>
               </div>
             </a>
-
           </div>
         </div>
       </div>
@@ -1254,6 +1293,8 @@
     const workCarousel = document.getElementById('workCarousel');
     const caseStudySection = document.getElementById('caseStudyViewer');
     const closeCaseStudy = document.getElementById('closeCaseStudy');
+    const caseMedia = document.getElementById('caseMedia');
+    const caseLinks = document.getElementById('caseLinks');
 
     const caseData = {
       mocaad: {
@@ -1315,59 +1356,11 @@
       time: {
         label: 'Editorial / InDesign',
         title: 'Pharrell Williams TIME Magazine',
-        intro: 'A five-page editorial layout inspired by TIME magazine, designed to communicate cultural influence through typography, hierarchy, and image-led storytelling.',
+        intro: 'A multi-page editorial layout inspired by TIME magazine, designed to communicate Pharrell Williams’ influence across music, fashion, and creativity through strong hierarchy, typography, and image-led storytelling.',
         role: 'Editorial layout, typography, image editing, visual storytelling',
         tools: 'Adobe InDesign, Adobe Photoshop',
         focus: 'Hierarchy, storytelling, publication design',
-        outcome: 'Professional editorial layout system',
-        overview: 'I designed a five-page magazine layout inspired by TIME, centered on Pharrell Williams’ impact across music, fashion, and culture. The goal was to create a professional editorial experience using strong visual hierarchy and consistent page structure.',
-        problem: 'The challenge was to create a multi-page editorial system that felt cohesive, visually credible, and engaging while balancing headlines, imagery, captions, and long-form text.',
-        approach: 'I used Adobe InDesign for layout and Photoshop for image preparation. The design system relied on a recognizable cover treatment, strong headlines, restrained typography, and visual pacing across the interior spreads.',
-        impact: 'This project strengthened my editorial design skills and shows my ability to shape narrative through layout, typography, composition, and publication-style structure.'
-      }
-    };
-
-    document.querySelectorAll('.case-trigger').forEach((card) => {
-      card.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        const key = this.dataset.case;
-        const data = caseData[key];
-        if (!data) return;
-
-        document.getElementById('caseLabel').textContent = data.label;
-        document.getElementById('caseTitle').textContent = data.title;
-        document.getElementById('caseIntro').textContent = data.intro;
-        document.getElementById('caseRole').textContent = data.role;
-        document.getElementById('caseTools').textContent = data.tools;
-        document.getElementById('caseFocus').textContent = data.focus;
-        document.getElementById('caseOutcome').textContent = data.outcome;
-        document.getElementById('caseOverview').textContent = data.overview;
-        document.getElementById('caseProblem').textContent = data.problem;
-        document.getElementById('caseApproach').textContent = data.approach;
-        document.getElementById('caseImpact').textContent = data.impact;
-
-        caseStudySection.classList.add('open');
-
-        if (workCarousel) {
-          workCarousel.classList.add('paused');
-        }
-
-        caseStudySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-
-    if (closeCaseStudy) {
-      closeCaseStudy.addEventListener('click', function() {
-        caseStudySection.classList.remove('open');
-
-        if (workCarousel) {
-          workCarousel.classList.remove('paused');
-        }
-
-        document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    }
-  </script>
-</body>
-</html>
+        outcome: 'A polished editorial system spanning a cover and two interior spreads',
+        overview: 'I designed a magazine project inspired by TIME that explores Pharrell Williams’ creative influence across music, fashion, and culture. The final piece includes a cover and interior spreads that translate a recognizable editorial style into a cohesive, visually engaging layout.',
+        problem: 'The challenge was to create a professional editorial system that felt visually credible and cohesive across multiple pages while balancing headlines, imagery, captions, and long-form text. The project needed to maintain strong hierarchy and readability while still feeling dynamic and magazine-like.',
+        approach: 'I used Adobe InDesign for the full page layout and Adobe Photoshop for image editing and preparation. The cover was designed around a dominant image, TIME-inspired
