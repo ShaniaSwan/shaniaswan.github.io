@@ -1567,26 +1567,30 @@
         };
       }
 
-      if (key === "frost") {
-        return {
-          media: `
-            <div class="media-wrap">
-              <div class="media-topbar">
-                <span>Frost Science Presentation</span>
-              </div>
-              <iframe
-                class="embedded-frame"
-                src="https://www.canva.com/design/DAG5E11HThA/view?embed"
-                allowfullscreen
-                loading="lazy">
-              </iframe>
-            </div>
-          `,
-          links: `
-            <a class="btn btn-primary" href="https://www.canva.com/design/DAG5E11HThA/view" target="_blank">Open Full Presentation</a>
-          `
-        };
-      }
+     if (key === "frost") {
+  return {
+    media: `
+      <div class="media-wrap">
+        <div class="media-topbar">
+          <span>Frost Science Presentation</span>
+        </div>
+        <iframe
+          class="embedded-frame"
+          src="https://www.canva.com/design/DAG5E11HThA/iI-sqpyByBdnZQXDQHMWfQ/view?embed"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+    `,
+    links: `
+      <a class="btn btn-primary"
+         href="https://www.canva.com/design/DAG5E11HThA/iI-sqpyByBdnZQXDQHMWfQ/view"
+         target="_blank">
+         Open Full Presentation
+      </a>
+    `
+  };
+}
 
       if (key === "spotify") {
         return {
