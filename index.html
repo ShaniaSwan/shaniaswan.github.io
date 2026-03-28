@@ -832,6 +832,102 @@
         animation-duration: 22s;
       }
     }
+    .time-cover-visual {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#a9c7d8, #bcd6e6);
+  overflow: hidden;
+}
+
+/* RED FRAME */
+.time-frame {
+  position: absolute;
+  inset: 16px;
+  border: 14px solid #e41d1d;
+  z-index: 2;
+}
+
+/* DATE */
+.time-date {
+  position: absolute;
+  top: 26px;
+  left: 30px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: black;
+  z-index: 3;
+}
+
+/* TITLE */
+.time-title {
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  text-align: center;
+  z-index: 3;
+}
+
+.time-person {
+  display: block;
+  font-family: Georgia, serif;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.time-logo {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 5.5rem;
+  color: #e41d1d;
+  letter-spacing: -0.05em;
+}
+
+/* SUBJECT */
+.time-subject {
+  position: absolute;
+  bottom: 120px;
+  left: 40px;
+  font-family: Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  z-index: 3;
+}
+
+.time-subject span {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin-top: 6px;
+}
+
+/* RIGHT SIDE TEXT */
+.time-side {
+  position: absolute;
+  bottom: 120px;
+  right: 40px;
+  text-align: right;
+  max-width: 180px;
+  z-index: 3;
+}
+
+.time-side span {
+  font-family: Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.time-side p {
+  font-size: 0.8rem;
+  margin-top: 6px;
+}.time-cover-card:hover .time-logo {
+  transform: scale(1.05);
+  transition: 0.3s ease;
+}
+
+.time-cover-card:hover .time-frame {
+  transform: scale(1.02);
+  transition: 0.3s ease;
+}
   </style>
 </head>
 <body>
