@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1623,7 +1622,7 @@ UX/UI • XR • Immersive Experiences
     function getMediaMarkup(key) {
       if (key === "mocaad") {
         return {
-          media: 
+          media: `
             <div class="media-wrap">
               <div class="media-topbar">
                 <span>Miami MoCAAD Project Video</span>
@@ -1635,42 +1634,43 @@ UX/UI • XR • Immersive Experiences
                 allowfullscreen>
               </iframe>
             </div>
-          ,
-          links: 
-            <a class="btn btn-primary" href="https://drive.google.com/file/d/1aAJ6k5q9MQQJZpWxyVQ-0Z2KD1yICZof/view?usp=sharing" target="_blank">Open Project Video</a>
-            <a class="btn btn-secondary" href="https://news.miami.edu/stories/2026/02/learning-overtowns-history-through-art.html" target="_blank">Read UM Article</a>
-          
+          `,
+          links: `
+            <a class="btn btn-primary" href="https://drive.google.com/file/d/1aAJ6k5q9MQQJZpWxyVQ-0Z2KD1yICZof/view?usp=sharing" target="_blank" rel="noopener">Open Project Video</a>
+            <a class="btn btn-secondary" href="https://news.miami.edu/stories/2026/02/learning-overtowns-history-through-art.html" target="_blank" rel="noopener">Read UM Article</a>
+          `
         };
       }
 
-     if (key === "frost") {
-  return {
-    media: 
-      <div class="media-wrap">
-        <div class="media-topbar">
-          <span>Frost Science Presentation</span>
-        </div>
-        <iframe
-          class="embedded-frame"
-          src="https://www.canva.com/design/DAG5E11HThA/iI-sqpyByBdnZQXDQHMWfQ/view?embed"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-      </div>
-    ,
-    links: 
-      <a class="btn btn-primary"
-         href="https://www.canva.com/design/DAG5E11HThA/iI-sqpyByBdnZQXDQHMWfQ/view"
-         target="_blank">
-         Open Full Presentation
-      </a>
-    
-  };
-}
+      if (key === "frost") {
+        return {
+          media: `
+            <div class="media-wrap">
+              <div class="media-topbar">
+                <span>Frost Science Presentation</span>
+              </div>
+              <iframe
+                class="embedded-frame"
+                src="https://www.canva.com/design/DAG5E11HThA/iI-sqpyByBdnZQXDQHMWfQ/view?embed"
+                allowfullscreen
+                loading="lazy">
+              </iframe>
+            </div>
+          `,
+          links: `
+            <a class="btn btn-primary"
+              href="https://www.canva.com/design/DAG5E11HThA/iI-sqpyByBdnZQXDQHMWfQ/view"
+              target="_blank"
+              rel="noopener">
+              Open Full Presentation
+            </a>
+          `
+        };
+      }
 
       if (key === "spotify") {
         return {
-          media: 
+          media: `
             <div class="media-wrap">
               <div class="media-topbar">
                 <span>Spotify AI DJ Demo</span>
@@ -1682,16 +1682,16 @@ UX/UI • XR • Immersive Experiences
                 allowfullscreen>
               </iframe>
             </div>
-          ,
-          links: 
-            <a class="btn btn-primary" href="https://drive.google.com/file/d/18FWjMTTXcKJ-6qDG6Ln4f0SFsKSEyrNb/view?usp=drive_link" target="_blank">Open Full Video</a>
-          
+          `,
+          links: `
+            <a class="btn btn-primary" href="https://drive.google.com/file/d/18FWjMTTXcKJ-6qDG6Ln4f0SFsKSEyrNb/view?usp=drive_link" target="_blank" rel="noopener">Open Full Video</a>
+          `
         };
       }
 
       if (key === "campuscats") {
         return {
-          media: 
+          media: `
             <div class="media-wrap">
               <div class="media-topbar">
                 <span>Figma Prototype</span>
@@ -1702,16 +1702,16 @@ UX/UI • XR • Immersive Experiences
                 allowfullscreen>
               </iframe>
             </div>
-          ,
-          links: 
-            <a class="btn btn-primary" href="https://www.figma.com/proto/4T7SfxOkRg7YgMLavRm9C4/Design-Sprint-3?node-id=0-1802&page-id=0%3A2&starting-point-node-id=0%3A1802&show-proto-sidebar=1&t=U8sWg0aQzhOlIL2a-1" target="_blank">Open Full Prototype</a>
-          
+          `,
+          links: `
+            <a class="btn btn-primary" href="https://www.figma.com/proto/4T7SfxOkRg7YgMLavRm9C4/Design-Sprint-3?node-id=0-1802&page-id=0%3A2&starting-point-node-id=0%3A1802&show-proto-sidebar=1&t=U8sWg0aQzhOlIL2a-1" target="_blank" rel="noopener">Open Full Prototype</a>
+          `
         };
       }
 
       if (key === "time") {
         return {
-          media: 
+          media: `
             <div class="media-wrap">
               <div class="media-topbar">
                 <span>Pharrell Williams TIME Magazine</span>
@@ -1721,15 +1721,15 @@ UX/UI • XR • Immersive Experiences
                 src="Shania_Swan_TIME_Magazine.pdf">
               </iframe>
             </div>
-          ,
+          `,
           links: ""
         };
       }
 
       return {
-  media: "",
-  links: ""
-};
+        media: "",
+        links: ""
+      };
     }
 
     document.querySelectorAll(".case-trigger").forEach(function (card) {
