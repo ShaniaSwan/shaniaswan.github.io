@@ -344,7 +344,7 @@
 
     .hero-side {
       display: grid;
-      grid-template-rows: 1fr auto;
+      grid-template-rows: auto;
       gap: 1rem;
       padding: 1rem;
     }
@@ -1141,11 +1141,7 @@ UX/UI • XR • Immersive Experiences
         </div>
 
         <div class="panel hero-side fade-right">
-          <div class="portrait-card" id="heroPortrait">
-            <img src="shania-headshot.jpg" alt="Headshot of Shania Swan" />
-          </div>
-
-          <div class="mini-grid">
+<div class="mini-grid">
             <div class="mini-card">
               <h3>Current Focus</h3>
               <p>Designing experiences that blend interface design, emerging tech, and real-world impact.</p>
@@ -1486,7 +1482,6 @@ UX/UI • XR • Immersive Experiences
 });
 
     const heroCopy = document.getElementById("heroCopy");
-    const heroPortrait = document.getElementById("heroPortrait");
 
     function parallaxCard(el, e, amount) {
       const rect = el.getBoundingClientRect();
@@ -1502,12 +1497,7 @@ UX/UI • XR • Immersive Experiences
       heroCopy.addEventListener("mouseleave", function () {
         heroCopy.style.transform = "rotateY(0deg) rotateX(0deg)";
       });
-    }
-
-    if (heroPortrait) {
-      heroPortrait.addEventListener("mousemove", function (e) {
-        parallaxCard(heroPortrait, e, 32);
-      });
+    });
       heroPortrait.addEventListener("mouseleave", function () {
         heroPortrait.style.transform = "rotateY(0deg) rotateX(0deg)";
       });
