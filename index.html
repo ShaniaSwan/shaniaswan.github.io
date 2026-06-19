@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shania Swan | Portfolio</title>
-  <meta name="description" content="Shania Swan — UX/UI Designer, XR/VR creative technologist, and product experience designer." />
 
   <style>
     :root {
@@ -51,8 +50,7 @@
       text-decoration: none;
     }
 
-    img,
-    video {
+    img {
       display: block;
       max-width: 100%;
     }
@@ -111,11 +109,6 @@
       gap: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.02em;
-      transition: transform 0.25s ease;
-    }
-
-    .brand:hover {
-      transform: translateY(-1px);
     }
 
     .brand-mark {
@@ -138,32 +131,8 @@
       font-size: 0.95rem;
     }
 
-    .nav-links a {
-      position: relative;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -0.25rem;
-      width: 100%;
-      height: 2px;
-      transform: scaleX(0);
-      transform-origin: left;
-      background: linear-gradient(90deg, var(--gold), var(--violet));
-      transition: transform 0.25s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
+    .nav-links a:hover {
       color: var(--text);
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      transform: scaleX(1);
     }
 
     .hero {
@@ -181,13 +150,12 @@
       overflow: hidden;
     }
 
-    .hero-copy {
-      position: relative;
+    .hero-card {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
       grid-template-areas:
-        "eyebrow portrait"
-        "title portrait"
+        "eyebrow photo"
+        "title photo"
         "intro stats"
         "actions stats";
       column-gap: 2.5rem;
@@ -211,7 +179,7 @@
       margin-bottom: 1rem;
     }
 
-    .hero h1 {
+    h1 {
       grid-area: title;
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(2.7rem, 4.8vw, 4.7rem);
@@ -220,27 +188,26 @@
       max-width: 10ch;
     }
 
-    .interactive-headline {
+    .headline {
       display: flex;
       flex-wrap: wrap;
       gap: 0.16em 0.22em;
       max-width: 11ch;
     }
 
-    .interactive-headline span {
+    .headline span {
       display: inline-block;
       color: var(--text);
       transition: color 0.22s ease, transform 0.22s ease, text-shadow 0.22s ease;
-      cursor: default;
     }
 
-    .interactive-headline span:hover {
+    .headline span:hover {
       color: var(--gold);
       transform: translateY(-2px);
       text-shadow: 0 0 18px rgba(240, 194, 79, 0.24);
     }
 
-    .hero p {
+    .hero-intro {
       grid-area: intro;
       color: var(--muted);
       max-width: 62ch;
@@ -264,7 +231,7 @@
       border-radius: 999px;
       font-weight: 700;
       border: 1px solid var(--line);
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
       cursor: pointer;
     }
 
@@ -284,16 +251,10 @@
       color: var(--text);
     }
 
-    .hero-side {
-      grid-area: portrait;
+    .hero-photo {
+      grid-area: photo;
       width: 100%;
       aspect-ratio: 1 / 1;
-      z-index: 2;
-    }
-
-    .portrait-card {
-      width: 100%;
-      height: 100%;
       border-radius: var(--radius-lg);
       overflow: hidden;
       border: 1px solid var(--line);
@@ -305,7 +266,7 @@
       padding: 0.65rem;
     }
 
-    .portrait-card img {
+    .hero-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -326,12 +287,6 @@
       border-radius: var(--radius-sm);
       border: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.035);
-      transition: transform 0.22s ease, border-color 0.22s ease;
-    }
-
-    .stat:hover {
-      transform: translateY(-4px);
-      border-color: rgba(240, 194, 79, 0.22);
     }
 
     .stat small {
@@ -422,7 +377,6 @@
       gap: 1rem;
       width: max-content;
       animation: workScroll 28s linear infinite;
-      will-change: transform;
     }
 
     .work-carousel:hover .work-track {
@@ -443,15 +397,7 @@
       border: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
       box-shadow: var(--shadow);
-      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
       isolation: isolate;
-      cursor: pointer;
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px) rotate(-0.4deg);
-      border-color: rgba(240, 194, 79, 0.25);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
     }
 
     .project-card::before {
@@ -524,10 +470,6 @@
       padding: 1.5rem;
     }
 
-    .resume-card h3 {
-      font-size: 1.2rem;
-    }
-
     .resume-card p {
       color: var(--muted);
       margin-top: 0.6rem;
@@ -544,37 +486,11 @@
       padding: 1.25rem;
     }
 
-    .contact-card h3 {
-      font-size: 1.05rem;
-    }
-
     .contact-card p,
     .contact-card a {
       color: var(--muted);
       margin-top: 0.45rem;
       line-height: 1.6;
-    }
-
-    .contact-card a:hover {
-      color: var(--text);
-    }
-
-    .fade-in,
-    .fade-left,
-    .fade-right {
-      opacity: 0;
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .fade-in { transform: translateY(26px); }
-    .fade-left { transform: translateX(-32px); }
-    .fade-right { transform: translateX(32px); }
-
-    .visible.fade-in,
-    .visible.fade-left,
-    .visible.fade-right {
-      opacity: 1;
-      transform: translate(0, 0);
     }
 
     footer {
@@ -589,7 +505,7 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-copy {
+      .hero-card {
         grid-template-columns: minmax(0, 1fr) minmax(270px, 380px);
         column-gap: 1.4rem;
         padding: 2rem;
@@ -602,36 +518,31 @@
     }
 
     @media (max-width: 760px) {
-      .hero-copy {
+      .hero-card {
         grid-template-columns: 1fr;
         grid-template-areas:
           "eyebrow"
           "title"
-          "portrait"
+          "photo"
           "stats"
           "intro"
           "actions";
         padding: 1.5rem;
       }
 
-      .hero-side {
+      .hero-photo {
         width: 100%;
         max-width: 420px;
-        aspect-ratio: 1 / 1;
         margin: 0 auto;
       }
 
-      .hero h1 {
+      h1 {
         max-width: 100%;
       }
 
       .project-card {
         flex: 0 0 270px;
         min-height: 350px;
-      }
-
-      .work-track {
-        animation-duration: 22s;
       }
     }
   </style>
@@ -658,12 +569,12 @@
   </nav>
 
   <main id="top">
-    <section class="hero fade-in">
+    <section class="hero">
       <div class="container">
-        <div class="panel hero-copy">
+        <div class="panel hero-card">
           <div class="eyebrow">UX/UI • XR • Immersive Experiences</div>
 
-          <h1 class="interactive-headline" aria-label="I design digital experiences that feel as good as they function.">
+          <h1 class="headline" aria-label="I design digital experiences that feel as good as they function.">
             <span>I</span>
             <span>design</span>
             <span>digital</span>
@@ -677,19 +588,17 @@
             <span>function.</span>
           </h1>
 
-          <p>
+          <p class="hero-intro">
             UX/UI & XR designer blending storytelling, culture, and technology to create intuitive, human-centered digital experiences.
           </p>
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#projects">Explore My Work</a>
-            <a class="btn btn-secondary" href="file:///Users/shaniaswan/Downloads/S.Swan%20Resume.pdf" target="_blank">Open Resume</a>
+            <a class="btn btn-secondary" href="shania-resume.pdf" target="_blank">Open Resume</a>
           </div>
 
-          <div class="hero-side">
-            <div class="portrait-card">
-              <img src="file:///Users/shaniaswan/Downloads/Documents/Shania%20Headshot.jpeg" alt="Headshot of Shania Swan" />
-            </div>
+          <div class="hero-photo">
+            <img src="shania-headshot.jpeg" alt="Headshot of Shania Swan" />
           </div>
 
           <div class="hero-stats">
@@ -710,7 +619,7 @@
       </div>
     </section>
 
-    <section class="section fade-left" id="about">
+    <section class="section" id="about">
       <div class="container">
         <div class="section-head">
           <h2 class="section-title">About</h2>
@@ -750,7 +659,7 @@
       </div>
     </section>
 
-    <section class="section fade-in" id="projects">
+    <section class="section" id="projects">
       <div class="container">
         <div class="section-head">
           <h2 class="section-title">Selected Work</h2>
@@ -827,7 +736,7 @@
       </div>
     </section>
 
-    <section class="section fade-in" id="resume">
+    <section class="section" id="resume">
       <div class="container">
         <div class="section-head">
           <h2 class="section-title">Resume</h2>
@@ -837,13 +746,13 @@
           <h3>My Resume</h3>
           <p>A deeper look into my experience, leadership, and design work.</p>
           <div class="hero-actions" style="margin-top: 1rem;">
-            <a class="btn btn-primary" href="file:///Users/shaniaswan/Downloads/S.Swan%20Resume.pdf" target="_blank">Open Resume</a>
+            <a class="btn btn-primary" href="shania-resume.pdf" target="_blank">Open Resume</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section fade-in" id="contact">
+    <section class="section" id="contact">
       <div class="container">
         <div class="section-head">
           <h2 class="section-title">Contact</h2>
@@ -885,21 +794,6 @@
     window.addEventListener("mousemove", function (e) {
       root.style.setProperty("--mx", e.clientX + "px");
       root.style.setProperty("--my", e.clientY + "px");
-    });
-
-    const revealObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-
-    document.querySelectorAll(".fade-in, .fade-left, .fade-right").forEach(function (el) {
-      revealObserver.observe(el);
     });
   </script>
 </body>
