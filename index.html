@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shania Swan | Portfolio</title>
   <meta name="description" content="Shania Swan — UX/UI Designer, XR/VR creative technologist, and product experience designer." />
+
   <style>
     :root {
       --bg: #0b0c10;
@@ -198,8 +199,6 @@
       row-gap: 1.35rem;
       align-items: start;
       padding: 3rem;
-      transition: transform 0.15s ease;
-      transform-style: preserve-3d;
     }
 
     .hero-copy::before {
@@ -936,6 +935,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="bg-grid"></div>
   <div class="cursor-glow"></div>
@@ -1332,7 +1332,6 @@
       }
     });
 
-    const heroCopy = document.getElementById("heroCopy");
     const heroPortrait = document.getElementById("heroPortrait");
 
     function parallaxCard(el, e, amount) {
@@ -1340,15 +1339,6 @@
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
       el.style.transform = "rotateY(" + x / amount + "deg) rotateX(" + -y / amount + "deg)";
-    }
-
-    if (heroCopy) {
-      heroCopy.addEventListener("mousemove", function (e) {
-        parallaxCard(heroCopy, e, 28);
-      });
-      heroCopy.addEventListener("mouseleave", function () {
-        heroCopy.style.transform = "rotateY(0deg) rotateX(0deg)";
-      });
     }
 
     if (heroPortrait) {
